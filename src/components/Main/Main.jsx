@@ -1,6 +1,7 @@
 import React from "react";
 import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
+import "./Main.css";
 
 function Main({ weather, items }) {
   const filteredItems = items.filter(

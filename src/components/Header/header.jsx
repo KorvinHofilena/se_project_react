@@ -1,4 +1,5 @@
 import React from "react";
+import "./Header.css";
 
 function Header({ weather }) {
   const currentDate = new Date().toLocaleString("default", {

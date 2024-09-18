@@ -17,7 +17,7 @@ function App() {
   }, []);
 
   return (
-    <div className="app">
+    <div className="page">
       <Header weather={weatherData} />
       <Main weather={weatherData} items={clothingItems} />
       <Footer />
