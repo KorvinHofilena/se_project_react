@@ -1,6 +1,6 @@
 export async function getWeatherData() {
   const API_KEY = "b360ae9323cb522c6cf6c3c4ff04dc77";
-  const latitude = "37.7749"; // Example coordinates (San Francisco)
+  const latitude = "37.7749";
   const longitude = "-122.4194";
   const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${b360ae9323cb522c6cf6c3c4ff04dc77}`;
 
