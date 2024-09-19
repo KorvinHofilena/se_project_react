@@ -1,16 +1,35 @@
-export async function getWeatherData() {
-  const API_KEY = "b360ae9323cb522c6cf6c3c4ff04dc77";
-  const latitude = "37.7749";
-  const longitude = "-122.4194";
-  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${b360ae9323cb522c6cf6c3c4ff04dc77}`;
+export const getWeather = ({ latitude, longitude }, APIkey) => {
+  return fetch(
+    `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${APIkey}`
+  ).then((res) => {
+    if (res.ok) {
+      return res.json();
+    } else {
+      return Promise.reject(`Error: ${res.status}`);
+    }
+  });
+};
 
-  const response = await fetch(url);
-  const data = await response.json();
+export const filterWeatherData = (data) => {
+  const result = {};
+  result.city = data.name;
+  result.temp = { F: data.main.temp };
+  result.type = getWeatherType(result.temp.F);
+  result.condition = data.weather[0].main.toLowerCase();
+  result.isDay = isDay(data.sys, Date.now());
+  return result;
+};
 
-  return {
-    temperature: Math.round(data.main.temp),
-    city: data.name,
-    temperatureType:
-      data.main.temp >= 86 ? "hot" : data.main.temp >= 66 ? "warm" : "cold",
-  };
-}
+const isDay = ({ sunrise, sunset }, now) => {
+  return sunrise * 1000 < now && now < sunset * 1000;
+};
+
+const getWeatherType = (temperature) => {
+  if (temperature >= 86) {
+    return "hot";
+  } else if (temperature >= 66) {
+    return "warm";
+  } else {
+    return "cold";
+  }
+};
