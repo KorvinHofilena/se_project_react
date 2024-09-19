@@ -1,26 +1,19 @@
-import React from "react";
 import "./Header.css";
+import logo from "../../assets/logo.svg";
+import avatar from "../../assets/avatar.png";
 
-function Header({ weather }) {
-  const currentDate = new Date().toLocaleString("default", {
-    month: "long",
-    day: "numeric",
-  });
-
-  return (
+function Header() {
+  return [
     <header className="header">
-      <div className="header__logo">WTWR</div>
-      <div className="header__date">{currentDate}</div>
-      <div className="header__location">
-        {weather ? weather.city : "Loading..."}
+      <img className="header__logo" src={logo} />
+      <p className="header__date-and-location">DATE, LOCATION</p>
+      <button className="header__add-clothes-btn">+ Add clothes</button>
+      <div className="header__user-container">
+        <p className="header__username">NAME</p>
+        <img src="{avatar}" alt="Korvin" className="header__avatar" />
       </div>
-      <button className="header__add-button">Add Clothes</button>
-      <div className="header__user">
-        <img className="header__avatar" src="avatar.png" alt="User Avatar" />
-        <span className="header__name">Redux</span>
-      </div>
-    </header>
-  );
+    </header>,
+  ];
 }
 
 export default Header;
