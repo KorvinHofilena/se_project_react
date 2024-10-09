@@ -1,36 +1,31 @@
 const baseUrl = "http://localhost:3001";
 
-function checkResponse(res) {
-  if (res.ok) {
-    return res.json();
-  }
-  return Promise.reject(`Error ${res.status}`);
-}
+export const checkResponse = (res) => {
+  return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
+};
 
-function getItems() {
+const getCardData = () => {
   return fetch(`${baseUrl}/items`).then(checkResponse);
-}
+};
 
-function postItems({ name, imageUrl, weather }) {
+const addItem = (data) => {
   return fetch(`${baseUrl}/items`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      name,
-      imageUrl,
-      weather,
+      name: data.name,
+      imageUrl: data.imageUrl,
+      weather: data.weather,
     }),
   }).then(checkResponse);
-}
-function deleteItems(cardID) {
-  return fetch(`${baseUrl}/items/${cardID}`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  }).then(checkResponse);
-}
+};
 
-export { getItems, postItems, deleteItems };
+const deleteItem = (id) => {
+  return fetch(`${baseUrl}/items/${id}`, {
+    method: "DELETE",
+  }).then(checkResponse);
+};
+
+export { getCardData, addItem, deleteItem };

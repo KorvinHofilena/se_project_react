@@ -1,72 +1,89 @@
 export const weatherOptions = [
   {
     day: true,
-    condition: "Sunny",
-    url: new URL("../assets/day/Sunny.png", import.meta.url).href,
+    condition: "clear",
+    url: new URL("../assets/weather-images/day/clear.png", import.meta.url)
+      .href,
   },
   {
     day: true,
-    condition: "Cloudy",
-    url: new URL("../assets/day/Cloudy.png", import.meta.url).href,
+    condition: "clouds",
+    url: new URL("../assets/weather-images/day/clouds.png", import.meta.url)
+      .href,
   },
   {
     day: true,
-    condition: "Rain",
-    url: new URL("../assets/day/Rain.png", import.meta.url).href,
+    condition: "rain",
+    url: new URL("../assets/weather-images/day/rain.png", import.meta.url).href,
   },
   {
     day: true,
-    condition: "Storm",
-    url: new URL("../assets/day/Storm.png", import.meta.url).href,
+    condition: "fog",
+    url: new URL("../assets/weather-images/day/fog.png", import.meta.url).href,
   },
   {
     day: true,
-    condition: "Snow",
-    url: new URL("../assets/day/Snow.png", import.meta.url).href,
+    condition: "snow",
+    url: new URL("../assets/weather-images/day/snow.png", import.meta.url).href,
   },
   {
     day: true,
-    condition: "Fog",
-    url: new URL("../assets/day/Fog.png", import.meta.url).href,
+    condition: "thunderstorm",
+    url: new URL(
+      "../assets/weather-images/day/thunderstorm.png",
+      import.meta.url
+    ).href,
   },
   {
     day: false,
-    condition: "Clear",
-    url: new URL("../assets/night/Clear.png", import.meta.url).href,
+    condition: "clear",
+    url: new URL("../assets/weather-images/night/clear.png", import.meta.url)
+      .href,
   },
   {
     day: false,
-    condition: "Cloudy",
-    url: new URL("../assets/night/Cloudy.png", import.meta.url).href,
+    condition: "clouds",
+    url: new URL("../assets/weather-images/night/clouds.png", import.meta.url)
+      .href,
   },
   {
     day: false,
-    condition: "Rain",
-    url: new URL("../assets/night/Rain.png", import.meta.url).href,
+    condition: "rain",
+    url: new URL("../assets/weather-images/night/rain.png", import.meta.url)
+      .href,
   },
   {
     day: false,
-    condition: "stormy",
-    url: new URL("../assets/night/Storm.png", import.meta.url).href,
+    condition: "fog",
+    url: new URL("../assets/weather-images/night/fog.png", import.meta.url)
+      .href,
   },
   {
     day: false,
-    condition: "Snow",
-    url: new URL("../assets/night/Snow.png", import.meta.url).href,
+    condition: "snow",
+    url: new URL("../assets/weather-images/night/snow.png", import.meta.url)
+      .href,
   },
   {
     day: false,
-    condition: "Fog",
-    url: new URL("../assets/night/Fog.png", import.meta.url).href,
+    condition: "thunderstorm",
+    url: new URL(
+      "../assets/weather-images/night/thunderstorm.png",
+      import.meta.url
+    ).href,
   },
 ];
 
-export const DefaultWeatherOptions = {
+export const defaultWeatherOptions = {
   day: {
-    url: new URL("../assets/day/default.day.png", import.meta.url).href,
+    url: new URL("../assets/weather-images/day/default.png", import.meta.url)
+      .href,
+    condition: "Day default",
   },
   night: {
-    url: new URL("../assets/night/default.night.png", import.meta.url).href,
+    url: new URL("../assets/weather-images/night/default.svg", import.meta.url)
+      .href,
+    condition: "Night default",
   },
 };
 
@@ -108,7 +125,6 @@ export const defaultClothingItems = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Coat.png?etag=298717ed89d5e40b1954a1831ae0bdd4",
   },
 ];
-
 export const coordinates = {
   latitude: 35.6938401,
   longitude: 139.7035494,

@@ -1,29 +1,50 @@
-@font-face {
-  font-family: "Cabinet Grotesk";
-  src: url("../../vendor/fonts/Inter-Bold.woff2") format("woff2");
+.clothes-section__text-container {
+  display: flex;
+  gap: 16px;
+  font-family: "CabinetGrotesk-Medium";
+  font-size: 20px;
   font-weight: 700;
-  font-display: swap;
-  font-style: normal;
+  line-height: 24.8px;
+  text-align: left;
+  color: black;
+  margin-top: 20px;
 }
 
-.clothes-section__personal {
-  display: flex;
-  flex-direction: row;
-  font-family: "Cabinet Grotesk";
-  font-weight: 700;
+.clothes-section__your-items {
+  margin: 0;
 }
-.clothes-section__btn {
+
+.clothes-section__add-btn {
   border: none;
-  background-color: white;
-  font-family: "Cabinet Grotesk";
-  font-weight: 700;
-  margin-left: 20px;
+  opacity: 0.6;
+}
+
+.clothes-section__add-btn:hover {
   cursor: pointer;
 }
 
-.clothes-section__list {
+.clothes-section__cards-list {
+  margin: 0;
+  margin-top: 16px;
   display: flex;
   flex-wrap: wrap;
+  flex-direction: row;
+  gap: 19px;
+  list-style-type: none;
+  margin-top: 35px;
   padding: 0;
-  gap: 21px;
+}
+
+@media screen and (max-width: 600px) {
+  .clothes {
+    width: 100%;
+  }
+
+  .clothes-section__text-container {
+    padding-bottom: 16px;
+  }
+
+  .clothes-section__cards-list {
+    justify-content: center;
+  }
 }

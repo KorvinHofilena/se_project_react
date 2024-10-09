@@ -1,16 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
 import App from "./components/App/App";
 import "./index.css";
-import { CurrentTemperatureUnitProvider } from "./contexts/CurrentTemperatureUnitContext";
-import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <CurrentTemperatureUnitProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </CurrentTemperatureUnitProvider>
+    <BrowserRouter basename="/se_project_react">
+      <App />
+    </BrowserRouter>
   </React.StrictMode>
 );

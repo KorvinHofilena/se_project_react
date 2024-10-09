@@ -1,49 +1,47 @@
-.header {
+.card-container {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  width: 323px;
+  height: 326px;
   display: flex;
-  align-items: center;
-  padding: 32px 0 28px;
+  justify-content: center;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.3);
 }
 
-.header__logo {
-  margin-right: 24px;
+.card__image {
+  object-fit: cover;
+  width: 100%;
 }
 
-.header__date-and-location {
-  font-family: "Inter";
-  font-size: 20px;
-  line-height: 24px;
-  font-weight: 700;
-  margin: 0;
-}
-
-.header__add-clothes-btn {
-  font-family: "Inter";
-  font-size: 20px;
-  line-height: 24px;
-  font-weight: 700;
-  margin-right: 10px;
-  border: none;
-  background-color: transparent;
+.card__image:hover {
   cursor: pointer;
 }
 
-.header__controls {
-  display: flex;
-  align-items: center;
-  margin-left: auto;
-  gap: 10px;
-}
-
-.header__user-container {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.header__username {
-  font-family: "Inter";
-  font-size: 20px;
-  line-height: 24px;
-  font-weight: 700;
+.card__title {
+  position: absolute;
+  top: 15px;
   margin: 0;
+  color: rgba(0, 0, 0, 0.6);
+  background-color: #fff;
+  width: 100%;
+  border-radius: 4px;
+  font-family: "CabinetGrotesk-Medium";
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 700;
+  text-align: center;
+  max-width: 80px;
+}
+
+.card__like-btn {
+  position: absolute;
+  top: 19px;
+  right: 97px;
+  display: flex;
+  width: 18px;
+  height: 15px;
+  cursor: pointer;
 }

@@ -1,0 +1,52 @@
+.item-modal__content_type_image {
+  padding: 0;
+}
+
+.item-modal__image {
+  height: 100%;
+  width: 100%;
+}
+
+.item-modal__caption {
+  margin: 0;
+  padding-top: 20px;
+  padding-left: 32px;
+  font-family: "CabinetGrotesk-Medium";
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.item-modal__weather {
+  font-family: "CabinetGrotesk-Medium";
+  font-size: 20px;
+  line-height: 24px;
+  margin: 0;
+  padding: 20px 0px 32px 32px;
+}
+
+.item-modal__delete-btn {
+  font-family: "CabinetGrotesk-Medium";
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: left;
+  color: #ff4d00;
+  background-color: white;
+  border: none;
+  padding: 20px 32px;
+}
+
+.item-modal__delete-btn:hover {
+  cursor: pointer;
+}
+
+.model__delete_hidden {
+  display: none;
+}
+
+.item-modal__footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}

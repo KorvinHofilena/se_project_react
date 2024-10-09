@@ -1,28 +1,22 @@
-@font-face {
-  font-family: "Inter";
-  src: url("../../vendor/fonts/Inter-Bold.woff2") format("woff2");
-  font-weight: 700;
-  font-display: swap;
-  font-style: normal;
-}
-
 .switch {
-  margin-left: auto;
   display: flex;
   position: relative;
+  align-items: center;
 }
 
 .switch__box {
   border-radius: 25px;
-  border: 2px solid black;
-  width: 56px;
-  height: 28px;
+  border: 2px solid #7e7e7e;
+  width: 50px;
+  height: 30px;
   appearance: none;
+  margin-right: 20px;
 }
+
 .switch__slider {
   border-radius: 20px;
-  width: 28px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
   background-color: black;
   color: white;
   text-align: center;
@@ -30,30 +24,34 @@
   position: absolute;
 }
 
-.switch__slider-c {
-  left: 28px;
+.switch__slider-C {
+}
+
+.switch__slider-F {
+  left: 19px;
 }
 
 .switch__active {
   color: white;
+  font-size: 14px;
+  line-height: 17.36px;
 }
 
-.switch-temp-c {
-  font-family: "Inter";
-  font-weight: 700;
-  font-size: 14px;
+.switch__temp-F {
   position: absolute;
-  left: 36px;
-  top: -7px;
-  color: white;
+  top: -2px;
+  left: 31px;
+  font-size: 14px;
+  line-height: 17.36px;
+  color: #f3f3f3;
 }
 
-.switch-temp-f {
-  font-family: "Inter";
-  font-weight: 700;
-  font-size: 14px;
+.switch__temp-C {
   position: absolute;
-  left: 10px;
-  top: -7px;
-  color: white;
+  top: -2px;
+  left: 9px;
+  font-size: 14px;
+  line-height: 17.36px;
+  font-weight: 700px;
+  color: #f3f3f3;
 }

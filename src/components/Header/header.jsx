@@ -1,45 +1,41 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import "./Header.css";
-import logo from "../../assets/logo.svg";
-import avatar from "../../assets/avatar.png";
-import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
+import "./itemCard.css";
+import { useContext } from "react";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
+import likeActive from "../../assets/like-active.png";
+import likeInactive from "../../assets/like-inactive.svg";
 
-function Header({ handleAddClick, weatherData }) {
-  const currentDate = new Date().toLocaleString("default", {
-    month: "long",
-    day: "numeric",
-  });
+function ItemCard({ item, onCardClick, onCardLike }) {
+  const currentUser = useContext(CurrentUserContext);
+  const isLiked = item.likes.some((id) => id === currentUser?._id);
+
+  const handleCardClick = () => {
+    onCardClick(item);
+  };
+
+  const handleLike = (evt) => {
+    evt.preventDefault();
+    onCardLike({ _id: item._id, isLiked });
+  };
 
   return (
-    <header className="header">
-      <Link to="/">
-        <img className="header__logo" src={logo} alt="WTWR logo" />
-      </Link>
-
-      <p className="header__date-and-location">
-        {currentDate}, {weatherData.city}
-      </p>
-
-      <ToggleSwitch />
-
-      <button
-        onClick={handleAddClick}
-        type="button"
-        className="header__add-clothes-btn"
-      >
-        + Add clothes
-      </button>
-
-      <div className="header__user-container">
-        <p className="header__username">John Doe</p>
-
-        <Link to="/profile">
-          <img src={avatar} alt="User Avatar" className="header__avatar" />
-        </Link>
-      </div>
-    </header>
+    <li className="card-container">
+      <h2 className="card__title"> {item.name} </h2>
+      {currentUser && (
+        <img
+          src={isLiked ? likeActive : likeInactive}
+          alt={isLiked ? "Unlike" : "Like"}
+          className="card__like-btn"
+          onClick={handleLike}
+        />
+      )}
+      <img
+        onClick={handleCardClick}
+        className="card__image"
+        src={item.imageUrl}
+        alt={item.name}
+      ></img>
+    </li>
   );
 }
 
-export default Header;
+export default ItemCard;
