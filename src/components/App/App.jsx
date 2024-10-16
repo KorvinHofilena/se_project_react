@@ -4,7 +4,7 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import "../App/App.css";
 
 import { coordinates, APIkey } from "../../utils/constants";
-import Header from "../Header/Header";
+import Header from "../Header/header.jsx";
 import Main from "../Main/Main";
 import Profile from "../Profile/Profile";
 import ItemModal from "../ItemModal/ItemModal";
@@ -23,7 +23,7 @@ import {
   addItem,
   likeItem,
   unlikeItem,
-} from "../../utils/Api";
+} from "../../utils/api.js";
 import {
   registerUser,
   signinUser,

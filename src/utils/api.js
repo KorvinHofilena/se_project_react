@@ -28,4 +28,16 @@ const deleteItem = (id) => {
   }).then(checkResponse);
 };
 
-export { getCardData, addItem, deleteItem };
+const likeItem = (id) => {
+  return fetch(`${baseUrl}/items/${id}/like`, {
+    method: "POST",
+  }).then(checkResponse);
+};
+
+const dislikeItem = (id) => {
+  return fetch(`${baseUrl}/items/${id}/dislike`, {
+    method: "POST",
+  }).then(checkResponse);
+};
+
+export { getCardData, addItem, deleteItem, likeItem, dislikeItem };
