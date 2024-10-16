@@ -4,7 +4,7 @@ import "./Header.css";
 
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 
-import logo from "../../assets/logo.png";
+import logo from "../../assets/logo.svg";
 import avatar from "../../assets/avatar.png";
 
 function Header({ info, handler }) {

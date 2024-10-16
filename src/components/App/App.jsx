@@ -3,8 +3,8 @@ import { Routes, Route } from "react-router-dom";
 
 import "./App.css";
 
-import Header from "../Header/Header.jsx";
-import getInfo from "../../utils/weatherApi.js";
+import Header from "../Header/header.jsx";
+import { getWeather } from "../../utils/weatherApi.js";
 import Main from "../Main/Main.jsx";
 import Footer from "../Footer/Footer.jsx";
 import ItemModal from "../ItemModal/ItemModal.jsx";
@@ -14,7 +14,7 @@ import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext.js";
 
 import { position, APIkey } from "../../utils/constants.js";
-import LoadingImage from "../../assets/Loading-image.png";
+
 import {
   getServerItems,
   addServerItem,
@@ -82,7 +82,7 @@ function App() {
 
   useEffect(() => {
     setLoading(true);
-    getInfo(position, APIkey)
+    getWeather(position, APIkey) // Updated to `getWeather`
       .then((obj) => {
         setInfo(obj);
       })
