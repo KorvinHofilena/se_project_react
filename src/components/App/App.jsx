@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 
 import "../App/App.css";
-
 import { coordinates, APIkey } from "../../utils/constants";
 import Header from "../Header/header.jsx";
 import Main from "../Main/Main";
@@ -16,7 +15,6 @@ import AddItemModal from "../AddItemModal/AddItemModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import DeleteConfirmModal from "../DeleteConfirmModal/DeleteConfirmModal";
-import LoginModal from "../LoginModal/LoginModal";
 import {
   getItems,
   deleteItem,
@@ -50,7 +48,6 @@ function App() {
   const navigate = useNavigate();
 
   const handleSubmit = (request) => {
-    // start loading
     setIsLoading(true);
     request()
       .then(closeActiveModal)
@@ -127,15 +124,12 @@ function App() {
     if (!isLiked) {
       likeItem(id, token)
         .then((newCard) => {
-          console.log("New card after like", newCard);
-
           setClothingItems(updateClothingItems(newCard.item));
         })
         .catch(console.error);
-    } else if (isLiked) {
+    } else {
       unlikeItem(id, token)
         .then((newCard) => {
-          console.log("New card after unlike", newCard);
           setClothingItems(updateClothingItems(newCard.item));
         })
         .catch(console.error);
@@ -143,8 +137,6 @@ function App() {
   };
 
   const handleRegistration = (values, resetRegistrationForm) => {
-    if (!values) return;
-
     registerUser(values)
       .then((res) => {
         setIsLoggedIn(true);
@@ -154,27 +146,22 @@ function App() {
         closeActiveModal();
       })
       .catch((res) => {
-        console.log(`There is an error in handleUserRegistration: ${res}`);
+        console.error(`Error in registration: ${res}`);
       });
   };
 
   const handleEditProfile = (values, resetCurrentForm) => {
     const token = getToken();
-    function makeRequest() {
+    const makeRequest = () => {
       return updateUser(values, token).then((userData) => {
-        console.log(userData);
         setCurrentUser(userData);
         resetCurrentForm();
       });
-    }
+    };
     handleSubmit(makeRequest);
   };
 
   const handleLogin = (values, resetLoginForm) => {
-    if (!values) {
-      return;
-    }
-
     signinUser(values)
       .then((res) => {
         setToken(res.token);
@@ -200,27 +187,24 @@ function App() {
   };
 
   useEffect(() => {
-    if (!activeModal) return; // stop the effect not to add the listener if there is no active modal
-
     const handleEscClose = (e) => {
-      // define the function inside useEffect not to lose the reference on rerendering
       if (e.key === "Escape") {
         closeActiveModal();
       }
     };
 
-    document.addEventListener("keydown", handleEscClose);
+    if (activeModal) {
+      document.addEventListener("keydown", handleEscClose);
+    }
 
     return () => {
-      // don't forget to add a clean up function for removing the listener
       document.removeEventListener("keydown", handleEscClose);
     };
-  }, [activeModal]); // watch activeModal here
+  }, [activeModal]);
 
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
-        //data is the json response
         const filteredData = filterWeatherData(data);
         setWeatherData(filteredData);
       })

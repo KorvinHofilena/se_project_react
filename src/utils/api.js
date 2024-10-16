@@ -30,14 +30,14 @@ const deleteItem = (id) => {
 
 const likeItem = (id) => {
   return fetch(`${baseUrl}/items/${id}/like`, {
-    method: "POST",
+    method: "PUT",
   }).then(checkResponse);
 };
 
-const dislikeItem = (id) => {
-  return fetch(`${baseUrl}/items/${id}/dislike`, {
-    method: "POST",
+const unlikeItem = (id) => {
+  return fetch(`${baseUrl}/items/${id}/like`, {
+    method: "DELETE",
   }).then(checkResponse);
 };
 
-export { getCardData, addItem, deleteItem, likeItem, dislikeItem };
+export { getCardData, addItem, deleteItem, likeItem, unlikeItem };
