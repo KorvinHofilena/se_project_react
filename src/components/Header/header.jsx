@@ -1,41 +1,40 @@
-import "../ItemCard/itemCard.css";
-import { useContext } from "react";
-import CurrentUserContext from "../../contexts/CurrentUserContext";
-import likeActive from "../../assets/like-active.png";
-import likeInactive from "../../assets/like-inactive.svg";
+import { Link } from "react-router-dom";
 
-function ItemCard({ item, onCardClick, onCardLike }) {
-  const currentUser = useContext(CurrentUserContext);
-  const isLiked = item.likes.some((id) => id === currentUser?._id);
+import "./Header.css";
 
-  const handleCardClick = () => {
-    onCardClick(item);
-  };
+import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 
-  const handleLike = (evt) => {
-    evt.preventDefault();
-    onCardLike({ _id: item._id, isLiked });
-  };
+import logo from "../../assets/logo.png";
+import avatar from "../../assets/avatar.png";
+
+function Header({ info, handler }) {
+  const currentDate = new Date().toLocaleString("default", {
+    month: "long",
+    day: "numeric",
+  });
 
   return (
-    <li className="card-container">
-      <h2 className="card__title"> {item.name} </h2>
-      {currentUser && (
-        <img
-          src={isLiked ? likeActive : likeInactive}
-          alt={isLiked ? "Unlike" : "Like"}
-          className="card__like-btn"
-          onClick={handleLike}
-        />
-      )}
-      <img
-        onClick={handleCardClick}
-        className="card__image"
-        src={item.imageUrl}
-        alt={item.name}
-      ></img>
-    </li>
+    <header className="header">
+      <Link to="/">
+        <img className="header__logo" src={logo} alt="Logo" />
+      </Link>
+      <p className="header__date-location">
+        {currentDate}, {info.location}
+      </p>
+      <div className="header__user-space">
+        <ToggleSwitch />
+        <button className="header__add-button" type="button" onClick={handler}>
+          + Add clothes
+        </button>
+        <div className="header__user-info">
+          <Link to="/profile" className="header__link">
+            <p className="header__username">Terrence Tegegne</p>
+          </Link>
+          <img className="header__avatar" src={avatar} alt="Avatar" />
+        </div>
+      </div>
+    </header>
   );
 }
 
-export default ItemCard;
+export default Header;

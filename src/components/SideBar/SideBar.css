@@ -1,53 +1,20 @@
-.sidebar__avatar-container {
+.side-bar {
+  width: 345px;
+}
+
+.side-bar__user-info {
   display: flex;
-  gap: 16px;
+  align-items: center;
 }
 
-.sidebar__avatar {
-  height: 56px;
-  width: 56px;
-  border-radius: 50px;
-}
-
-.sidebar__username {
-  font-family: "CabinetGrotesk-Medium";
+.side-bar__username {
+  margin: 0;
   font-size: 20px;
-  font-weight: 700;
-  line-height: 24.8px;
-  text-align: left;
+  font-weight: bold;
 }
 
-.sidebar__buttons-container {
-  display: flex;
-  flex-direction: column;
-}
-
-.sidebar__logout-btn {
-  font-family: "CabinetGrotesk-Medium";
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 24.8px;
-  text-align: left;
-  margin-top: 8px;
-  border: none;
-  background: none;
-  padding: 0;
-}
-
-.sidebar__edit-profile-btn {
-  font-family: "CabinetGrotesk-Medium";
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 24.8px;
-  text-align: left;
-  margin-bottom: 0;
-  border: none;
-  background: none;
-  padding: 0;
-}
-
-@media screen and (max-width: 600px) {
-  .sidebar {
-    display: none;
-  }
+.side-bar__avatar {
+  width: 56px;
+  height: 56px;
+  margin: 0 16px 0 0;
 }

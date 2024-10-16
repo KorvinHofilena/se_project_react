@@ -1,9 +1,14 @@
-.page {
-  background-color: #f3f3f3;
+.app__container {
+  width: 100vw;
+  max-width: 1440px;
+  height: 100%;
+  padding: 32px 40px 24px;
+  box-sizing: border-box;
+  font-family: "Cabinet Grotesk", Arial, sans-serif;
+  color: #000;
+  position: relative;
 }
 
-.page__content {
-  max-width: 1360px;
-  margin: 0 auto;
-  padding: 0 20px;
+.app__loading {
+  width: 100vw;
 }

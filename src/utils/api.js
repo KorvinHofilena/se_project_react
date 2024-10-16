@@ -1,43 +1,38 @@
-const baseUrl = "http://localhost:3001";
+const baseURL = "http://localhost:3001";
 
-export const checkResponse = (res) => {
-  return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
+const checkResponse = (res) => {
+  if (res.ok) {
+    return res.json();
+  } else {
+    return Promise.reject(`Error: ${res.status}`);
+  }
 };
 
-const getCardData = () => {
-  return fetch(`${baseUrl}/items`).then(checkResponse);
+const request = (url, options) => {
+  return fetch(`${baseURL}/${url}`, options).then(checkResponse);
 };
 
-const addItem = (data) => {
-  return fetch(`${baseUrl}/items`, {
+const getServerItems = () => {
+  return request(`items`);
+};
+
+const addServerItem = (newCard) => {
+  return request(`items`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: { "Content-type": "application/json" },
     body: JSON.stringify({
-      name: data.name,
-      imageUrl: data.imageUrl,
-      weather: data.weather,
+      _id: newCard._id,
+      name: newCard.name,
+      imageUrl: newCard.imageUrl,
+      weather: newCard.weather,
     }),
-  }).then(checkResponse);
+  });
 };
 
-const deleteItem = (id) => {
-  return fetch(`${baseUrl}/items/${id}`, {
+const deleteServerItem = (id) => {
+  return request(`items/${id}`, {
     method: "DELETE",
-  }).then(checkResponse);
+  });
 };
 
-const likeItem = (id) => {
-  return fetch(`${baseUrl}/items/${id}/like`, {
-    method: "PUT",
-  }).then(checkResponse);
-};
-
-const unlikeItem = (id) => {
-  return fetch(`${baseUrl}/items/${id}/like`, {
-    method: "DELETE",
-  }).then(checkResponse);
-};
-
-export { getCardData, addItem, deleteItem, likeItem, unlikeItem };
+export { getServerItems, addServerItem, deleteServerItem, checkResponse };

@@ -1,38 +1,30 @@
-import "./itemModal.css";
-import { useContext } from "react";
-import CurrentUserContext from "../../contexts/CurrentUserContext";
+import "./ItemModal.css";
 
-function ItemModal({ activeModal, card, onClose, handleDeleteClick }) {
-  const currentUser = useContext(CurrentUserContext);
-
+function ItemModal({ isOpen, selectedCard, closePopup, deleteCard }) {
   return (
-    <div className={`modal ${activeModal === "preview" && "modal_opened"}`}>
-      <div className="modal__content item-modal__content_type_image">
+    <div className={`modal  ${isOpen ? "modal_opened" : ""}`}>
+      <div className="modal-item__content">
         <button
-          className="modal__close"
+          className="modal-item__button_type_close"
           type="button"
-          onClick={onClose}
-        ></button>
-        <img
-          src={card.imageUrl}
-          alt={card.name}
-          className="item-modal__image"
+          onClick={closePopup}
         />
-        <div className="item-modal__footer">
-          <div className="item-modal__footer-text">
-            <h2 className="item-modal__caption">{card.name}</h2>
-            <p className="item-modal__weather">Weather: {card.weather}</p>
-          </div>
-
+        <img
+          className="modal-item__image"
+          src={selectedCard.imageUrl}
+          alt={selectedCard.name}
+        />
+        <div className="modal-item__info">
+          <p className="modal-item__name">{selectedCard.name}</p>
+          <p className="modal-item__weather-type">
+            Weather: {selectedCard.weather}
+          </p>
           <button
+            className="modal-item__delete"
             type="button"
-            className={`item-modal__delete-btn ${
-              card.owner === currentUser?._id ? "" : "model__delete_hidden"
-            }`}
-            onClick={handleDeleteClick}
+            onClick={deleteCard}
           >
-            {" "}
-            Delete card
+            Delete item
           </button>
         </div>
       </div>
