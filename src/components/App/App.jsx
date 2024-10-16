@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
-
 import "../App/App.css";
 import { coordinates, APIkey } from "../../utils/constants";
 import Header from "../Header/header.jsx";
@@ -16,7 +15,7 @@ import RegisterModal from "../RegisterModal/RegisterModal";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import DeleteConfirmModal from "../DeleteConfirmModal/DeleteConfirmModal";
 import {
-  getItems,
+  getCardData,
   deleteItem,
   addItem,
   likeItem,
@@ -58,7 +57,6 @@ function App() {
   const onAddItem = (newItem, resetCurrentForm) => {
     setIsLoading(true);
     const token = getToken();
-
     const makeRequest = () => {
       return addItem(newItem, token).then((res) => {
         setClothingItems([res.data, ...clothingItems]);
@@ -212,7 +210,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    getItems()
+    getCardData() // Changed from getItems to getCardData
       .then((data) => {
         setClothingItems(data);
       })
