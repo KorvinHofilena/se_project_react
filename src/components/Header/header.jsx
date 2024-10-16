@@ -28,7 +28,7 @@ function Header({ info, handler }) {
         </button>
         <div className="header__user-info">
           <Link to="/profile" className="header__link">
-            <p className="header__username">Terrence Tegegne</p>
+            <p className="header__username">John Doe</p>
           </Link>
           <img className="header__avatar" src={avatar} alt="Avatar" />
         </div>
