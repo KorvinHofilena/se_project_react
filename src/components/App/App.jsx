@@ -82,7 +82,7 @@ function App() {
 
   useEffect(() => {
     setLoading(true);
-    getWeather(position, APIkey) // Updated to `getWeather`
+    getWeather(position, APIkey)
       .then((obj) => {
         setInfo(obj);
       })
