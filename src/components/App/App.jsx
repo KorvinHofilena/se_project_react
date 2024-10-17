@@ -13,7 +13,7 @@ import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext.js";
 
-import { position, APIkey } from "../../utils/constants.js";
+import { coordinates, APIkey } from "../../utils/constants.js";
 
 import {
   getServerItems,
@@ -82,7 +82,7 @@ function App() {
 
   useEffect(() => {
     setLoading(true);
-    getWeather(position, APIkey)
+    getWeather(coordinates, APIkey)
       .then((obj) => {
         setInfo(obj);
       })
