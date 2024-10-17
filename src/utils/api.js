@@ -4,11 +4,11 @@ export const checkResponse = (res) => {
   return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
 };
 
-const getCardData = () => {
+const getServerItems = () => {
   return fetch(`${baseUrl}/items`).then(checkResponse);
 };
 
-const addItem = (data) => {
+const addServerItem = (data) => {
   return fetch(`${baseUrl}/items`, {
     method: "POST",
     headers: {
@@ -22,7 +22,7 @@ const addItem = (data) => {
   }).then(checkResponse);
 };
 
-const deleteItem = (id) => {
+const deleteServerItem = (id) => {
   return fetch(`${baseUrl}/items/${id}`, {
     method: "DELETE",
   }).then(checkResponse);
@@ -40,4 +40,10 @@ const unlikeItem = (id) => {
   }).then(checkResponse);
 };
 
-export { getCardData, addItem, deleteItem, likeItem, unlikeItem };
+export {
+  getServerItems,
+  addServerItem,
+  deleteServerItem,
+  likeItem,
+  unlikeItem,
+};
