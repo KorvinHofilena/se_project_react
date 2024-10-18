@@ -10,7 +10,7 @@ import Profile from "../Profile/Profile";
 import ItemModal from "../ItemModal/ItemModal";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import Footer from "../Footer/Footer";
-import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
+import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
@@ -18,12 +18,12 @@ import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import DeleteConfirmModal from "../DeleteConfirmModal/DeleteConfirmModal";
 import LoginModal from "../LoginModal/LoginModal";
 import {
-  getItems,
-  deleteItem,
-  addItem,
+  getServerItems,
+  addServerItem,
+  deleteServerItem,
   likeItem,
   unlikeItem,
-} from "../../utils/Api";
+} from "../../utils/api";
 import {
   registerUser,
   signinUser,
@@ -51,7 +51,6 @@ function App() {
   const navigate = useNavigate();
 
   const handleSubmit = (request) => {
-    // start loading
     setIsLoading(true);
     request()
       .then(closeActiveModal)
@@ -59,12 +58,16 @@ function App() {
       .finally(() => setIsLoading(false));
   };
 
+  const handleToggleSwitchChange = () => {
+    setCurrentTemperatureUnit((prevUnit) => (prevUnit === "F" ? "C" : "F"));
+  };
+
   const onAddItem = (newItem, resetCurrentForm) => {
     setIsLoading(true);
     const token = getToken();
 
     const makeRequest = () => {
-      return addItem(newItem, token).then((res) => {
+      return addServerItem(newItem, token).then((res) => {
         setClothingItems([res.data, ...clothingItems]);
         resetCurrentForm();
       });
@@ -75,7 +78,7 @@ function App() {
   const handleDeleteItem = () => {
     const token = getToken();
     const makeRequest = () => {
-      return deleteItem(selectedCard._id, token).then(() =>
+      return deleteServerItem(selectedCard._id, token).then(() =>
         setClothingItems((prevItem) =>
           prevItem.filter((item) => item._id !== selectedCard._id)
         )
@@ -99,10 +102,6 @@ function App() {
 
   const closeActiveModal = () => {
     setActiveModal("");
-  };
-
-  const handleToggleSwitchChange = () => {
-    setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
   };
 
   const handleRegisterClick = () => {
@@ -129,7 +128,6 @@ function App() {
       likeItem(id, token)
         .then((newCard) => {
           console.log("New card after like", newCard);
-
           setClothingItems(updateClothingItems(newCard.item));
         })
         .catch(console.error);
@@ -201,10 +199,9 @@ function App() {
   };
 
   useEffect(() => {
-    if (!activeModal) return; // stop the effect not to add the listener if there is no active modal
+    if (!activeModal) return;
 
     const handleEscClose = (e) => {
-      // define the function inside useEffect not to lose the reference on rerendering
       if (e.key === "Escape") {
         closeActiveModal();
       }
@@ -213,15 +210,12 @@ function App() {
     document.addEventListener("keydown", handleEscClose);
 
     return () => {
-      // don't forget to add a clean up function for removing the listener
       document.removeEventListener("keydown", handleEscClose);
     };
-  }, [activeModal]); // watch activeModal here
-
+  }, [activeModal]);
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
-        //data is the json response
         const filteredData = filterWeatherData(data);
         setWeatherData(filteredData);
       })
@@ -229,7 +223,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    getItems()
+    getServerItems()
       .then((data) => {
         setClothingItems(data);
       })
@@ -304,7 +298,7 @@ function App() {
               activeModal={activeModal}
               card={selectedCard}
               onClose={closeActiveModal}
-              handleDeleteClick={handleDeleteClick}
+              handleDeleteClick={handleDeleteItem}
             />
 
             <RegisterModal

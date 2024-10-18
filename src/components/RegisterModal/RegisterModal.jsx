@@ -1,6 +1,6 @@
 import "./RegisterModal.css";
 
-import { useFormAndValidation } from "../../utils/UseFormAndValidation";
+import { useFormAndValidation } from "../../utils/UseFormAndValidation.js";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 function RegisterModal({

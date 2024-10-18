@@ -4,22 +4,31 @@ import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperature
 import { weatherOptions } from "../../utils/constants";
 
 function WeatherCard({ info }) {
-  const actualCondition = weatherOptions.filter((item) => {
-    return item.day === info.isDay && item.condition === info.condition;
-  });
+  const actualCondition = info
+    ? weatherOptions.filter(
+        (item) => item.day === info.isDay && item.condition === info.condition
+      )
+    : [];
 
-  const currentTempUnit = useContext(
-    CurrentTemperatureUnitContext
-  ).currentTemperatureUnit;
+  const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
 
   return (
     <section className="weather-card">
-      <p className="weather-card__temp">{info.temp[currentTempUnit]}</p>
-      <img
-        className="weather-card__image"
-        src={actualCondition[0].url}
-        alt="Weather card"
-      />
+      {info && info.temp && (
+        <p className="weather-card__temp">
+          {info.temp[currentTemperatureUnit] || "N/A"}
+        </p>
+      )}
+
+      {actualCondition.length > 0 ? (
+        <img
+          className="weather-card__image"
+          src={actualCondition[0].url}
+          alt="Weather condition"
+        />
+      ) : (
+        <p>No weather data available</p>
+      )}
     </section>
   );
 }
