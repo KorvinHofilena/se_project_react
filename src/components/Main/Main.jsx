@@ -7,26 +7,26 @@ import WeatherCard from "../WeatherCard/WeatherCard.jsx";
 import ItemCard from "../ItemCard/ItemCard.jsx";
 
 function Main({ info, handler, settingArray }) {
-  const currentTempUnit = useContext(
-    CurrentTemperatureUnitContext
-  ).currentTemperatureUnit;
+  const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
 
   return (
     <main className="main-app">
+      {/* WeatherCard component showing current weather */}
       <WeatherCard info={info} />
+
+      {/* Display current temperature with the unit */}
       <p className="main-app__phrase">
-        Today is {info.temp[currentTempUnit]} / You may want to wear :
+        Today is {info.temp?.[currentTemperatureUnit] || "N/A"}{" "}
+        {currentTemperatureUnit} / You may want to wear:
       </p>
-      <ul className="main-app_list">
+
+      {/* Display the list of filtered clothing items */}
+      <ul className="main-app__list">
         {settingArray
-          .filter((item) => {
-            return item.weather === info.type;
-          })
-          .map((item) => {
-            return (
-              <ItemCard key={item._id} item={item} onCardClick={handler} />
-            );
-          })}
+          .filter((item) => item.weather === info.type) // Filter items based on weather
+          .map((item) => (
+            <ItemCard key={item._id} item={item} onCardClick={handler} />
+          ))}
       </ul>
     </main>
   );
