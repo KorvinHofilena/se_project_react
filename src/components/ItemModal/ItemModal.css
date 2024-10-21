@@ -1,69 +1,52 @@
-.modal-item__button_type_close {
-  height: 20px;
-  width: 20px;
-
-  background-image: url(../../assets/CloseButton.png);
-  background-color: transparent;
-  position: absolute;
-  top: 24px;
-  right: 24px;
-
-  border: 0;
+.item-modal__content_type_image {
+  padding: 0;
 }
 
-.modal-item__content {
-  background-color: #fff;
-  border-radius: 15px;
-  position: relative;
+.item-modal__image {
+  height: 100%;
+  width: 100%;
 }
 
-.modal-item__image {
-  border-radius: 15px;
-  width: 498px;
-  height: 498px;
-}
-
-.modal-item__info {
+.item-modal__caption {
+  margin: 0;
+  padding-top: 20px;
+  padding-left: 32px;
+  font-family: "CabinetGrotesk-Medium";
   font-size: 20px;
-  font-weight: bold;
-  padding: 20px 32px 32px;
-
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-
-  position: relative;
+  line-height: 24px;
 }
 
-.modal-item__name {
-  max-width: 135px;
+.item-modal__weather {
+  font-family: "CabinetGrotesk-Medium";
+  font-size: 20px;
+  line-height: 24px;
   margin: 0;
-  padding: 0;
+  padding: 20px 0px 32px 32px;
 }
 
-.modal-item__weather-type {
-  margin: 0;
-  padding: 0;
-}
-
-.modal-item__delete {
+.item-modal__delete-btn {
+  font-family: "CabinetGrotesk-Medium";
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: left;
+  color: #ff4d00;
+  background-color: white;
   border: none;
-  background-color: transparent;
-  padding: 0;
-  font-family: "Inter", Arial, sans-serif;
-  color: #ff0000;
-  font-weight: bold;
-  cursor: pointer;
-
-  position: absolute;
-  top: 20px;
-  right: 32px;
+  padding: 20px 32px;
 }
 
-@media screen and (max-width: 505px) {
-  .modal-item__image {
-    border-radius: 15px;
-    width: 300px;
-    height: 300px;
-  }
+.item-modal__delete-btn:hover {
+  cursor: pointer;
+}
+
+.model__delete_hidden {
+  display: none;
+}
+
+.item-modal__footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
 }

@@ -1,32 +1,38 @@
-import "./ItemModal.css";
+import "./itemModal.css";
+import { useContext } from "react";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-function ItemModal({ isOpen, selectedCard, closePopup, deleteCard }) {
+function ItemModal({ activeModal, card, onClose, handleDeleteClick }) {
+  const currentUser = useContext(CurrentUserContext);
+
   return (
-    <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
-      <div className="modal-item__content">
+    <div className={`modal ${activeModal === "preview" && "modal_opened"}`}>
+      <div className="modal__content item-modal__content_type_image">
         <button
-          className="modal-item__button_type_close"
+          className="modal__close"
           type="button"
-          onClick={closePopup}
-        />
+          onClick={onClose}
+        ></button>
         <img
-          className="modal-item__image"
-          src={selectedCard?.imageUrl || "default-image-url.jpg"}
-          alt={selectedCard?.name || "Unknown item"}
+          src={card.imageUrl}
+          alt={card.name}
+          className="item-modal__image"
         />
-        <div className="modal-item__info">
-          <p className="modal-item__name">
-            {selectedCard?.name || "Unknown item"}
-          </p>
-          <p className="modal-item__weather-type">
-            Weather: {selectedCard?.weather || "Not specified"}
-          </p>
+        <div className="item-modal__footer">
+          <div className="item-modal__footer-text">
+            <h2 className="item-modal__caption">{card.name}</h2>
+            <p className="item-modal__weather">Weather: {card.weather}</p>
+          </div>
+
           <button
-            className="modal-item__delete"
             type="button"
-            onClick={deleteCard}
+            className={`item-modal__delete-btn ${
+              card.owner === currentUser?._id ? "" : "model__delete_hidden"
+            }`}
+            onClick={handleDeleteClick}
           >
-            Delete item
+            {" "}
+            Delete card
           </button>
         </div>
       </div>
