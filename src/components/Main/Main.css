@@ -1,13 +1,29 @@
-.main-app {
-  font-weight: bold;
+.cards__text {
+  font-weight: 700;
+  font-family: "Inter";
+  font-size: 20px;
+  margin: 40px 0 35px;
 }
 
-.main-app_list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, 323px);
+.cards__list {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 19px;
   list-style-type: none;
-  grid-gap: 20px;
-
-  margin: auto;
+  margin-top: 35px;
   padding: 0;
+}
+
+@media screen and (max-width: 600px) {
+  .cards__text {
+    display: flex;
+    margin: 0;
+    justify-content: center;
+    font-size: 16px;
+  }
+
+  .cards__list {
+    justify-content: center;
+  }
 }

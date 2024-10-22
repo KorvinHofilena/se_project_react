@@ -11,13 +11,13 @@
   margin: 0;
   padding-top: 20px;
   padding-left: 32px;
-  font-family: "CabinetGrotesk-Medium";
+  font-family: "Inter";
   font-size: 20px;
   line-height: 24px;
 }
 
 .item-modal__weather {
-  font-family: "CabinetGrotesk-Medium";
+  font-family: "Inter";
   font-size: 20px;
   line-height: 24px;
   margin: 0;
@@ -25,7 +25,7 @@
 }
 
 .item-modal__delete-btn {
-  font-family: "CabinetGrotesk-Medium";
+  font-family: "Inter";
   font-size: 20px;
   font-weight: 700;
   line-height: 24px;

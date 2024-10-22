@@ -1,27 +1,50 @@
-import "./ModalWithForm.css";
+import "./modalWithForm.css";
 
 function ModalWithForm({
   children,
-  title,
-  closePopup,
-  isOpen,
-  onSubmit,
   buttonText,
+  altButtonText,
+  altButtonClick,
+  title,
+  isOpen,
+  onClose,
+  onSubmit,
+  formValid,
 }) {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit();
+  };
+
   return (
     <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
       <div className="modal__content">
-        <p className="modal__title">{title}</p>
+        <h2 className="modal__title">{title}</h2>
         <button
-          className="modal__button_type_close"
+          className="modal__close"
           type="button"
-          onClick={closePopup}
-        />
-        <form className="modal__form" onSubmit={onSubmit}>
+          onClick={onClose}
+        ></button>
+        <form action="" onSubmit={handleSubmit} className="modal__form">
           {children}
-          <button type="submit" className="modal__button_type_submit">
-            {buttonText}
-          </button>
+          <div className="modal__buttons-container">
+            <button
+              className={`modal__submit modal__el_hovered ${
+                !formValid ? "modal__submit_disabled" : ""
+              }`}
+              type="submit"
+              disabled={`${!formValid ? "disabled" : ""}`}
+            >
+              {buttonText}
+            </button>
+            <button
+              className={"modal__text-button modal__el_hovered"}
+              type="button"
+              onClick={altButtonClick}
+            >
+              {altButtonText}
+            </button>
+          </div>
         </form>
       </div>
     </div>
