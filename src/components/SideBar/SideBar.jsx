@@ -1,5 +1,5 @@
 import "./SideBar.css";
-import CurrentUserContext from "../../contexts/CurrentUserContext";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useContext } from "react";
 
 function Sidebar({ handleEditProfileClick, onLogout }) {

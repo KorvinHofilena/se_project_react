@@ -36,3 +36,10 @@ const getWeatherType = (temperature) => {
     return "cold";
   }
 };
+
+const weatherApi = {
+  getWeather,
+  filterWeatherData,
+};
+
+export default weatherApi;

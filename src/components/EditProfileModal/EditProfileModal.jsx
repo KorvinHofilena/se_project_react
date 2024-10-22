@@ -1,86 +1,72 @@
-import "../ModalWithForm/ModalWithForm";
+import { useContext, useState, useEffect } from "react";
+
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { useFormAndValidation } from "../../utils/UseFormAndValidation";
-import { useContext, useEffect } from "react";
-import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-function EditProfileModal({
-  handleEditProfile,
-  isOpen,
-  isLoading,
-  onClose,
-  setActiveModal,
-}) {
-  const { values, handleChange, errors, isValid, setValues, resetForm } =
-    useFormAndValidation();
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
+function EditProfileModal({ selectedPopup, onClose, handleProfileUpdate }) {
   const currentUser = useContext(CurrentUserContext);
+  const [data, setData] = useState({
+    name: currentUser.name,
+    avatar: currentUser.avatar,
+  });
+
+  const handleChange = (evt) => {
+    const { name, value } = evt.target;
+    setData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const _handleSubmit = (evt) => {
+    evt.preventDefault();
+    handleProfileUpdate(data);
+    onClose();
+  };
+
+  const isOpen = selectedPopup === "popup-update";
 
   useEffect(() => {
-    setValues({ name: currentUser?.name, avatar: currentUser?.avatar });
-  }, [isOpen, setValues, currentUser]);
-
-  const handleSubmit = () => {
-    handleEditProfile(values, resetCurrentForm);
-  };
-
-  const resetCurrentForm = () => {
-    resetForm({ username: "", avatarUrl: "" });
-  };
+    setData({ name: currentUser.name, avatar: currentUser.avatar });
+  }, [isOpen]);
 
   return (
     <ModalWithForm
-      title="change profile data"
-      buttonText={isLoading ? "Updating" : "Save changes"}
-      altButtonText={""}
-      altButtonClick={() => setActiveModal("register")}
+      title="Change profile data"
+      closePopup={onClose}
       isOpen={isOpen}
-      onSubmit={handleSubmit}
-      formValid={isValid}
-      onClose={onClose}
+      onSubmit={_handleSubmit}
+      buttonText="Save changes"
     >
-      <label className="modal__label" htmlFor="name-edit-profile">
-        Name *
+      <label className="modal__label">
+        Name*
+        <input
+          className="modal__input"
+          id="name-update-id"
+          type="text"
+          placeholder="Name"
+          required
+          minLength="2"
+          maxLength="30"
+          name="name"
+          value={data.name}
+          onChange={handleChange}
+        />
       </label>
-      <input
-        className="modal__input"
-        id="name-edit-profile"
-        minLength="4"
-        maxLength="33"
-        name="name"
-        type="text"
-        value={values.name || ""}
-        onChange={handleChange}
-        required
-      />
-      <span
-        className={`modal__input-error ${
-          errors.name ? "modal__input-error_visible" : ""
-        }`}
-        id="name-error"
-      >
-        {errors.name}
-      </span>
-      <label className="modal__label" htmlFor="avatar-edit-profile">
-        Avatar *
+      <label className="modal__label">
+        Avatar
+        <input
+          className="modal__input"
+          id="avatar-update-id"
+          placeholder="Avatar"
+          type="url"
+          required
+          name="avatar"
+          value={data.avatar}
+          onChange={handleChange}
+        />
       </label>
-      <input
-        className="modal__input"
-        id="avatar-edit-profile"
-        name="avatar"
-        type="url"
-        value={values.avatar || ""}
-        onChange={handleChange}
-        required
-      />
-      <span
-        className={`modal__input-error ${
-          errors.avatar ? "modal__input-error_visible" : ""
-        }`}
-        id="avatarUrl-error"
-      >
-        {errors.avatar}
-      </span>
     </ModalWithForm>
   );
 }

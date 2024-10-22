@@ -4,7 +4,7 @@ const baseUrl =
     : "http://localhost:3001";
 import { processServerResponse } from "./utils";
 
-function registerUser({ name, avatar, email, password }) {
+function signUserUp({ name, avatar, email, password }) {
   return fetch(`${baseUrl}/signup`, {
     method: "POST",
     headers: {
@@ -14,7 +14,7 @@ function registerUser({ name, avatar, email, password }) {
   }).then(processServerResponse);
 }
 
-function signinUser({ email, password }) {
+function signUserIn({ email, password }) {
   return fetch(`${baseUrl}/signin`, {
     method: "POST",
     headers: {
@@ -47,4 +47,4 @@ function getUserByToken(token) {
   }).then(processServerResponse);
 }
 
-export { registerUser, signinUser, getUserByToken, updateUser };
+export { signUserUp, signUserIn, getUserByToken, updateUser };
