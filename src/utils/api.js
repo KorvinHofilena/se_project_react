@@ -1,49 +1,55 @@
-const baseUrl = "http://localhost:3001";
+import { processServerResponse } from "../utils/utils";
+import { getToken } from "../utils/token";
+const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://api.wtwrwtwr.jumpingcrab.com"
+    : "http://localhost:3001";
 
-export const checkResponse = (res) => {
-  return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
-};
+function getItems() {
+  return fetch(`${baseUrl}/items`).then(processServerResponse);
+}
 
-const getServerItems = () => {
-  return fetch(`${baseUrl}/items`).then(checkResponse);
-};
+function deleteItem(id, token) {
+  return fetch(`${baseUrl}/items/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  }).then(processServerResponse);
+}
 
-const addServerItem = (data) => {
+function addItem({ name, weather, imageUrl }, token) {
   return fetch(`${baseUrl}/items`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({
-      name: data.name,
-      imageUrl: data.imageUrl,
-      weather: data.weather,
-    }),
-  }).then(checkResponse);
-};
+    body: JSON.stringify({ name, weather, imageUrl }),
+  }).then(processServerResponse);
+}
 
-const deleteServerItem = (id) => {
-  return fetch(`${baseUrl}/items/${id}`, {
-    method: "DELETE",
-  }).then(checkResponse);
-};
-
-const likeItem = (id) => {
-  return fetch(`${baseUrl}/items/${id}/like`, {
+function likeItem(id) {
+  const token = getToken();
+  return fetch(`${baseUrl}/items/${id}/likes`, {
     method: "PUT",
-  }).then(checkResponse);
-};
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  }).then(processServerResponse);
+}
 
-const unlikeItem = (id) => {
-  return fetch(`${baseUrl}/items/${id}/like`, {
+function unlikeItem(id) {
+  const token = getToken();
+  return fetch(`${baseUrl}/items/${id}/likes`, {
     method: "DELETE",
-  }).then(checkResponse);
-};
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  }).then(processServerResponse);
+}
 
-export {
-  getServerItems,
-  addServerItem,
-  deleteServerItem,
-  likeItem,
-  unlikeItem,
-};
+export { getItems, deleteItem, addItem, likeItem, unlikeItem };
