@@ -17,7 +17,7 @@ function Main({ weatherData, handleCardClick, items }) {
         </p>
         <ul className="cards__list">
           {items
-            .filter((item) => item.weather === weatherData.type) // Only show items that match the weather condition
+            .filter((item) => item.weather === weatherData.type)
             .map((item) => (
               <ItemCard
                 key={item._id}

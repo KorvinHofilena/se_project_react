@@ -13,7 +13,7 @@ const LoginModal = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleLogin(values, resetCurrentForm); // Fixed form submission handling
+    handleLogin(values, resetCurrentForm);
   };
 
   const resetCurrentForm = () => {

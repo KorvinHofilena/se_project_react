@@ -23,7 +23,7 @@ function ItemModal({ activeModal, card, onClose, handleDeleteClick }) {
             <h2 className="item-modal__caption">{card?.name}</h2>
             <p className="item-modal__weather">Weather: {card?.weather}</p>
           </div>
-          {/* Only allow deletion if the user is the owner */}
+
           {card?.owner === currentUser?._id && (
             <button
               type="button"
