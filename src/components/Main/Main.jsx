@@ -4,7 +4,7 @@ import ItemCard from "../ItemCard/ItemCard";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { useContext } from "react";
 
-function Main({ weatherData, onCardClick, clothingItems = [], onCardLike }) {
+function Main({ weatherData, handleCardClick, items }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   const temp = weatherData?.temp?.[currentTemperatureUnit] || 999;
 
@@ -16,14 +16,13 @@ function Main({ weatherData, onCardClick, clothingItems = [], onCardLike }) {
           Today is {temp} {currentTemperatureUnit} / You may want to wear:
         </p>
         <ul className="cards__list">
-          {clothingItems
-            ?.filter((item) => item.weather === weatherData?.type)
-            ?.map((item) => (
+          {items
+            .filter((item) => item.weather === weatherData.type) // Only show items that match the weather condition
+            .map((item) => (
               <ItemCard
                 key={item._id}
                 item={item}
-                onCardClick={onCardClick}
-                onCardLike={onCardLike}
+                onCardClick={handleCardClick}
               />
             ))}
         </ul>

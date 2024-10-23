@@ -1,12 +1,14 @@
 import "./itemCard.css";
 import { useContext } from "react";
-import CurrentUserContext from "../../contexts/CurrentUserContext";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import likeActive from "../../assets/like-active.png";
 import likeInactive from "../../assets/like-inactive.svg";
 
 function ItemCard({ item, onCardClick, onCardLike }) {
   const currentUser = useContext(CurrentUserContext);
-  const isLiked = item.likes.some((id) => id === currentUser?._id);
+
+  // Safe access to likes to avoid errors when undefined
+  const isLiked = item?.likes?.some((id) => id === currentUser?._id) || false;
 
   const handleCardClick = () => {
     onCardClick(item);
@@ -33,7 +35,7 @@ function ItemCard({ item, onCardClick, onCardLike }) {
         className="card__image"
         src={item.imageUrl}
         alt={item.name}
-      ></img>
+      />
     </li>
   );
 }

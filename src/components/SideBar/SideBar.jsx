@@ -13,7 +13,6 @@ function Sidebar({ handleEditProfileClick, onLogout }) {
           alt={currentUser?.name}
           className="sidebar__avatar"
         />
-
         <p className="sidebar__username">{currentUser?.name}</p>
       </div>
 

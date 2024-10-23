@@ -2,11 +2,9 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 
 import "./Header.css";
-
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-
 import logo from "../../assets/logo.png";
 
 function Header({
@@ -25,55 +23,46 @@ function Header({
 
   return (
     <header className="header">
-      <Link to="/">
-        <img className="header__logo" src={logo} alt="Logo" />
-      </Link>
-      <p className="header__date-location">
-        {currentDate}, {info.location}
-      </p>
-      <div className="header__user-space">
+      <div className="header__logo-and-date">
+        <Link to="/">
+          <img className="header__logo" src={logo} alt="Logo" />
+        </Link>
+        <p className="header__date-and-location">
+          {currentDate}, {info?.location || "Unknown location"}
+        </p>
+      </div>
+      <div className="header__temp-and-user">
         <ToggleSwitch />
         {isLoggedIn ? (
           <>
-            <button
-              className="header__button"
-              type="button"
-              id="header-add-button"
-              onClick={handler}
-            >
+            <button className="header__add-btn" type="button" onClick={handler}>
               + Add clothes
             </button>
-            <div className="header__user-info">
+            <div className="header__user-container">
               <Link to="/profile" className="header__link">
-                <p className="header__username">{currentUser.name}</p>
+                <p className="header__user-name">
+                  {currentUser?.name || "Guest"}
+                </p>
               </Link>
-              {currentUser.avatar ? (
+              {currentUser?.avatar ? (
                 <img
-                  className="header__avatar"
+                  className="header__user-avatar"
                   src={currentUser.avatar}
                   alt="Avatar"
                 />
               ) : (
-                <div className="header__avatar-placeholder">
-                  {currentUser.name.split("")[0]}
+                <div className="header__user-avatar-placeholder">
+                  {currentUser?.name?.charAt(0) || "?"}
                 </div>
               )}
             </div>
           </>
         ) : (
           <div className="header__auth-container">
-            <button
-              className="header__button"
-              id="header-register-button"
-              onClick={handleRegisterClick}
-            >
+            <button className="header__register" onClick={handleRegisterClick}>
               Sign Up
             </button>
-            <button
-              className="header__button"
-              onClick={handleLoginClick}
-              id="header-login-button"
-            >
+            <button className="header__login" onClick={handleLoginClick}>
               Log In
             </button>
           </div>

@@ -2,7 +2,7 @@ import "./itemModal.css";
 import { useContext } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-function ItemModal({ activeModal, card = {}, onClose, handleDeleteClick }) {
+function ItemModal({ activeModal, card, onClose, handleDeleteClick }) {
   const currentUser = useContext(CurrentUserContext);
 
   return (
@@ -14,23 +14,23 @@ function ItemModal({ activeModal, card = {}, onClose, handleDeleteClick }) {
           onClick={onClose}
         ></button>
         <img
-          src={card.imageUrl || ""}
-          alt={card.name || "Item Image"}
+          src={card?.imageUrl}
+          alt={card?.name}
           className="item-modal__image"
         />
         <div className="item-modal__footer">
           <div className="item-modal__footer-text">
-            <h2 className="item-modal__caption">{card.name || "Item"}</h2>
-            <p className="item-modal__weather">Weather: {card.weather || ""}</p>
+            <h2 className="item-modal__caption">{card?.name}</h2>
+            <p className="item-modal__weather">Weather: {card?.weather}</p>
           </div>
-
-          {card.owner === currentUser?._id && (
+          {/* Only allow deletion if the user is the owner */}
+          {card?.owner === currentUser?._id && (
             <button
               type="button"
               className="item-modal__delete-btn"
               onClick={handleDeleteClick}
             >
-              Delete card
+              Delete Item
             </button>
           )}
         </div>

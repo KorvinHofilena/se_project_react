@@ -1,6 +1,5 @@
 import "./RegisterModal.css";
-
-import { useFormAndValidation } from "../../utils/UseFormAndValidation.js";
+import { useFormAndValidation } from "../../utils/UseFormAndValidation";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 function RegisterModal({
@@ -12,8 +11,9 @@ function RegisterModal({
 }) {
   const { values, handleChange, isValid, resetForm } = useFormAndValidation();
 
-  const handleSubmit = () => {
-    handleRegistration(values, resetCurrentForm);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleRegistration(values, resetCurrentForm); // Corrected form submission handling
   };
 
   const resetCurrentForm = () => {

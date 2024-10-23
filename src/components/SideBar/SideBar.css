@@ -10,7 +10,7 @@
 }
 
 .sidebar__username {
-  font-family: "Inter";
+  font-family: "CabinetGrotesk-Medium";
   font-size: 20px;
   font-weight: 700;
   line-height: 24.8px;
@@ -23,7 +23,7 @@
 }
 
 .sidebar__logout-btn {
-  font-family: "Inter";
+  font-family: "CabinetGrotesk-Medium";
   font-size: 18px;
   font-weight: 700;
   line-height: 24.8px;
@@ -35,7 +35,7 @@
 }
 
 .sidebar__edit-profile-btn {
-  font-family: "Inter";
+  font-family: "CabinetGrotesk-Medium";
   font-size: 18px;
   font-weight: 700;
   line-height: 24.8px;

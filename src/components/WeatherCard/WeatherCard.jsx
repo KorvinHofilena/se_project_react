@@ -3,21 +3,20 @@ import { weatherOptions, defaultWeatherOptions } from "../../utils/constants";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { useContext } from "react";
 
-function WeatherCard({ weatherData = {} }) {
+function WeatherCard({ weatherData }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   const temp = weatherData?.temp?.[currentTemperatureUnit] || 999;
 
-  // Safely destructure weatherData to avoid undefined errors
-  const { isDay = true, condition = "" } = weatherData;
-
-  // Find the appropriate weather option based on the current weather conditions
   const foundOption = weatherOptions.find((option) => {
-    return option.day === isDay && option.condition === condition;
+    return (
+      option.day === weatherData.isDay &&
+      option.condition === weatherData.condition
+    );
   });
 
-  // Use default options if no specific match is found
-  const weatherOption =
-    foundOption || defaultWeatherOptions[isDay ? "day" : "night"];
+  let weatherOption = foundOption
+    ? foundOption
+    : defaultWeatherOptions[weatherData.isDay ? "day" : "night"];
 
   return (
     <section className="weather-card">
@@ -26,7 +25,7 @@ function WeatherCard({ weatherData = {} }) {
       </p>
       <img
         src={weatherOption?.url}
-        alt={weatherOption?.condition || "default weather"}
+        alt={weatherOption?.condition}
         className="weather-card__image"
       />
     </section>

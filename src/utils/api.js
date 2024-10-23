@@ -1,15 +1,17 @@
 import { processServerResponse } from "../utils/utils";
 import { getToken } from "../utils/token";
 
-const baseUrl = "http://localhost:3001";
+const baseUrl = "http://localhost:3001"; // Mock server running on port 3001
 
-const getServerItems = () => {
+// Fetch all items from the server (garments)
+export const getServerItems = () => {
   return fetch(`${baseUrl}/items`)
     .then(processServerResponse)
     .catch((err) => console.error("Error fetching items:", err));
 };
 
-function addServerItem({ name, weather, imageUrl }, token) {
+// Add a new item to the server (garments)
+export const addServerItem = ({ name, weather, imageUrl }, token) => {
   return fetch(`${baseUrl}/items`, {
     method: "POST",
     headers: {
@@ -18,9 +20,10 @@ function addServerItem({ name, weather, imageUrl }, token) {
     },
     body: JSON.stringify({ name, weather, imageUrl }),
   }).then(processServerResponse);
-}
+};
 
-function deleteServerItem(id, token) {
+// Delete an item from the server
+export const deleteServerItem = (id, token) => {
   return fetch(`${baseUrl}/items/${id}`, {
     method: "DELETE",
     headers: {
@@ -28,9 +31,10 @@ function deleteServerItem(id, token) {
       authorization: `Bearer ${token}`,
     },
   }).then(processServerResponse);
-}
+};
 
-function addCardLike(id) {
+// Add a like to an item
+export const addCardLike = (id) => {
   const token = getToken();
   return fetch(`${baseUrl}/items/${id}/likes`, {
     method: "PUT",
@@ -39,9 +43,10 @@ function addCardLike(id) {
       authorization: `Bearer ${token}`,
     },
   }).then(processServerResponse);
-}
+};
 
-function removeCardLike(id) {
+// Remove a like from an item
+export const removeCardLike = (id) => {
   const token = getToken();
   return fetch(`${baseUrl}/items/${id}/likes`, {
     method: "DELETE",
@@ -50,24 +55,16 @@ function removeCardLike(id) {
       authorization: `Bearer ${token}`,
     },
   }).then(processServerResponse);
-}
+};
 
-const updateUserData = (data) => {
+// Update user data on the server
+export const updateUserData = (data) => {
   return fetch(`${baseUrl}/users/me`, {
     method: "PATCH",
     headers: {
-      "Content-type": "application/json",
+      "Content-Type": "application/json",
       authorization: `Bearer ${localStorage.getItem("jwt")}`,
     },
     body: JSON.stringify(data),
   }).then(processServerResponse);
-};
-
-export {
-  updateUserData,
-  getServerItems,
-  deleteServerItem,
-  addServerItem,
-  addCardLike,
-  removeCardLike,
 };

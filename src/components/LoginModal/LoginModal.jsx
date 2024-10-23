@@ -11,8 +11,9 @@ const LoginModal = ({
 }) => {
   const { values, handleChange, isValid, resetForm } = useFormAndValidation();
 
-  const handleSubmit = () => {
-    handleLogin(values, resetCurrentForm);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleLogin(values, resetCurrentForm); // Fixed form submission handling
   };
 
   const resetCurrentForm = () => {
