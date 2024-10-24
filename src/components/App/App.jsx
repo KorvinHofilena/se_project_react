@@ -8,10 +8,12 @@ import RegisterModal from "../RegisterModal/RegisterModal";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
 import Footer from "../Footer/Footer";
+import Profile from "../Profile/Profile";
+import AddItemModal from "../AddItemModal/AddItemModal";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import { getServerItems } from "../../utils/api";
 import { signUserIn, signUserUp, getUserByToken } from "../../utils/auth";
-import { CurrentTemperatureUnitProvider } from "../../contexts/CurrentTemperatureUnitContext"; // Import the correct provider
+import { CurrentTemperatureUnitProvider } from "../../contexts/CurrentTemperatureUnitContext";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -25,6 +27,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
+  const [clothingItems, setClothingItems] = useState([]);
 
   const handleCardClick = (card) => {
     setActiveModal("preview");
@@ -32,7 +35,7 @@ function App() {
   };
 
   const handleAddClick = () => {
-    setActiveModal("add-garment");
+    setActiveModal("add-item");
   };
 
   const handleLoginClick = () => {
@@ -100,11 +103,23 @@ function App() {
             handleLoginClick={handleLoginClick}
             handleRegisterClick={handleRegisterClick}
           />
-          <Main
-            weatherData={weatherData}
-            handleCardClick={handleCardClick}
-            items={items}
-          />
+
+          {isLoggedIn ? (
+            <Profile
+              handleEditProfileClick={() => setActiveModal("edit-profile")}
+              onCardClick={handleCardClick}
+              clothingItems={clothingItems}
+              handleAddClick={handleAddClick}
+              handleLogout={() => setIsLoggedIn(false)}
+              onCardLike={() => {}}
+            />
+          ) : (
+            <Main
+              weatherData={weatherData}
+              handleCardClick={handleCardClick}
+              items={items}
+            />
+          )}
         </div>
 
         <LoginModal
@@ -123,71 +138,15 @@ function App() {
           onClose={closeActiveModal}
         />
 
-        <ModalWithForm
-          isOpen={activeModal === "add-garment"}
-          title="New garment"
-          buttonText="Add garment"
-          activeModal={activeModal}
+        <AddItemModal
+          isOpen={activeModal === "add-item"}
+          onAddItem={(newItem) => {
+            setItems([newItem, ...items]);
+            closeActiveModal();
+          }}
+          isLoading={isLoading}
           onClose={closeActiveModal}
-        >
-          <label htmlFor="name" className="modal__label">
-            Name
-            <input
-              type="text"
-              className="modal__input"
-              id="name"
-              placeholder="Name"
-            />
-          </label>
-          <label htmlFor="imageUrl" className="modal__label">
-            Image
-            <input
-              type="text"
-              className="modal__input"
-              id="imageUrl"
-              placeholder="Image URL"
-            />
-          </label>
-          <fieldset className="modal__radio-buttons">
-            <legend className="modal__legend">Select the weather type:</legend>
-            <label
-              htmlFor="hot"
-              className="modal__label modal__label_type_radio"
-            >
-              <input
-                id="hot"
-                type="radio"
-                className="modal__radio-input"
-                name="weather"
-              />
-              <span>Hot</span>
-            </label>
-            <label
-              htmlFor="warm"
-              className="modal__label modal__label_type_radio"
-            >
-              <input
-                id="warm"
-                type="radio"
-                className="modal__radio-input"
-                name="weather"
-              />
-              <span>Warm</span>
-            </label>
-            <label
-              htmlFor="cold"
-              className="modal__label modal__label_type_radio"
-            >
-              <input
-                id="cold"
-                type="radio"
-                className="modal__radio-input"
-                name="weather"
-              />
-              <span>Cold</span>
-            </label>
-          </fieldset>
-        </ModalWithForm>
+        />
 
         <ItemModal
           activeModal={activeModal}
