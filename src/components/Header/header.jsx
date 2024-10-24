@@ -1,9 +1,7 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-
 import "./Header.css";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
-
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import logo from "../../assets/logo.png";
 
@@ -12,7 +10,7 @@ function Header({
   handler,
   isLoggedIn,
   handleRegisterClick,
-  handleLoginClick,
+  handleLoginClick, // Props to manage modal state
 }) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",

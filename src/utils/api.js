@@ -4,9 +4,7 @@ import { getToken } from "../utils/token";
 const baseUrl = "http://localhost:3001";
 
 export const getServerItems = () => {
-  return fetch(`${baseUrl}/items`)
-    .then(processServerResponse)
-    .catch((err) => console.error("Error fetching items:", err));
+  return fetch(`${baseUrl}/items`).then(processServerResponse);
 };
 
 export const addServerItem = ({ name, weather, imageUrl }, token) => {

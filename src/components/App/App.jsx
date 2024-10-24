@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import { coordinates, APIkey } from "../../utils/constants";
-import Header from "../Header/header";
+import Header from "../Header/Header";
 import Main from "../Main/Main";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
@@ -18,26 +18,40 @@ function App() {
     temp: { F: 999 },
     city: "",
   });
-  const [activeModal, setActiveModal] = useState("");
+  const [activeModal, setActiveModal] = useState(""); // Manage which modal is active
   const [selectedCard, setSelectedCard] = useState({});
   const [items, setItems] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
 
+  // Handle card click to open item modal
   const handleCardClick = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
   };
 
+  // Open the add item modal
   const handleAddClick = () => {
     setActiveModal("add-garment");
   };
 
+  // Open the login modal
+  const handleLoginClick = () => {
+    setActiveModal("login");
+  };
+
+  // Open the register modal
+  const handleRegisterClick = () => {
+    setActiveModal("register");
+  };
+
+  // Close any active modal
   const closeActiveModal = () => {
     setActiveModal("");
   };
 
+  // Handle user login
   const handleLogin = (credentials) => {
     setIsLoading(true);
     signUserIn(credentials)
@@ -48,12 +62,13 @@ function App() {
       .then((user) => {
         setCurrentUser(user);
         setIsLoggedIn(true);
-        closeActiveModal();
+        closeActiveModal(); // Close login modal
       })
       .catch(console.error)
       .finally(() => setIsLoading(false));
   };
 
+  // Handle user registration
   const handleRegister = (data) => {
     setIsLoading(true);
     signUserUp(data)
@@ -62,6 +77,7 @@ function App() {
       .finally(() => setIsLoading(false));
   };
 
+  // Fetch weather data
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
@@ -71,6 +87,7 @@ function App() {
       .catch(console.error);
   }, []);
 
+  // Fetch items (garments) from the server when the app loads
   useEffect(() => {
     getServerItems()
       .then((data) => {
@@ -87,6 +104,8 @@ function App() {
           weatherData={weatherData}
           isLoggedIn={isLoggedIn}
           currentUser={currentUser}
+          handleLoginClick={handleLoginClick} // Pass the login handler
+          handleRegisterClick={handleRegisterClick} // Pass the register handler
         />
         <Main
           weatherData={weatherData}
@@ -94,6 +113,8 @@ function App() {
           items={items}
         />
       </div>
+
+      {/* Login Modal */}
       <LoginModal
         isOpen={activeModal === "login"}
         handleLogin={handleLogin}
@@ -101,6 +122,8 @@ function App() {
         setActiveModal={setActiveModal}
         onClose={closeActiveModal}
       />
+
+      {/* Register Modal */}
       <RegisterModal
         isOpen={activeModal === "register"}
         handleRegistration={handleRegister}
@@ -108,6 +131,8 @@ function App() {
         setActiveModal={setActiveModal}
         onClose={closeActiveModal}
       />
+
+      {/* Add Garment Modal */}
       <ModalWithForm
         isOpen={activeModal === "add-garment"}
         title="New garment"
@@ -170,11 +195,14 @@ function App() {
           </label>
         </fieldset>
       </ModalWithForm>
+
+      {/* Item Preview Modal */}
       <ItemModal
         activeModal={activeModal}
         card={selectedCard}
         onClose={closeActiveModal}
       />
+
       <Footer />
     </div>
   );
