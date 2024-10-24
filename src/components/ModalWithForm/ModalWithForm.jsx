@@ -1,5 +1,4 @@
-import "./modalWithForm.css";
-
+import "./ModalWithForm.css";
 function ModalWithForm({
   children,
   buttonText,
