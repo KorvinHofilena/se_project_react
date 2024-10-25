@@ -13,10 +13,7 @@ function RegisterModal({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleRegistration(values, resetCurrentForm); // Corrected form submission handling
-  };
-
-  const resetCurrentForm = () => {
+    handleRegistration(values);
     resetForm({ email: "", password: "", name: "", avatar: "" });
   };
 
@@ -24,7 +21,7 @@ function RegisterModal({
     <ModalWithForm
       title="Sign up"
       buttonText={isLoading ? "Registering" : "Next"}
-      altButtonText={"or Log in"}
+      altButtonText="or Log in"
       altButtonClick={() => setActiveModal("login")}
       isOpen={isOpen}
       onSubmit={handleSubmit}
@@ -67,7 +64,7 @@ function RegisterModal({
         onChange={handleChange}
         required
       />
-      <label className="register-modal__label" htmlFor="avatar-register">
+      <label className="modal__label" htmlFor="avatar-register">
         Avatar URL *
       </label>
       <input

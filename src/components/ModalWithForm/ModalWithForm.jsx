@@ -1,4 +1,5 @@
 import "./ModalWithForm.css";
+
 function ModalWithForm({
   children,
   buttonText,
@@ -12,7 +13,9 @@ function ModalWithForm({
 }) {
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit();
+    if (onSubmit) {
+      onSubmit(e); // Pass the event in case onSubmit needs it
+    }
   };
 
   return (
@@ -32,12 +35,12 @@ function ModalWithForm({
                 !formValid ? "modal__submit_disabled" : ""
               }`}
               type="submit"
-              disabled={`${!formValid ? "disabled" : ""}`}
+              disabled={!formValid}
             >
               {buttonText}
             </button>
             <button
-              className={"modal__text-button modal__el_hovered"}
+              className="modal__text-button modal__el_hovered"
               type="button"
               onClick={altButtonClick}
             >

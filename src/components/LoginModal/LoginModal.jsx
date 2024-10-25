@@ -11,12 +11,9 @@ const LoginModal = ({
 }) => {
   const { values, handleChange, isValid, resetForm } = useFormAndValidation();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    handleLogin(values, resetCurrentForm);
-  };
-
-  const resetCurrentForm = () => {
+  const handleSubmit = (event) => {
+    event.preventDefault(); // Make sure to prevent default behavior here
+    handleLogin(values);
     resetForm({ email: "", password: "" });
   };
 
@@ -24,10 +21,10 @@ const LoginModal = ({
     <ModalWithForm
       title="Login"
       buttonText={isLoading ? "Logging in" : "Login"}
-      altButtonText={"or Register"}
+      altButtonText="or Register"
       altButtonClick={() => setActiveModal("register")}
       isOpen={isOpen}
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmit} // Pass handleSubmit correctly here
       formValid={isValid}
       onClose={onClose}
     >
