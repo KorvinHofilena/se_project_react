@@ -12,6 +12,7 @@ function Profile({
 }) {
   return (
     <div className="profile">
+      <p>** Debug: Profile Loaded **</p> {/* Debugging line */}
       <section className="profile__sidebar">
         <Sidebar
           handleEditProfileClick={handleEditProfileClick}
