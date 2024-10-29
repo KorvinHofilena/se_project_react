@@ -6,13 +6,7 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import logo from "../../assets/logo.png";
 import avatarPlaceholder from "../../assets/avatar.png";
 
-function Header({
-  info,
-  handler,
-  isLoggedIn,
-  handleRegisterClick,
-  handleLoginClick,
-}) {
+function Header({ info, handler, isLoggedIn }) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
