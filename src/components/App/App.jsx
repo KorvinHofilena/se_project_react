@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
 import { coordinates, APIkey } from "../../utils/constants";
-import Header from "../Header/header";
+import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Profile from "../Profile/Profile";
 import AddItemModal from "../AddItemModal/AddItemModal";
@@ -15,7 +15,6 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { CurrentTemperatureUnitProvider } from "../../contexts/CurrentTemperatureUnitContext";
 
 function App() {
-  // Set isLoggedIn to true by default
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [currentUser, setCurrentUser] = useState({
     name: "John Doe",
@@ -32,7 +31,6 @@ function App() {
   const [clothingItems, setClothingItems] = useState([]);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
 
-  // Toggle temperature unit
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit((prevUnit) => (prevUnit === "F" ? "C" : "F"));
   };
@@ -78,6 +76,7 @@ function App() {
             handleAddClick={handleAddClick}
             weatherData={weatherData}
             isLoggedIn={isLoggedIn}
+            handler={handleAddClick}
           />
           <Routes>
             <Route

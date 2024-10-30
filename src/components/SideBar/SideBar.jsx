@@ -1,29 +1,31 @@
 import "./SideBar.css";
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useContext } from "react";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import avatarPlaceholder from "../../assets/avatar.png";
 
-function Sidebar({ handleEditProfileClick, onLogout }) {
+function SideBar({ handleEditProfileClick, onLogout }) {
   const currentUser = useContext(CurrentUserContext);
 
   return (
-    <div className="sidebar">
-      <p>** Debug: Sidebar Loaded **</p> {/* Debugging line */}
-      <div className="sidebar__avatar-container">
+    <div className="side-bar">
+      <div className="side-bar__avatar-container">
         <img
-          src={currentUser?.avatar}
-          alt={currentUser?.name}
-          className="sidebar__avatar"
+          src={currentUser?.avatar || avatarPlaceholder}
+          alt={currentUser?.name || "User Avatar"}
+          className="side-bar__avatar"
         />
-        <p className="sidebar__username">{currentUser?.name || "Username"}</p>
+        <p className="side-bar__username">
+          {currentUser?.name || "Guest User"}
+        </p>
       </div>
-      <div className="sidebar__buttons-container">
+      <div className="side-bar__buttons-container">
         <button
           onClick={handleEditProfileClick}
-          className="sidebar__edit-profile-btn"
+          className="side-bar__edit-profile-btn"
         >
-          Change profile data
+          Edit Profile
         </button>
-        <button onClick={onLogout} className="sidebar__logout-btn">
+        <button onClick={onLogout} className="side-bar__logout-btn">
           Log out
         </button>
       </div>
@@ -31,4 +33,4 @@ function Sidebar({ handleEditProfileClick, onLogout }) {
   );
 }
 
-export default Sidebar;
+export default SideBar;

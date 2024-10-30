@@ -1,5 +1,6 @@
+// Profile.jsx
 import "./Profile.css";
-import Sidebar from "../SideBar/SideBar";
+import SideBar from "../SideBar/SideBar";
 import ClothesSection from "../ClothesSection/ClothesSection";
 
 function Profile({
@@ -12,9 +13,8 @@ function Profile({
 }) {
   return (
     <div className="profile">
-      <p>** Debug: Profile Loaded **</p> {/* Debugging line */}
       <section className="profile__sidebar">
-        <Sidebar
+        <SideBar
           handleEditProfileClick={handleEditProfileClick}
           onLogout={handleLogout}
         />
