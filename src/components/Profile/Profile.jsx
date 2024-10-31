@@ -21,9 +21,9 @@ function Profile({
       </section>
       <section className="profile__clothing-items">
         <ClothesSection
-          clothingItems={clothingItems}
-          onCardClick={onCardClick}
-          handleAddClick={handleAddClick}
+          settingArray={clothingItems}
+          handler={onCardClick}
+          onClick={handleAddClick}
           onCardLike={onCardLike}
         />
       </section>

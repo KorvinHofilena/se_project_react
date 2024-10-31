@@ -10,7 +10,7 @@ import AddItemModal from "../AddItemModal/AddItemModal";
 import ItemModal from "../ItemModal/ItemModal";
 import Footer from "../Footer/Footer";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
-import { getServerItems } from "../../utils/api";
+import { getServerItems, deleteServerItem } from "../../utils/api"; // Import deleteServerItem
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { CurrentTemperatureUnitProvider } from "../../contexts/CurrentTemperatureUnitContext";
 
@@ -18,6 +18,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [currentUser, setCurrentUser] = useState({
     name: "John Doe",
+    _id: "user123", // Example ID; this should match the owner ID on the items
   });
   const [weatherData, setWeatherData] = useState({
     type: "",
@@ -42,6 +43,16 @@ function App() {
 
   const handleAddClick = () => {
     setActiveModal("add-item");
+  };
+
+  const handleDeleteClick = () => {
+    deleteServerItem(selectedCard._id)
+      .then(() => {
+        // Update the items array by filtering out the deleted item
+        setItems(items.filter((item) => item._id !== selectedCard._id));
+        setActiveModal(""); // Close the modal after deletion
+      })
+      .catch((err) => console.error("Error deleting item:", err));
   };
 
   const handleLogout = () => {
@@ -122,6 +133,7 @@ function App() {
             activeModal={activeModal}
             card={selectedCard}
             onClose={() => setActiveModal("")}
+            handleDeleteClick={handleDeleteClick} // Pass handleDeleteClick here
           />
         </div>
       </CurrentUserContext.Provider>

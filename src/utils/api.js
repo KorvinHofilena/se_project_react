@@ -2,7 +2,12 @@
 const baseUrl = "http://localhost:3001";
 
 export const getServerItems = () => {
-  return fetch(`${baseUrl}/items`).then((res) => res.json());
+  return fetch(`${baseUrl}/items`).then((res) => {
+    if (!res.ok) {
+      return Promise.reject(`Error: ${res.status}`);
+    }
+    return res.json();
+  });
 };
 
 export const addServerItem = (item) => {
@@ -12,11 +17,22 @@ export const addServerItem = (item) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(item),
-  }).then((res) => res.json());
+  }).then((res) => {
+    if (!res.ok) {
+      return Promise.reject(`Error: ${res.status}`);
+    }
+    return res.json();
+  });
 };
 
 export const deleteServerItem = (id) => {
   return fetch(`${baseUrl}/items/${id}`, {
     method: "DELETE",
-  }).then((res) => res.json());
+  }).then((res) => {
+    if (!res.ok) {
+      return Promise.reject(`Error: ${res.status}`);
+    }
+    // Optional: return a success message or ID if needed
+    return { message: "Item deleted", id };
+  });
 };
