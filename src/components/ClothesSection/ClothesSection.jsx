@@ -1,11 +1,12 @@
+// ClothesSection.jsx
 import { useContext } from "react";
 import "./ClothesSection.css";
 import ItemCard from "../ItemCard/ItemCard";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-function ClothesSection({ settingArray, handler, onClick, onCardLike }) {
+function ClothesSection({ items, handler, onClick, onCardLike }) {
   const currentUserId = useContext(CurrentUserContext)?._id;
-  const userItems = settingArray.filter((item) => item.owner === currentUserId);
+  const userItems = items.filter((item) => item.owner === currentUserId);
 
   return (
     <section className="clothes-section">
@@ -20,16 +21,14 @@ function ClothesSection({ settingArray, handler, onClick, onCardLike }) {
         </button>
       </div>
       <ul className="clothes-section__cards-list">
-        {userItems.map((item) => {
-          return (
-            <ItemCard
-              key={item._id}
-              item={item}
-              onCardClick={handler}
-              onCardLike={onCardLike}
-            />
-          );
-        })}
+        {userItems.map((item) => (
+          <ItemCard
+            key={item._id || item.id} // Ensuring unique key
+            item={item}
+            onCardClick={handler}
+            onCardLike={onCardLike}
+          />
+        ))}
       </ul>
     </section>
   );

@@ -6,7 +6,7 @@ import ClothesSection from "../ClothesSection/ClothesSection";
 function Profile({
   handleEditProfileClick,
   onCardClick,
-  clothingItems,
+  items,
   handleAddClick,
   handleLogout,
   onCardLike,
@@ -21,7 +21,7 @@ function Profile({
       </section>
       <section className="profile__clothing-items">
         <ClothesSection
-          settingArray={clothingItems}
+          items={items}
           handler={onCardClick}
           onClick={handleAddClick}
           onCardLike={onCardLike}

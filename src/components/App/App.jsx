@@ -29,7 +29,6 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({});
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [clothingItems, setClothingItems] = useState([]);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
 
   const handleToggleSwitchChange = () => {
@@ -48,7 +47,6 @@ function App() {
   const handleDeleteClick = () => {
     deleteServerItem(selectedCard._id)
       .then(() => {
-        // Update the items array by filtering out the deleted item
         setItems(items.filter((item) => item._id !== selectedCard._id));
         setActiveModal(""); // Close the modal after deletion
       })
@@ -109,7 +107,7 @@ function App() {
                       setActiveModal("edit-profile")
                     }
                     onCardClick={handleCardClick}
-                    clothingItems={clothingItems}
+                    items={items} // Use "items" for consistency
                     handleAddClick={handleAddClick}
                     handleLogout={handleLogout}
                   />
