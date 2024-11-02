@@ -1,4 +1,3 @@
-// Api.js
 const baseUrl = "http://localhost:3001";
 
 export const getServerItems = () => {
@@ -32,7 +31,7 @@ export const deleteServerItem = (id) => {
     if (!res.ok) {
       return Promise.reject(`Error: ${res.status}`);
     }
-    // Optional: return a success message or ID if needed
+
     return { message: "Item deleted", id };
   });
 };

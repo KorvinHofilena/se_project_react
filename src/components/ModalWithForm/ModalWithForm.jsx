@@ -14,7 +14,7 @@ function ModalWithForm({
   const handleSubmit = (e) => {
     e.preventDefault();
     if (onSubmit) {
-      onSubmit(e); // Pass the event in case onSubmit needs it
+      onSubmit(e);
     }
   };
 

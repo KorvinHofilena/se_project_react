@@ -1,4 +1,3 @@
-// ClothesSection.jsx
 import { useContext } from "react";
 import "./ClothesSection.css";
 import ItemCard from "../ItemCard/ItemCard";
@@ -23,7 +22,7 @@ function ClothesSection({ items, handler, onClick, onCardLike }) {
       <ul className="clothes-section__cards-list">
         {userItems.map((item) => (
           <ItemCard
-            key={item._id || item.id} // Ensuring unique key
+            key={item._id || item.id}
             item={item}
             onCardClick={handler}
             onCardLike={onCardLike}

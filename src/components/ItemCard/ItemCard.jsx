@@ -7,7 +7,7 @@ import likeInactive from "../../assets/like-inactive.svg";
 function ItemCard({ item, onCardClick, onCardLike }) {
   const currentUser = useContext(CurrentUserContext);
 
-  const isLiked = item?.likes?.some((id) => id === currentUser?._id) || false;
+  const isLiked = item?.likes?.some((id) => id === currentUser?.id) || false;
 
   const handleCardClick = () => {
     onCardClick(item);
@@ -15,7 +15,7 @@ function ItemCard({ item, onCardClick, onCardLike }) {
 
   const handleLike = (evt) => {
     evt.preventDefault();
-    onCardLike({ _id: item._id, isLiked });
+    onCardLike({ id: item.id, isLiked });
   };
 
   return (

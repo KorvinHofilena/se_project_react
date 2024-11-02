@@ -1,4 +1,3 @@
-// App.jsx
 import { useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
@@ -10,7 +9,11 @@ import AddItemModal from "../AddItemModal/AddItemModal";
 import ItemModal from "../ItemModal/ItemModal";
 import Footer from "../Footer/Footer";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
-import { getServerItems, deleteServerItem } from "../../utils/api"; // Import deleteServerItem
+import {
+  getServerItems,
+  deleteServerItem,
+  addServerItem,
+} from "../../utils/api";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { CurrentTemperatureUnitProvider } from "../../contexts/CurrentTemperatureUnitContext";
 
@@ -18,7 +21,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [currentUser, setCurrentUser] = useState({
     name: "John Doe",
-    _id: "user123", // Example ID; this should match the owner ID on the items
+    id: "user123",
   });
   const [weatherData, setWeatherData] = useState({
     type: "",
@@ -26,7 +29,7 @@ function App() {
     city: "",
   });
   const [activeModal, setActiveModal] = useState("");
-  const [selectedCard, setSelectedCard] = useState({});
+  const [selectedCard, setSelectedCard] = useState(null);
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
@@ -36,8 +39,14 @@ function App() {
   };
 
   const handleCardClick = (card) => {
+    if (!card || !card.id) {
+      console.error("Invalid card data:", card);
+      return;
+    }
+
     setActiveModal("preview");
     setSelectedCard(card);
+    console.log("Selected card set for preview:", card);
   };
 
   const handleAddClick = () => {
@@ -45,12 +54,34 @@ function App() {
   };
 
   const handleDeleteClick = () => {
-    deleteServerItem(selectedCard._id)
+    if (!selectedCard || !selectedCard.id) {
+      console.error("No valid ID for the selected item.");
+      return;
+    }
+
+    console.log("Attempting to delete item with id:", selectedCard.id);
+
+    deleteServerItem(selectedCard.id)
       .then(() => {
-        setItems(items.filter((item) => item._id !== selectedCard._id));
-        setActiveModal(""); // Close the modal after deletion
+        setItems(items.filter((item) => item.id !== selectedCard.id));
+        setActiveModal("");
+        setSelectedCard(null);
       })
       .catch((err) => console.error("Error deleting item:", err));
+  };
+
+  const handleAddItem = (newItem) => {
+    const itemWithId = {
+      ...newItem,
+      id: Date.now().toString(),
+    };
+
+    addServerItem(itemWithId)
+      .then((addedItem) => {
+        setItems([addedItem, ...items]);
+        setActiveModal("");
+      })
+      .catch((err) => console.error("Error adding new item:", err));
   };
 
   const handleLogout = () => {
@@ -107,7 +138,7 @@ function App() {
                       setActiveModal("edit-profile")
                     }
                     onCardClick={handleCardClick}
-                    items={items} // Use "items" for consistency
+                    items={items}
                     handleAddClick={handleAddClick}
                     handleLogout={handleLogout}
                   />
@@ -120,18 +151,18 @@ function App() {
           <Footer />
           <AddItemModal
             isOpen={activeModal === "add-item"}
-            onAddItem={(newItem) => {
-              setItems([newItem, ...items]);
-              setActiveModal("");
-            }}
+            onAddItem={handleAddItem}
             isLoading={isLoading}
             onClose={() => setActiveModal("")}
           />
           <ItemModal
             activeModal={activeModal}
             card={selectedCard}
-            onClose={() => setActiveModal("")}
-            handleDeleteClick={handleDeleteClick} // Pass handleDeleteClick here
+            onClose={() => {
+              setActiveModal("");
+              setSelectedCard(null);
+            }}
+            handleDeleteClick={handleDeleteClick}
           />
         </div>
       </CurrentUserContext.Provider>
