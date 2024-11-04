@@ -1,3 +1,4 @@
+// api.js
 const baseUrl = "http://localhost:3001";
 
 export const getServerItems = () => {
@@ -31,7 +32,34 @@ export const deleteServerItem = (id) => {
     if (!res.ok) {
       return Promise.reject(`Error: ${res.status}`);
     }
-
     return { message: "Item deleted", id };
+  });
+};
+
+// Toggle like status for an item
+export const toggleLike = (id, isLiked, userId) => {
+  return getServerItems().then((items) => {
+    const item = items.find((item) => item.id === id);
+    if (!item) {
+      return Promise.reject("Item not found");
+    }
+
+    // Ensure `likes` is initialized as an array if it's undefined
+    const updatedLikes = isLiked
+      ? (item.likes || []).filter((likeId) => likeId !== userId)
+      : [...(item.likes || []), userId];
+
+    return fetch(`${baseUrl}/items/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ ...item, likes: updatedLikes }),
+    }).then((res) => {
+      if (!res.ok) {
+        return Promise.reject(`Error: ${res.status}`);
+      }
+      return res.json();
+    });
   });
 };

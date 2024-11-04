@@ -1,3 +1,5 @@
+// App.jsx
+
 import { useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
@@ -13,6 +15,7 @@ import {
   getServerItems,
   deleteServerItem,
   addServerItem,
+  toggleLike,
 } from "../../utils/api";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { CurrentTemperatureUnitProvider } from "../../contexts/CurrentTemperatureUnitContext";
@@ -73,7 +76,8 @@ function App() {
   const handleAddItem = (newItem) => {
     const itemWithId = {
       ...newItem,
-      id: Date.now().toString(),
+      id: Date.now().toString(), // Ensure unique ID
+      likes: [], // Initialize with an empty likes array
     };
 
     addServerItem(itemWithId)
@@ -82,6 +86,22 @@ function App() {
         setActiveModal("");
       })
       .catch((err) => console.error("Error adding new item:", err));
+  };
+
+  const handleCardLike = ({ id, isLiked }) => {
+    console.log(
+      `Toggling like for item with id: ${id}, currently liked: ${isLiked}`
+    );
+
+    toggleLike(id, isLiked, currentUser.id)
+      .then((updatedItem) => {
+        setItems((prevItems) =>
+          prevItems.map((item) =>
+            item.id === updatedItem.id ? updatedItem : item
+          )
+        );
+      })
+      .catch((err) => console.error("Error toggling like:", err));
   };
 
   const handleLogout = () => {
@@ -125,6 +145,7 @@ function App() {
                 <Main
                   weatherData={weatherData}
                   handleCardClick={handleCardClick}
+                  onCardLike={handleCardLike} // Pass handleCardLike here
                   items={items}
                 />
               }

@@ -1,3 +1,5 @@
+// ItemCard.jsx
+
 import "./ItemCard.css";
 import { useContext } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
@@ -15,7 +17,9 @@ function ItemCard({ item, onCardClick, onCardLike }) {
 
   const handleLike = (evt) => {
     evt.preventDefault();
-    onCardLike({ id: item.id, isLiked });
+    if (onCardLike) {
+      onCardLike({ id: item.id, isLiked });
+    }
   };
 
   return (

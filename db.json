@@ -48,7 +48,8 @@
       "id": "b090",
       "name": "Jeans",
       "weather": "warm",
-      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Jeans.png?etag=58345e8bef1ce5f95ac882e71d309e6c"
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Jeans.png?etag=58345e8bef1ce5f95ac882e71d309e6c",
+      "likes": []
     },
     {
       "id": "db38",
@@ -108,7 +109,8 @@
       "_id": "1e48",
       "name": "new beanie",
       "weather": "hot",
-      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Beanie.png?etag=bc10497cc80fa557f036e94f9999f7b2"
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Beanie.png?etag=bc10497cc80fa557f036e94f9999f7b2",
+      "id": "679b"
     },
     {
       "id": "fd93",
@@ -170,6 +172,36 @@
       "name": "Shirt",
       "weather": "hot",
       "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861"
+    },
+    {
+      "id": "1730720673397",
+      "_id": null,
+      "name": "Shirt",
+      "weather": "hot",
+      "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861"
+    },
+    {
+      "id": "1730720676447",
+      "_id": null,
+      "name": "Shirt",
+      "weather": "hot",
+      "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861"
+    },
+    {
+      "id": "1730721346787",
+      "_id": null,
+      "name": "Shirt",
+      "weather": "hot",
+      "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861",
+      "likes": []
+    },
+    {
+      "id": "1730721364535",
+      "_id": null,
+      "name": "Shirt",
+      "weather": "hot",
+      "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861",
+      "likes": []
     }
   ],
   "users": [
