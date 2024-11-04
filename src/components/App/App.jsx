@@ -7,7 +7,7 @@ import Main from "../Main/Main";
 import Profile from "../Profile/Profile";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import ItemModal from "../ItemModal/ItemModal";
-import DeleteConfirmModal from "../DeleteConfirmModal/DeleteConfirmModal"; // Import DeleteConfirmModal
+import DeleteConfirmModal from "../DeleteConfirmModal/DeleteConfirmModal";
 import Footer from "../Footer/Footer";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import {
@@ -48,7 +48,6 @@ function App() {
 
     setActiveModal("preview");
     setSelectedCard(card);
-    console.log("Selected card set for preview:", card);
   };
 
   const handleAddClick = () => {
@@ -65,8 +64,6 @@ function App() {
       console.error("No valid ID for the selected item.");
       return;
     }
-
-    console.log("Attempting to delete item with id:", selectedCard.id);
 
     deleteServerItem(selectedCard.id)
       .then(() => {
@@ -86,17 +83,13 @@ function App() {
 
     addServerItem(itemWithId)
       .then((addedItem) => {
-        setItems([addedItem, ...items]);
+        setItems((prevItems) => [addedItem, ...prevItems]);
         setActiveModal("");
       })
       .catch((err) => console.error("Error adding new item:", err));
   };
 
   const handleCardLike = ({ id, isLiked }) => {
-    console.log(
-      `Toggling like for item with id: ${id}, currently liked: ${isLiked}`
-    );
-
     toggleLike(id, isLiked, currentUser.id)
       .then((updatedItem) => {
         setItems((prevItems) =>
@@ -167,6 +160,7 @@ function App() {
                     items={items}
                     handleAddClick={handleAddClick}
                     handleLogout={handleLogout}
+                    onCardLike={handleCardLike}
                   />
                 ) : (
                   <Navigate to="/" />
