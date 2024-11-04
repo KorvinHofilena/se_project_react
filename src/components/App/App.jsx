@@ -1,5 +1,3 @@
-// App.jsx
-
 import { useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
@@ -9,6 +7,7 @@ import Main from "../Main/Main";
 import Profile from "../Profile/Profile";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import ItemModal from "../ItemModal/ItemModal";
+import DeleteConfirmModal from "../DeleteConfirmModal/DeleteConfirmModal"; // Import DeleteConfirmModal
 import Footer from "../Footer/Footer";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import {
@@ -56,7 +55,12 @@ function App() {
     setActiveModal("add-item");
   };
 
-  const handleDeleteClick = () => {
+  const openDeleteModal = (card) => {
+    setSelectedCard(card);
+    setActiveModal("delete-item");
+  };
+
+  const handleDeleteConfirm = () => {
     if (!selectedCard || !selectedCard.id) {
       console.error("No valid ID for the selected item.");
       return;
@@ -76,8 +80,8 @@ function App() {
   const handleAddItem = (newItem) => {
     const itemWithId = {
       ...newItem,
-      id: Date.now().toString(), // Ensure unique ID
-      likes: [], // Initialize with an empty likes array
+      id: Date.now().toString(),
+      likes: [],
     };
 
     addServerItem(itemWithId)
@@ -145,7 +149,7 @@ function App() {
                 <Main
                   weatherData={weatherData}
                   handleCardClick={handleCardClick}
-                  onCardLike={handleCardLike} // Pass handleCardLike here
+                  onCardLike={handleCardLike}
                   items={items}
                 />
               }
@@ -159,6 +163,7 @@ function App() {
                       setActiveModal("edit-profile")
                     }
                     onCardClick={handleCardClick}
+                    onDeleteClick={openDeleteModal}
                     items={items}
                     handleAddClick={handleAddClick}
                     handleLogout={handleLogout}
@@ -183,7 +188,12 @@ function App() {
               setActiveModal("");
               setSelectedCard(null);
             }}
-            handleDeleteClick={handleDeleteClick}
+            handleDeleteClick={() => openDeleteModal(selectedCard)}
+          />
+          <DeleteConfirmModal
+            activeModal={activeModal}
+            onDelete={handleDeleteConfirm}
+            onClose={() => setActiveModal("")}
           />
         </div>
       </CurrentUserContext.Provider>

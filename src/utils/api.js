@@ -1,4 +1,3 @@
-// api.js
 const baseUrl = "http://localhost:3001";
 
 export const getServerItems = () => {
@@ -36,7 +35,6 @@ export const deleteServerItem = (id) => {
   });
 };
 
-// Toggle like status for an item
 export const toggleLike = (id, isLiked, userId) => {
   return getServerItems().then((items) => {
     const item = items.find((item) => item.id === id);
@@ -44,7 +42,6 @@ export const toggleLike = (id, isLiked, userId) => {
       return Promise.reject("Item not found");
     }
 
-    // Ensure `likes` is initialized as an array if it's undefined
     const updatedLikes = isLiked
       ? (item.likes || []).filter((likeId) => likeId !== userId)
       : [...(item.likes || []), userId];

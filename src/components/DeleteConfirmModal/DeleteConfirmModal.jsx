@@ -2,7 +2,9 @@ import "./DeleteConfirmModal.css";
 
 function DeleteConfirmModal({ activeModal, onClose, onDelete }) {
   return (
-    <div className={`modal ${activeModal === "delete-item" && "modal_opened"}`}>
+    <div
+      className={`modal ${activeModal === "delete-item" ? "modal_opened" : ""}`}
+    >
       <div className="delete-modal__content">
         <button
           className="modal__close"
@@ -14,7 +16,7 @@ function DeleteConfirmModal({ activeModal, onClose, onDelete }) {
           irreversible.
         </p>
         <button
-          type="submit"
+          type="button"
           className="delete-modal__confirm"
           onClick={onDelete}
         >
@@ -23,7 +25,7 @@ function DeleteConfirmModal({ activeModal, onClose, onDelete }) {
         <button
           className="delete-modal__cancel"
           onClick={onClose}
-          type="submit"
+          type="button"
         >
           Cancel
         </button>
