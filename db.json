@@ -16,17 +16,11 @@
       "owner": "user123"
     },
     {
-      "id": "13e5",
-      "name": "Beanie",
-      "weather": "cold",
-      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Beanie.png?etag=bc10497cc80fa557f036e94f9999f7b2",
-      "likes": []
-    },
-    {
       "id": "cc2e",
       "name": "Coat",
       "weather": "cold",
-      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Coat.png?etag=298717ed89d5e40b1954a1831ae0bdd4"
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Coat.png?etag=298717ed89d5e40b1954a1831ae0bdd4",
+      "likes": []
     },
     {
       "id": "c87b",
@@ -121,49 +115,79 @@
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Beanie.png?etag=bc10497cc80fa557f036e94f9999f7b2"
     },
     {
-      "id": "1730549268010",
+      "id": "1730894547862",
       "_id": null,
       "name": "Shirt",
       "weather": "hot",
-      "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861"
+      "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861",
+      "likes": [],
+      "owner": "user123"
     },
     {
-      "id": "1730549269367",
+      "id": "1730894612767",
       "_id": null,
       "name": "Shirt",
       "weather": "hot",
-      "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861"
+      "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861",
+      "likes": [],
+      "owner": "user123"
     },
     {
-      "id": "1730549270929",
+      "id": "1730894660517",
       "_id": null,
       "name": "Shirt",
       "weather": "hot",
-      "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861"
+      "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861",
+      "likes": [],
+      "owner": "user123"
     },
     {
-      "id": "1730549274477",
+      "id": "1730895822559",
       "_id": null,
       "name": "Shirt",
       "weather": "hot",
-      "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861"
+      "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861",
+      "likes": [],
+      "owner": "user123"
     },
     {
-      "id": "1730720673397",
+      "id": "1730895829919",
       "_id": null,
       "name": "Shirt",
       "weather": "hot",
-      "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861"
+      "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861",
+      "likes": [],
+      "owner": "user123"
     },
     {
-      "id": "1730720676447",
+      "id": "1730895834761",
       "_id": null,
       "name": "Shirt",
       "weather": "hot",
-      "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861"
+      "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861",
+      "likes": [],
+      "owner": "user123"
     },
     {
-      "id": "1730721346787",
+      "id": "1730895853459",
+      "_id": null,
+      "name": "Shirt",
+      "weather": "hot",
+      "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861",
+      "likes": [],
+      "owner": "user123"
+    },
+    {
+      "id": "1730895859389",
+      "_id": null,
+      "name": "Shirt",
+      "weather": "hot",
+      "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861",
+      "likes": [],
+      "owner": "user123"
+    },
+    {
+      "id": "1730895906871",
       "_id": null,
       "name": "Shirt",
       "weather": "hot",
@@ -171,84 +195,31 @@
       "likes": []
     },
     {
-      "id": "1730724887489",
+      "id": "1730896844221",
       "_id": null,
       "name": "Shirt",
       "weather": "hot",
       "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861",
-      "likes": []
+      "likes": [],
+      "owner": "user123"
     },
     {
-      "id": "1730725442854",
+      "id": "1730896851695",
       "_id": null,
       "name": "Shirt",
       "weather": "hot",
       "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861",
-      "likes": []
+      "likes": [],
+      "owner": "user123"
     },
     {
-      "id": "1730726336605",
+      "id": "1730896855838",
       "_id": null,
       "name": "Shirt",
       "weather": "hot",
       "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861",
-      "likes": []
-    },
-    {
-      "id": "1730726347594",
-      "_id": null,
-      "name": "Shirt",
-      "weather": "hot",
-      "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861",
-      "likes": []
-    },
-    {
-      "id": "1730726351055",
-      "_id": null,
-      "name": "Shirt",
-      "weather": "hot",
-      "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861",
-      "likes": []
-    },
-    {
-      "id": "1730726362624",
-      "_id": null,
-      "name": "Shirt",
-      "weather": "hot",
-      "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861",
-      "likes": []
-    },
-    {
-      "id": "1730726449915",
-      "_id": null,
-      "name": "Shirt",
-      "weather": "hot",
-      "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861",
-      "likes": []
-    },
-    {
-      "id": "1730726452169",
-      "_id": null,
-      "name": "Shirt",
-      "weather": "hot",
-      "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861",
-      "likes": []
-    },
-    {
-      "id": "1730726497482",
-      "_id": null,
-      "name": "Shirt",
-      "weather": "hot",
-      "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861",
-      "likes": []
-    },
-    {
-      "id": "1730726527090",
-      "_id": null,
-      "name": "Shirt",
-      "weather": "hot",
-      "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861",
-      "likes": []
+      "likes": [],
+      "owner": "user123"
     }
   ],
   "users": [
