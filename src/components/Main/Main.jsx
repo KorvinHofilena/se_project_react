@@ -6,15 +6,14 @@ import ItemCard from "../ItemCard/ItemCard";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { useContext } from "react";
 
-function Main({
-  weatherData,
-  handleCardClick,
-  items,
-  onCardLike,
-  onDeleteClick,
-}) {
+function Main({ weatherData, handleCardClick, items, onCardLike }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   const temp = weatherData?.temp?.[currentTemperatureUnit] || 999;
+
+  // Ensuring items render even if weather type doesn't match
+  const filteredItems = items.filter((item) => {
+    return item.weather === weatherData.type || weatherData.type === "";
+  });
 
   return (
     <main className="main">
@@ -24,17 +23,14 @@ function Main({
           Today is {temp} {currentTemperatureUnit} / You may want to wear:
         </p>
         <ul className="cards__list">
-          {items
-            .filter((item) => item.weather === weatherData.type)
-            .map((item) => (
-              <ItemCard
-                key={item.id}
-                item={item}
-                onCardClick={handleCardClick}
-                onCardLike={onCardLike}
-                onDeleteClick={onDeleteClick} // Pass onDeleteClick here
-              />
-            ))}
+          {filteredItems.map((item) => (
+            <ItemCard
+              key={item.id}
+              item={item}
+              onCardClick={handleCardClick}
+              onCardLike={onCardLike}
+            />
+          ))}
         </ul>
       </section>
     </main>
