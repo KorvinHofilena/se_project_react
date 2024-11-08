@@ -22,30 +22,6 @@
   flex-direction: column;
 }
 
-.sidebar__logout-btn {
-  font-family: "CabinetGrotesk-Medium";
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 24.8px;
-  text-align: left;
-  margin-top: 8px;
-  border: none;
-  background: none;
-  padding: 0;
-}
-
-.sidebar__edit-profile-btn {
-  font-family: "CabinetGrotesk-Medium";
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 24.8px;
-  text-align: left;
-  margin-bottom: 0;
-  border: none;
-  background: none;
-  padding: 0;
-}
-
 @media screen and (max-width: 600px) {
   .sidebar {
     display: none;

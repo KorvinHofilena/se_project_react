@@ -18,17 +18,6 @@ function SideBar({ handleEditProfileClick, onLogout }) {
           {currentUser?.name || "Guest User"}
         </p>
       </div>
-      <div className="side-bar__buttons-container">
-        <button
-          onClick={handleEditProfileClick}
-          className="side-bar__edit-profile-btn"
-        >
-          Edit Profile
-        </button>
-        <button onClick={onLogout} className="side-bar__logout-btn">
-          Log out
-        </button>
-      </div>
     </div>
   );
 }

@@ -20,20 +20,9 @@
       "name": "Dress",
       "weather": "hot",
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Dress.png?etag=1f9cd32a311ab139cab43494883720bf",
-      "likes": []
-    },
-    {
-      "id": "7b20",
-      "name": "Hoodie",
-      "weather": "cold",
-      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Hoodie.png?etag=5f52451d0958ccb1016c78a45603a4e8",
-      "likes": []
-    },
-    {
-      "id": "9eab",
-      "name": "Jacket",
-      "weather": "cold",
-      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Jacket.png?etag=f4bb188deaa25ac84ce2338be2d404ad"
+      "likes": [
+        "user123"
+      ]
     },
     {
       "id": "db38",
@@ -51,7 +40,10 @@
       "id": "a616",
       "name": "Scarf",
       "weather": "cold",
-      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Scarf.png?etag=74efbee93810c926b5507e862c6cb76c"
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Scarf.png?etag=74efbee93810c926b5507e862c6cb76c",
+      "likes": [
+        "user123"
+      ]
     },
     {
       "id": "5ef7",
@@ -219,6 +211,13 @@
     {
       "id": "1730990404745",
       "_id": null,
+      "name": "Shirt",
+      "weather": "hot",
+      "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861",
+      "likes": []
+    },
+    {
+      "id": "fd32",
       "name": "Shirt",
       "weather": "hot",
       "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861",

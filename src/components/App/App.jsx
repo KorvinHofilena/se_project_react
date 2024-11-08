@@ -77,7 +77,7 @@ function App() {
   const handleAddItem = (newItem) => {
     const itemWithId = {
       ...newItem,
-      id: Date.now().toString(),
+
       likes: [],
     };
 
