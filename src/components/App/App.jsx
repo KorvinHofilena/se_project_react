@@ -1,3 +1,5 @@
+// App.jsx
+
 import { useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
@@ -41,7 +43,7 @@ function App() {
   };
 
   const handleCardClick = (card) => {
-    if (!card || !card.id) {
+    if (!card || (!card.id && !card._id)) {
       console.error("Invalid card data:", card);
       return;
     }
@@ -60,24 +62,33 @@ function App() {
   };
 
   const handleDeleteConfirm = () => {
-    if (!selectedCard || !selectedCard.id) {
+    if (!selectedCard || (!selectedCard.id && !selectedCard._id)) {
       console.error("No valid ID for the selected item.");
       return;
     }
 
-    deleteServerItem(selectedCard.id)
+    const deleteId = selectedCard.id || selectedCard._id;
+
+    deleteServerItem(deleteId)
       .then(() => {
-        setItems(items.filter((item) => item.id !== selectedCard.id));
+        setItems((prevItems) =>
+          prevItems.filter(
+            (item) => item.id !== deleteId && item._id !== deleteId
+          )
+        );
         setActiveModal("");
         setSelectedCard(null);
       })
       .catch((err) => console.error("Error deleting item:", err));
   };
 
+  const generateUniqueId = () =>
+    `${Date.now()}${Math.floor(Math.random() * 1000)}`;
+
   const handleAddItem = (newItem) => {
     const itemWithId = {
       ...newItem,
-
+      _id: generateUniqueId(),
       likes: [],
     };
 
@@ -94,7 +105,9 @@ function App() {
       .then((updatedItem) => {
         setItems((prevItems) =>
           prevItems.map((item) =>
-            item.id === updatedItem.id ? updatedItem : item
+            item.id === updatedItem.id || item._id === updatedItem._id
+              ? updatedItem
+              : item
           )
         );
       })

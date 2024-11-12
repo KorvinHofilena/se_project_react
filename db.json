@@ -1,7 +1,7 @@
 {
   "items": [
     {
-      "id": "e35b",
+      "_id": "e35b",
       "name": "Korvin",
       "weather": "hot",
       "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861",
@@ -9,35 +9,32 @@
       "likes": []
     },
     {
-      "id": "5d85",
+      "_id": "5d85",
       "name": "Korvin",
       "weather": "hot",
       "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861",
       "owner": "user123"
     },
     {
-      "id": "c87b",
-      "name": "Dress",
-      "weather": "hot",
-      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Dress.png?etag=1f9cd32a311ab139cab43494883720bf",
+      "_id": "db38",
+      "name": "Loafers",
+      "weather": "warm",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Loafers.png?etag=dc2d6e1ca7b297597406e35c40aef030",
       "likes": [
         "user123"
       ]
     },
     {
-      "id": "db38",
-      "name": "Loafers",
-      "weather": "warm",
-      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Loafers.png?etag=dc2d6e1ca7b297597406e35c40aef030"
-    },
-    {
-      "id": "f3a4",
+      "_id": "f3a4",
       "name": "Sandals",
       "weather": "hot",
-      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Sandals.png?etag=9bea85a77c0306586d2b71a33b626d41"
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Sandals.png?etag=9bea85a77c0306586d2b71a33b626d41",
+      "likes": [
+        "user123"
+      ]
     },
     {
-      "id": "a616",
+      "_id": "a616",
       "name": "Scarf",
       "weather": "cold",
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Scarf.png?etag=74efbee93810c926b5507e862c6cb76c",
@@ -46,38 +43,38 @@
       ]
     },
     {
-      "id": "5ef7",
+      "_id": "5ef7",
       "name": "Shorts",
       "weather": "hot",
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Shorts.png?etag=d728c496643f610de8d8fea92dd915ba"
     },
     {
-      "id": "d937",
+      "_id": "d937",
       "name": "Skirt",
       "weather": "hot",
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Skirt.png?etag=27a6bea7e1b63218820d615876fa31d1"
     },
     {
-      "id": "3208",
+      "_id": "3208",
       "name": "Sneakers",
       "weather": "warm",
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Sneakers.png?etag=3efeec41c1c78b8afe26859ca7fa7b6f"
     },
     {
-      "id": "d4ad",
+      "_id": "d4ad",
       "name": "Sunglasses",
       "weather": "hot",
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Sunglasses.png?etag=a1bced9e331d36cb278c45df51150432"
     },
     {
-      "id": "bf80",
+      "_id": "bf80",
       "name": "Sweatshirt",
       "weather": "warm",
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Sweatshirt.png?etag=008a9674757bea2e0bdb31242e364be0",
       "likes": []
     },
     {
-      "id": "582c",
+      "_id": "582c",
       "name": "T-Shirt",
       "weather": "hot",
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/T-Shirt.png?etag=44ed1963c44ab19cd2f5011522c5fc09"
@@ -90,20 +87,19 @@
       "id": "679b"
     },
     {
-      "id": "fd93",
+      "_id": "fd93",
       "name": "new new beanie",
       "weather": "hot",
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Beanie.png?etag=bc10497cc80fa557f036e94f9999f7b2"
     },
     {
-      "id": "ebf0",
+      "_id": "ebf0",
       "name": "new beanie",
       "weather": "cold",
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Beanie.png?etag=bc10497cc80fa557f036e94f9999f7b2"
     },
     {
-      "id": "1730894547862",
-      "_id": null,
+      "_id": "1730894547862",
       "name": "Shirt",
       "weather": "hot",
       "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861",
@@ -111,8 +107,7 @@
       "owner": "user123"
     },
     {
-      "id": "1730894612767",
-      "_id": null,
+      "_id": "1730894612767",
       "name": "Shirt",
       "weather": "hot",
       "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861",
@@ -120,8 +115,7 @@
       "owner": "user123"
     },
     {
-      "id": "1730894660517",
-      "_id": null,
+      "_id": "1730894660517",
       "name": "Shirt",
       "weather": "hot",
       "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861",
@@ -129,8 +123,7 @@
       "owner": "user123"
     },
     {
-      "id": "1730895822559",
-      "_id": null,
+      "_id": "1730895822559",
       "name": "Shirt",
       "weather": "hot",
       "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861",
@@ -138,8 +131,7 @@
       "owner": "user123"
     },
     {
-      "id": "1730895829919",
-      "_id": null,
+      "_id": "1730895829919",
       "name": "Shirt",
       "weather": "hot",
       "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861",
@@ -147,8 +139,7 @@
       "owner": "user123"
     },
     {
-      "id": "1730895834761",
-      "_id": null,
+      "_id": "1730895834761",
       "name": "Shirt",
       "weather": "hot",
       "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861",
@@ -156,8 +147,7 @@
       "owner": "user123"
     },
     {
-      "id": "1730895853459",
-      "_id": null,
+      "_id": "1730895853459",
       "name": "Shirt",
       "weather": "hot",
       "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861",
@@ -165,8 +155,7 @@
       "owner": "user123"
     },
     {
-      "id": "1730895859389",
-      "_id": null,
+      "_id": "1730895859389",
       "name": "Shirt",
       "weather": "hot",
       "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861",
@@ -174,16 +163,7 @@
       "owner": "user123"
     },
     {
-      "id": "1730895906871",
-      "_id": null,
-      "name": "Shirt",
-      "weather": "hot",
-      "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861",
-      "likes": []
-    },
-    {
-      "id": "1730896844221",
-      "_id": null,
+      "_id": "1730896844221",
       "name": "Shirt",
       "weather": "hot",
       "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861",
@@ -191,8 +171,7 @@
       "owner": "user123"
     },
     {
-      "id": "1730896851695",
-      "_id": null,
+      "_id": "1730896851695",
       "name": "Shirt",
       "weather": "hot",
       "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861",
@@ -200,8 +179,7 @@
       "owner": "user123"
     },
     {
-      "id": "1730896855838",
-      "_id": null,
+      "_id": "1730896855838",
       "name": "Shirt",
       "weather": "hot",
       "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861",
@@ -209,24 +187,16 @@
       "owner": "user123"
     },
     {
-      "id": "1730990404745",
-      "_id": null,
       "name": "Shirt",
       "weather": "hot",
       "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861",
-      "likes": []
-    },
-    {
-      "id": "fd32",
-      "name": "Shirt",
-      "weather": "hot",
-      "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861",
+      "_id": "1731412857659898",
       "likes": []
     }
   ],
   "users": [
     {
-      "id": "1",
+      "_id": "1",
       "name": "John Doe",
       "email": "john@example.com",
       "token": "valid-jwt-token"

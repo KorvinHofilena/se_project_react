@@ -9,22 +9,28 @@ import likeInactive from "../../assets/like-inactive.svg";
 function ItemCard({ item, onCardClick, onCardLike }) {
   const currentUser = useContext(CurrentUserContext);
 
-  const isLiked = item?.likes?.some((id) => id === currentUser?.id) || false;
+  // Determine if the item is liked by the current user
+  const isLiked = item?.likes?.some(
+    (id) => id === currentUser?._id || id === currentUser?.id
+  );
 
   const handleCardClick = () => {
-    onCardClick(item);
+    // Use whichever identifier is available
+    if (onCardClick && (item._id || item.id)) {
+      onCardClick(item);
+    }
   };
 
   const handleLike = (evt) => {
     evt.preventDefault();
-    if (onCardLike) {
-      onCardLike({ id: item.id, isLiked });
+    if (onCardLike && (item._id || item.id)) {
+      onCardLike({ id: item._id || item.id, isLiked });
     }
   };
 
   return (
     <li className="card-container">
-      <h2 className="card__title"> {item.name} </h2>
+      <h2 className="card__title">{item.name}</h2>
       {currentUser && (
         <img
           src={isLiked ? likeActive : likeInactive}
