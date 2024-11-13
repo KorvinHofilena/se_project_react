@@ -1,5 +1,3 @@
-// App.jsx
-
 import { useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
@@ -105,7 +103,7 @@ function App() {
       .then((updatedItem) => {
         setItems((prevItems) =>
           prevItems.map((item) =>
-            item.id === updatedItem.id || item._id === updatedItem._id
+            item._id === updatedItem._id || item.id === updatedItem.id
               ? updatedItem
               : item
           )

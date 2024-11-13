@@ -39,7 +39,7 @@ export const deleteServerItem = (id) => {
 
 export const toggleLike = (id, isLiked, userId) => {
   return getServerItems().then((items) => {
-    const item = items.find((item) => item.id === id || item._id === id); // Check both id and _id
+    const item = items.find((item) => item.id === id || item._id === id);
     if (!item) {
       return Promise.reject("Item not found");
     }
@@ -48,8 +48,7 @@ export const toggleLike = (id, isLiked, userId) => {
       ? (item.likes || []).filter((likeId) => likeId !== userId)
       : [...(item.likes || []), userId];
 
-    return fetch(`${baseUrl}/items/${item.id || item._id}`, {
-      // Use correct id for API request
+    return fetch(`${baseUrl}/items/${item._id || item.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

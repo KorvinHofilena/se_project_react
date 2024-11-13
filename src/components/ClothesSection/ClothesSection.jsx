@@ -20,9 +20,9 @@ function ClothesSection({ items, handler, onClick, onCardLike }) {
         </button>
       </div>
       <ul className="clothes-section__cards-list">
-        {userItems.map((item) => (
+        {userItems.map((item, index) => (
           <ItemCard
-            key={item._id || item.id}
+            key={`${item._id || item.id}-${index}`} // Ensure unique key
             item={item}
             onCardClick={handler}
             onCardLike={onCardLike}
