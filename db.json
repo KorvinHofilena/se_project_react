@@ -56,13 +56,18 @@
       "name": "Skirt",
       "weather": "hot",
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Skirt.png?etag=27a6bea7e1b63218820d615876fa31d1",
-      "likes": []
+      "likes": [
+        "user123"
+      ]
     },
     {
       "_id": "3208",
       "name": "Sneakers",
       "weather": "warm",
-      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Sneakers.png?etag=3efeec41c1c78b8afe26859ca7fa7b6f"
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Sneakers.png?etag=3efeec41c1c78b8afe26859ca7fa7b6f",
+      "likes": [
+        "user123"
+      ]
     },
     {
       "_id": "d4ad",
@@ -199,6 +204,13 @@
       "weather": "hot",
       "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861",
       "_id": "1731412857659898",
+      "likes": []
+    },
+    {
+      "name": "Shirt",
+      "weather": "hot",
+      "imageUrl": "https://theproperlabel.us/cdn/shop/products/the-proper-tee-shirt-classic-no-logo-603222.jpg?v=1707423861",
+      "_id": "1731592416669755",
       "likes": []
     }
   ],

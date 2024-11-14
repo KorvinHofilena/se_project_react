@@ -103,9 +103,7 @@ function App() {
       .then((updatedItem) => {
         setItems((prevItems) =>
           prevItems.map((item) =>
-            item._id === updatedItem._id || item.id === updatedItem.id
-              ? updatedItem
-              : item
+            item._id === updatedItem._id ? updatedItem : item
           )
         );
       })

@@ -25,7 +25,7 @@ function Main({ weatherData, handleCardClick, items, onCardLike }) {
         <ul className="cards__list">
           {filteredItems.map((item) => (
             <ItemCard
-              key={item.id}
+              key={item._id}
               item={item}
               onCardClick={handleCardClick}
               onCardLike={onCardLike}
