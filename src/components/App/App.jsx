@@ -40,6 +40,11 @@ function App() {
     setCurrentTemperatureUnit((prevUnit) => (prevUnit === "F" ? "C" : "F"));
   };
 
+  const closeActiveModal = () => {
+    setActiveModal("");
+    setSelectedCard(null);
+  };
+
   const handleCardClick = (card) => {
     if (!card || (!card.id && !card._id)) {
       console.error("Invalid card data:", card);
@@ -74,8 +79,7 @@ function App() {
             (item) => item.id !== deleteId && item._id !== deleteId
           )
         );
-        setActiveModal("");
-        setSelectedCard(null);
+        closeActiveModal();
       })
       .catch((err) => console.error("Error deleting item:", err));
   };
@@ -93,7 +97,7 @@ function App() {
     addServerItem(itemWithId)
       .then((addedItem) => {
         setItems((prevItems) => [addedItem, ...prevItems]);
-        setActiveModal("");
+        closeActiveModal();
       })
       .catch((err) => console.error("Error adding new item:", err));
   };
@@ -182,21 +186,18 @@ function App() {
             isOpen={activeModal === "add-item"}
             onAddItem={handleAddItem}
             isLoading={isLoading}
-            onClose={() => setActiveModal("")}
+            onClose={closeActiveModal}
           />
           <ItemModal
             activeModal={activeModal}
             card={selectedCard}
-            onClose={() => {
-              setActiveModal("");
-              setSelectedCard(null);
-            }}
+            onClose={closeActiveModal}
             handleDeleteClick={() => openDeleteModal(selectedCard)}
           />
           <DeleteConfirmModal
             activeModal={activeModal}
             onDelete={handleDeleteConfirm}
-            onClose={() => setActiveModal("")}
+            onClose={closeActiveModal}
           />
         </div>
       </CurrentUserContext.Provider>
