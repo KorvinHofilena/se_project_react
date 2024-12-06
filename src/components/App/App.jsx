@@ -139,12 +139,15 @@ function App() {
         if (res.token) {
           localStorage.setItem("jwt", res.token);
           setIsLoggedIn(true);
-          setActiveModal(null); // Close the modal
+          setActiveModal(null);
         }
       })
       .catch((err) => console.error("Login error:", err))
       .finally(() => setIsLoading(false));
   };
+
+  const handleRegisterClick = () => setActiveModal("register");
+  const handleLoginClick = () => setActiveModal("login");
 
   useEffect(() => {
     getWeather(coordinates, APIkey)
@@ -175,6 +178,14 @@ function App() {
             isLoggedIn={isLoggedIn}
             handler={handleAddClick}
           />
+          <div className="header__auth-container">
+            <button className="header__register" onClick={handleRegisterClick}>
+              Sign Up
+            </button>
+            <button className="header__login" onClick={handleLoginClick}>
+              Log In
+            </button>
+          </div>
           <Routes>
             <Route
               path="/"
