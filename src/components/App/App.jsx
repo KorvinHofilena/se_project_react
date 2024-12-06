@@ -9,6 +9,8 @@ import AddItemModal from "../AddItemModal/AddItemModal";
 import ItemModal from "../ItemModal/ItemModal";
 import DeleteConfirmModal from "../DeleteConfirmModal/DeleteConfirmModal";
 import Footer from "../Footer/Footer";
+import LoginModal from "../LoginModal/LoginModal";
+import RegisterModal from "../RegisterModal/RegisterModal";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import {
   getServerItems,
@@ -16,6 +18,7 @@ import {
   addServerItem,
   toggleLike,
 } from "../../utils/api";
+import { signup, signin } from "../../utils/auth";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { CurrentTemperatureUnitProvider } from "../../contexts/CurrentTemperatureUnitContext";
 
@@ -119,6 +122,30 @@ function App() {
     setCurrentUser({});
   };
 
+  const handleRegister = (data) => {
+    setIsLoading(true);
+    signup(data)
+      .then(() => {
+        handleLogin({ email: data.email, password: data.password });
+      })
+      .catch((err) => console.error("Registration error:", err))
+      .finally(() => setIsLoading(false));
+  };
+
+  const handleLogin = (data) => {
+    setIsLoading(true);
+    signin(data)
+      .then((res) => {
+        if (res.token) {
+          localStorage.setItem("jwt", res.token);
+          setIsLoggedIn(true);
+          setActiveModal(null); // Close the modal
+        }
+      })
+      .catch((err) => console.error("Login error:", err))
+      .finally(() => setIsLoading(false));
+  };
+
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
@@ -197,6 +224,20 @@ function App() {
           <DeleteConfirmModal
             activeModal={activeModal}
             onDelete={handleDeleteConfirm}
+            onClose={closeActiveModal}
+          />
+          <LoginModal
+            isOpen={activeModal === "login"}
+            handleLogin={handleLogin}
+            isLoading={isLoading}
+            setActiveModal={setActiveModal}
+            onClose={closeActiveModal}
+          />
+          <RegisterModal
+            isOpen={activeModal === "register"}
+            handleRegistration={handleRegister}
+            isLoading={isLoading}
+            setActiveModal={setActiveModal}
             onClose={closeActiveModal}
           />
         </div>
