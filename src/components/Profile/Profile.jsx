@@ -1,5 +1,3 @@
-// Profile.jsx
-
 import "./Profile.css";
 import SideBar from "../SideBar/SideBar";
 import ClothesSection from "../ClothesSection/ClothesSection";
@@ -25,7 +23,7 @@ function Profile({
           items={items}
           handler={onCardClick}
           onClick={handleAddClick}
-          onCardLike={onCardLike} // Pass onCardLike to ClothesSection
+          onCardLike={onCardLike}
         />
       </section>
     </div>
