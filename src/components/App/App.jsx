@@ -48,6 +48,12 @@ function App() {
     setSelectedCard(null);
   };
 
+  const handleSignOut = () => {
+    localStorage.removeItem("jwt");
+    setIsLoggedIn(false);
+    setCurrentUser({});
+  };
+
   const handleCardClick = (card) => {
     if (!card || (!card.id && !card._id)) {
       console.error("Invalid card data:", card);
@@ -115,11 +121,6 @@ function App() {
         );
       })
       .catch((err) => console.error("Error toggling like:", err));
-  };
-
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-    setCurrentUser({});
   };
 
   const handleRegister = (data) => {
@@ -210,7 +211,7 @@ function App() {
                     onDeleteClick={openDeleteModal}
                     items={items}
                     handleAddClick={handleAddClick}
-                    handleLogout={handleLogout}
+                    handleLogout={handleSignOut} // Pass handleSignOut to Profile
                     onCardLike={handleCardLike}
                   />
                 ) : (
