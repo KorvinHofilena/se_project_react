@@ -2,6 +2,7 @@ const baseUrl =
   process.env.NODE_ENV === "production"
     ? "https://api.wtwrwtwr.jumpingcrab.com"
     : "http://localhost:3001";
+
 import { processServerResponse } from "./utils";
 
 function signUserUp({ name, avatar, email, password }) {
@@ -47,4 +48,4 @@ function getUserByToken(token) {
   }).then(processServerResponse);
 }
 
-export { signUserUp, signUserIn, getUserByToken, updateUser };
+export { signUserUp, signUserIn, updateUser, getUserByToken };
