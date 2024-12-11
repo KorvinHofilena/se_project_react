@@ -18,16 +18,13 @@ import {
   addServerItem,
   toggleLike,
 } from "../../utils/api";
-import { signup, signin } from "../../utils/auth";
+import { signUserUp, signUserIn } from "../../utils/auth";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { CurrentTemperatureUnitProvider } from "../../contexts/CurrentTemperatureUnitContext";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const [currentUser, setCurrentUser] = useState({
-    name: "John Doe",
-    id: "user123",
-  });
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Default to logged out
+  const [currentUser, setCurrentUser] = useState(null);
   const [weatherData, setWeatherData] = useState({
     type: "",
     temp: { F: 999, C: 37 },
@@ -51,7 +48,7 @@ function App() {
   const handleSignOut = () => {
     localStorage.removeItem("jwt");
     setIsLoggedIn(false);
-    setCurrentUser({});
+    setCurrentUser(null);
   };
 
   const handleCardClick = (card) => {
@@ -112,7 +109,7 @@ function App() {
   };
 
   const handleCardLike = ({ id, isLiked }) => {
-    toggleLike(id, isLiked, currentUser.id)
+    toggleLike(id, isLiked, currentUser?.id)
       .then((updatedItem) => {
         setItems((prevItems) =>
           prevItems.map((item) =>
@@ -125,7 +122,7 @@ function App() {
 
   const handleRegister = (data) => {
     setIsLoading(true);
-    signup(data)
+    signUserUp(data)
       .then(() => {
         handleLogin({ email: data.email, password: data.password });
       })
@@ -135,7 +132,7 @@ function App() {
 
   const handleLogin = (data) => {
     setIsLoading(true);
-    signin(data)
+    signUserIn(data)
       .then((res) => {
         if (res.token) {
           localStorage.setItem("jwt", res.token);
@@ -160,12 +157,15 @@ function App() {
   }, [isLoggedIn]);
 
   useEffect(() => {
-    getServerItems()
-      .then((data) => {
-        setItems(data);
-      })
-      .catch((err) => console.error("Error fetching items:", err));
-  }, []);
+    if (isLoggedIn) {
+      const token = localStorage.getItem("jwt");
+      if (token) {
+        getServerItems()
+          .then((data) => setItems(data))
+          .catch((err) => console.error("Error fetching items:", err));
+      }
+    }
+  }, [isLoggedIn]);
 
   return (
     <CurrentTemperatureUnitProvider
@@ -177,7 +177,6 @@ function App() {
             handleAddClick={handleAddClick}
             weatherData={weatherData}
             isLoggedIn={isLoggedIn}
-            handler={handleAddClick}
           />
           <div className="header__auth-container">
             <button className="header__register" onClick={handleRegisterClick}>
@@ -211,7 +210,7 @@ function App() {
                     onDeleteClick={openDeleteModal}
                     items={items}
                     handleAddClick={handleAddClick}
-                    handleLogout={handleSignOut} // Pass handleSignOut to Profile
+                    handleLogout={handleSignOut}
                     onCardLike={handleCardLike}
                   />
                 ) : (
