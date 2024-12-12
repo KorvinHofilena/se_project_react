@@ -179,12 +179,28 @@ function App() {
             isLoggedIn={isLoggedIn}
           />
           <div className="header__auth-container">
-            <button className="header__register" onClick={handleRegisterClick}>
-              Sign Up
-            </button>
-            <button className="header__login" onClick={handleLoginClick}>
-              Log In
-            </button>
+            {!isLoggedIn && (
+              <>
+                <button
+                  className="header__register"
+                  onClick={handleRegisterClick}
+                >
+                  Sign Up
+                </button>
+                <button className="header__login" onClick={handleLoginClick}>
+                  Log In
+                </button>
+              </>
+            )}
+            {isLoggedIn && (
+              <button
+                className="header__add-item"
+                onClick={handleAddClick}
+                style={{ marginLeft: "10px" }}
+              >
+                Add Clothes
+              </button>
+            )}
           </div>
           <Routes>
             <Route
