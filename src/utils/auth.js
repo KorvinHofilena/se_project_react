@@ -8,7 +8,7 @@ const getHeaders = (token = null) => ({
   ...(token && { authorization: `Bearer ${token}` }),
 });
 
-async function signUserUp({ name, avatar, email, password }) {
+export async function signUserUp({ name, avatar, email, password }) {
   try {
     const response = await fetch(`${baseUrl}/signup`, {
       method: "POST",
@@ -22,7 +22,7 @@ async function signUserUp({ name, avatar, email, password }) {
   }
 }
 
-async function signUserIn({ email, password }) {
+export async function signUserIn({ email, password }) {
   try {
     const response = await fetch(`${baseUrl}/signin`, {
       method: "POST",
@@ -36,7 +36,7 @@ async function signUserIn({ email, password }) {
   }
 }
 
-async function updateUser(newData, token) {
+export async function updateUser(newData, token) {
   try {
     const response = await fetch(`${baseUrl}/users/me`, {
       method: "PATCH",
@@ -50,7 +50,7 @@ async function updateUser(newData, token) {
   }
 }
 
-async function getUserByToken(token) {
+export async function getUserByToken(token) {
   try {
     const response = await fetch(`${baseUrl}/users/me`, {
       method: "GET",
@@ -62,10 +62,3 @@ async function getUserByToken(token) {
     throw error;
   }
 }
-
-export const authApi = {
-  signUserUp,
-  signUserIn,
-  updateUser,
-  getUserByToken,
-};
