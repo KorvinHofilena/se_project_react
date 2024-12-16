@@ -23,7 +23,7 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { CurrentTemperatureUnitProvider } from "../../contexts/CurrentTemperatureUnitContext";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Default to logged out
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [weatherData, setWeatherData] = useState({
     type: "",
@@ -56,7 +56,6 @@ function App() {
       console.error("Invalid card data:", card);
       return;
     }
-
     setActiveModal("preview");
     setSelectedCard(card);
   };
@@ -154,18 +153,14 @@ function App() {
         setWeatherData(filteredData);
       })
       .catch(console.error);
-  }, [isLoggedIn]);
+  }, []);
 
+  // Fetch items regardless of login status
   useEffect(() => {
-    if (isLoggedIn) {
-      const token = localStorage.getItem("jwt");
-      if (token) {
-        getServerItems()
-          .then((data) => setItems(data))
-          .catch((err) => console.error("Error fetching items:", err));
-      }
-    }
-  }, [isLoggedIn]);
+    getServerItems()
+      .then((data) => setItems(data))
+      .catch((err) => console.error("Error fetching items:", err));
+  }, []);
 
   return (
     <CurrentTemperatureUnitProvider
