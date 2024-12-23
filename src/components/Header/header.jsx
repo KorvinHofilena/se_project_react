@@ -6,7 +6,13 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import logo from "../../assets/logo.png";
 import avatarPlaceholder from "../../assets/avatar.png";
 
-function Header({ info, handler }) {
+function Header({
+  weatherData,
+  isLoggedIn,
+  handleRegisterClick,
+  handleLoginClick,
+  handleSignOut,
+}) {
   const currentUser = useContext(CurrentUserContext);
 
   return (
@@ -20,14 +26,25 @@ function Header({ info, handler }) {
             month: "long",
             day: "numeric",
           })}
-          , {info?.location || "Tokyo, Japan"}
+          , {weatherData.city || "Unknown"}
         </p>
       </div>
       <div className="header__temp-and-user">
         <ToggleSwitch />
-        <button className="header__add-btn" type="button" onClick={handler}>
-          + Add clothes
-        </button>
+        {!isLoggedIn ? (
+          <>
+            <button className="header__register" onClick={handleRegisterClick}>
+              Sign Up
+            </button>
+            <button className="header__login" onClick={handleLoginClick}>
+              Log In
+            </button>
+          </>
+        ) : (
+          <button className="header__logout" onClick={handleSignOut}>
+            Log Out
+          </button>
+        )}
         <div className="header__user-container">
           <Link to="/profile" className="header__link">
             <p className="header__user-name">{currentUser?.name || "Guest"}</p>

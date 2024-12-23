@@ -155,7 +155,6 @@ function App() {
       .catch(console.error);
   }, []);
 
-  // Fetch items regardless of login status
   useEffect(() => {
     getServerItems()
       .then((data) => setItems(data))
@@ -169,34 +168,12 @@ function App() {
       <CurrentUserContext.Provider value={currentUser}>
         <div className="app">
           <Header
-            handleAddClick={handleAddClick}
             weatherData={weatherData}
             isLoggedIn={isLoggedIn}
+            handleRegisterClick={handleRegisterClick}
+            handleLoginClick={handleLoginClick}
+            handleSignOut={handleSignOut}
           />
-          <div className="header__auth-container">
-            {!isLoggedIn && (
-              <>
-                <button
-                  className="header__register"
-                  onClick={handleRegisterClick}
-                >
-                  Sign Up
-                </button>
-                <button className="header__login" onClick={handleLoginClick}>
-                  Log In
-                </button>
-              </>
-            )}
-            {isLoggedIn && (
-              <button
-                className="header__add-item"
-                onClick={handleAddClick}
-                style={{ marginLeft: "10px" }}
-              >
-                Add Clothes
-              </button>
-            )}
-          </div>
           <Routes>
             <Route
               path="/"
