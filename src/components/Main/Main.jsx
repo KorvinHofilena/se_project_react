@@ -1,5 +1,3 @@
-// Main.jsx
-
 import "./Main.css";
 import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
@@ -10,7 +8,6 @@ function Main({ weatherData, handleCardClick, items, onCardLike }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   const temp = weatherData?.temp?.[currentTemperatureUnit] || 999;
 
-  // Ensuring items render even if weather type doesn't match
   const filteredItems = items.filter((item) => {
     return item.weather === weatherData.type || weatherData.type === "";
   });
