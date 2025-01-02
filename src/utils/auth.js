@@ -4,67 +4,51 @@ const baseUrl =
     process.env.REACT_APP_BASE_URL) ||
   "http://localhost:3001";
 
-import { processServerResponse } from "./utils";
+export async function signUserIn(data) {
+  const res = await fetch(`${baseUrl}/signin`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
 
-console.log("Base URL in auth.js:", baseUrl);
-
-const getHeaders = (token = null) => ({
-  Accept: "application/json",
-  "Content-Type": "application/json",
-  ...(token && { authorization: `Bearer ${token}` }),
-});
-
-export async function signUserUp({ name, avatar, email, password }) {
-  try {
-    const response = await fetch(`${baseUrl}/signup`, {
-      method: "POST",
-      headers: getHeaders(),
-      body: JSON.stringify({ name, avatar, email, password }),
-    });
-    return processServerResponse(response);
-  } catch (error) {
-    console.error("Error signing up:", error.message);
-    throw error;
+  const result = await res.json();
+  if (!res.ok) {
+    throw new Error(result.message || "Error during sign in");
   }
+
+  return result;
 }
 
-export async function signUserIn({ email, password }) {
-  try {
-    const response = await fetch(`${baseUrl}/signin`, {
-      method: "POST",
-      headers: getHeaders(),
-      body: JSON.stringify({ email, password }),
-    });
-    return processServerResponse(response);
-  } catch (error) {
-    console.error("Error signing in:", error.message);
-    throw error;
+export async function signUserUp(data) {
+  const res = await fetch(`${baseUrl}/signup`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  const result = await res.json();
+  if (!res.ok) {
+    throw new Error(result.message || "Error during sign up");
   }
+
+  return result;
 }
 
-export async function updateUser(newData, token) {
+export async function fetchUserData(token) {
   try {
     const response = await fetch(`${baseUrl}/users/me`, {
-      method: "PATCH",
-      headers: getHeaders(token),
-      body: JSON.stringify(newData),
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     });
-    return processServerResponse(response);
+    const data = await response.json();
+    return data;
   } catch (error) {
-    console.error("Error updating user:", error.message);
-    throw error;
-  }
-}
-
-export async function getUserByToken(token) {
-  try {
-    const response = await fetch(`${baseUrl}/users/me`, {
-      method: "GET",
-      headers: getHeaders(token),
-    });
-    return processServerResponse(response);
-  } catch (error) {
-    console.error("Error fetching user by token:", error.message);
+    console.error("Error fetching user data:", error);
     throw error;
   }
 }
