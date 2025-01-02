@@ -55,6 +55,11 @@ function Header({
             alt="User Avatar"
           />
         </div>
+        {isLoggedIn && (
+          <button className="header__add-item" onClick={() => handleAddClick()}>
+            + Add Clothes
+          </button>
+        )}
       </div>
     </header>
   );
