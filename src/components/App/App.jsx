@@ -17,6 +17,7 @@ import {
   deleteServerItem,
   addServerItem,
   toggleLike,
+  fetchUserData, // Import fetchUserData
 } from "../../utils/api";
 import { signUserUp, signUserIn } from "../../utils/auth";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
@@ -159,6 +160,18 @@ function App() {
     getServerItems()
       .then((data) => setItems(data))
       .catch((err) => console.error("Error fetching items:", err));
+  }, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem("jwt");
+    if (token) {
+      fetchUserData(token)
+        .then((userData) => {
+          setCurrentUser(userData);
+          setIsLoggedIn(true);
+        })
+        .catch((err) => console.error("Error fetching user data:", err));
+    }
   }, []);
 
   return (
