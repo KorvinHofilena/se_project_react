@@ -67,3 +67,17 @@ export const toggleLike = (id, isLiked, userId) => {
     });
   });
 };
+
+export const fetchUserData = (token) => {
+  return fetch(`${baseUrl}/users/me`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  }).then((res) => {
+    if (!res.ok) {
+      return Promise.reject(`Error: ${res.status}`);
+    }
+    return res.json();
+  });
+};

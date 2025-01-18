@@ -17,9 +17,8 @@ import {
   deleteServerItem,
   addServerItem,
   toggleLike,
-  fetchUserData, // Import fetchUserData
 } from "../../utils/api";
-import { signUserUp, signUserIn } from "../../utils/auth";
+import { signUserUp, signUserIn, fetchUserData } from "../../utils/auth"; // Correct import
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { CurrentTemperatureUnitProvider } from "../../contexts/CurrentTemperatureUnitContext";
 
