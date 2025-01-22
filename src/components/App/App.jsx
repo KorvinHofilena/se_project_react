@@ -30,7 +30,7 @@ function App() {
     temp: { F: 999, C: 37 },
     city: "",
   });
-  const [activeModal, setActiveModal] = useState(null);
+  const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState(null);
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -41,7 +41,7 @@ function App() {
   };
 
   const closeActiveModal = () => {
-    setActiveModal(null);
+    setActiveModal("");
     setSelectedCard(null);
   };
 
@@ -52,7 +52,7 @@ function App() {
   };
 
   const handleCardClick = (card) => {
-    if (!card?.id && !card?._id) {
+    if (!card || (!card.id && !card._id)) {
       console.error("Invalid card data:", card);
       return;
     }
@@ -60,7 +60,9 @@ function App() {
     setSelectedCard(card);
   };
 
-  const handleAddClick = () => setActiveModal("add-item");
+  const handleAddClick = () => {
+    setActiveModal("add-item");
+  };
 
   const openDeleteModal = (card) => {
     setSelectedCard(card);
@@ -68,11 +70,19 @@ function App() {
   };
 
   const handleDeleteConfirm = () => {
-    const deleteId = selectedCard?.id || selectedCard?._id;
+    if (!selectedCard || (!selectedCard.id && !selectedCard._id)) {
+      console.error("No valid ID for the selected item.");
+      return;
+    }
+
+    const deleteId = selectedCard.id || selectedCard._id;
+
     deleteServerItem(deleteId)
       .then(() => {
         setItems((prevItems) =>
-          prevItems.filter((item) => item.id !== deleteId)
+          prevItems.filter(
+            (item) => item.id !== deleteId && item._id !== deleteId
+          )
         );
         closeActiveModal();
       })
@@ -85,9 +95,10 @@ function App() {
   const handleAddItem = (newItem) => {
     const itemWithId = {
       ...newItem,
-      _id: generateUniqueId(),
+      _id: generateUniqueId(), // Used to generate ID
       likes: [],
     };
+
     addServerItem(itemWithId)
       .then((addedItem) => {
         setItems((prevItems) => [addedItem, ...prevItems]);
@@ -111,7 +122,9 @@ function App() {
   const handleRegister = (data) => {
     setIsLoading(true);
     signUserUp(data)
-      .then(() => handleLogin({ email: data.email, password: data.password }))
+      .then(() => {
+        handleLogin({ email: data.email, password: data.password });
+      })
       .catch((err) => console.error("Registration error:", err))
       .finally(() => setIsLoading(false));
   };
@@ -121,7 +134,7 @@ function App() {
     signUserIn(data)
       .then((res) => {
         if (res.token) {
-          localStorage.setItem("jwt", res.token);
+          localStorage.setItem("jwt", res.token); // Use consistent token key
           setIsLoggedIn(true);
           setActiveModal(null);
         }
@@ -130,16 +143,22 @@ function App() {
       .finally(() => setIsLoading(false));
   };
 
+  const handleRegisterClick = () => setActiveModal("register");
+  const handleLoginClick = () => setActiveModal("login");
+
   useEffect(() => {
-    Promise.all([
-      getWeather(coordinates, APIkey).then(filterWeatherData),
-      getServerItems(),
-    ])
-      .then(([weather, items]) => {
-        setWeatherData(weather);
-        setItems(items);
+    getWeather(coordinates, APIkey)
+      .then((data) => {
+        const filteredData = filterWeatherData(data);
+        setWeatherData(filteredData);
       })
       .catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    getServerItems()
+      .then((data) => setItems(data))
+      .catch((err) => console.error("Error fetching items:", err));
   }, []);
 
   useEffect(() => {
@@ -150,7 +169,7 @@ function App() {
           setCurrentUser(userData);
           setIsLoggedIn(true);
         })
-        .catch(console.error);
+        .catch((err) => console.error("Error fetching user data:", err));
     }
   }, []);
 
@@ -163,9 +182,10 @@ function App() {
           <Header
             weatherData={weatherData}
             isLoggedIn={isLoggedIn}
-            handleRegisterClick={() => setActiveModal("register")}
-            handleLoginClick={() => setActiveModal("login")}
+            handleRegisterClick={handleRegisterClick}
+            handleLoginClick={handleLoginClick}
             handleSignOut={handleSignOut}
+            handleAddClick={handleAddClick} // Passed to Header
           />
           <Routes>
             <Route
@@ -184,6 +204,9 @@ function App() {
               element={
                 isLoggedIn ? (
                   <Profile
+                    handleEditProfileClick={() =>
+                      setActiveModal("edit-profile")
+                    }
                     onCardClick={handleCardClick}
                     onDeleteClick={openDeleteModal}
                     items={items}
@@ -198,43 +221,37 @@ function App() {
             />
           </Routes>
           <Footer />
-          {activeModal === "add-item" && (
-            <AddItemModal
-              isOpen={true}
-              onAddItem={handleAddItem}
-              isLoading={isLoading}
-              onClose={closeActiveModal}
-            />
-          )}
-          {activeModal === "preview" && (
-            <ItemModal
-              card={selectedCard}
-              onClose={closeActiveModal}
-              handleDeleteClick={() => openDeleteModal(selectedCard)}
-            />
-          )}
-          {activeModal === "delete-item" && (
-            <DeleteConfirmModal
-              onDelete={handleDeleteConfirm}
-              onClose={closeActiveModal}
-            />
-          )}
-          {activeModal === "login" && (
-            <LoginModal
-              handleLogin={handleLogin}
-              isLoading={isLoading}
-              setActiveModal={setActiveModal}
-              onClose={closeActiveModal}
-            />
-          )}
-          {activeModal === "register" && (
-            <RegisterModal
-              handleRegistration={handleRegister}
-              isLoading={isLoading}
-              setActiveModal={setActiveModal}
-              onClose={closeActiveModal}
-            />
-          )}
+          <AddItemModal
+            isOpen={activeModal === "add-item"}
+            onAddItem={handleAddItem}
+            isLoading={isLoading}
+            onClose={closeActiveModal}
+          />
+          <ItemModal
+            activeModal={activeModal}
+            card={selectedCard}
+            onClose={closeActiveModal}
+            handleDeleteClick={() => openDeleteModal(selectedCard)}
+          />
+          <DeleteConfirmModal
+            activeModal={activeModal}
+            onDelete={handleDeleteConfirm}
+            onClose={closeActiveModal}
+          />
+          <LoginModal
+            isOpen={activeModal === "login"}
+            handleLogin={handleLogin}
+            isLoading={isLoading}
+            setActiveModal={setActiveModal}
+            onClose={closeActiveModal}
+          />
+          <RegisterModal
+            isOpen={activeModal === "register"}
+            handleRegistration={handleRegister}
+            isLoading={isLoading}
+            setActiveModal={setActiveModal}
+            onClose={closeActiveModal}
+          />
         </div>
       </CurrentUserContext.Provider>
     </CurrentTemperatureUnitProvider>

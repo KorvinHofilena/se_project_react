@@ -1,45 +1,58 @@
-const baseUrl = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
+const baseUrl =
+  (typeof process !== "undefined" &&
+    process.env &&
+    process.env.REACT_APP_BASE_URL) ||
+  "http://localhost:3001";
 
-export const signUserIn = (data) => {
-  return fetch(`${baseUrl}/signin`, {
+export async function signUserIn(data) {
+  const res = await fetch(`${baseUrl}/signin`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
-  }).then((res) => {
-    if (!res.ok) {
-      return Promise.reject(`Error: ${res.status}`);
-    }
-    return res.json();
   });
-};
 
-export const signUserUp = (data) => {
-  return fetch(`${baseUrl}/signup`, {
+  const result = await res.json();
+  if (!res.ok) {
+    throw new Error(result.message || "Error during sign in");
+  }
+
+  return result;
+}
+
+export async function signUserUp(data) {
+  const res = await fetch(`${baseUrl}/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
-  }).then((res) => {
-    if (!res.ok) {
-      return Promise.reject(`Error: ${res.status}`);
-    }
-    return res.json();
   });
-};
 
-export const fetchUserData = (token) => {
-  return fetch(`${baseUrl}/users/me`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
-  }).then((res) => {
-    if (!res.ok) {
-      return Promise.reject(`Error: ${res.status}`);
+  const result = await res.json();
+  if (!res.ok) {
+    throw new Error(result.message || "Error during sign up");
+  }
+
+  return result;
+}
+
+export async function fetchUserData(token) {
+  try {
+    const response = await fetch(`${baseUrl}/users/me`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+    if (!response.ok) {
+      throw new Error(data.message || "Error fetching user data");
     }
-    return res.json();
-  });
-};
+    return data;
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    throw error;
+  }
+}
