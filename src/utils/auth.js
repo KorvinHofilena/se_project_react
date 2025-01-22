@@ -1,11 +1,33 @@
-const baseUrl = "http://localhost:3001";
+const baseUrl = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 
-const getAuthHeaders = () => {
-  const token = localStorage.getItem("jwt");
-  return {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${token}`,
-  };
+export const signUserIn = (data) => {
+  return fetch(`${baseUrl}/signin`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  }).then((res) => {
+    if (!res.ok) {
+      return Promise.reject(`Error: ${res.status}`);
+    }
+    return res.json();
+  });
+};
+
+export const signUserUp = (data) => {
+  return fetch(`${baseUrl}/signup`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  }).then((res) => {
+    if (!res.ok) {
+      return Promise.reject(`Error: ${res.status}`);
+    }
+    return res.json();
+  });
 };
 
 export const fetchUserData = (token) => {
@@ -21,5 +43,3 @@ export const fetchUserData = (token) => {
     return res.json();
   });
 };
-
-// Other functions for signUserIn, signUserUp, etc., follow a similar structure.
