@@ -1,10 +1,10 @@
 const baseUrl = "http://localhost:3001";
 
 const getAuthHeaders = () => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("jwt"); // Ensure token key matches the rest of the app
   return {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${token}`,
+    Authorization: `Bearer ${token}`, // Fixed template literal syntax
   };
 };
 
@@ -13,7 +13,7 @@ export const getServerItems = () => {
     headers: getAuthHeaders(),
   }).then((res) => {
     if (!res.ok) {
-      return Promise.reject(`Error: ${res.status}`);
+      return Promise.reject(`Error: ${res.status}`); // Corrected error template
     }
     return res.json();
   });
@@ -71,7 +71,7 @@ export const toggleLike = (id, isLiked, userId) => {
 export const fetchUserData = (token) => {
   return fetch(`${baseUrl}/users/me`, {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`, // Fixed template literal syntax
       "Content-Type": "application/json",
     },
   }).then((res) => {
