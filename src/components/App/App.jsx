@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
 import { coordinates, APIkey } from "../../utils/constants";
-import Header from "../Header/Header";
+import Header from "../Header/header";
 import Main from "../Main/Main";
 import Profile from "../Profile/Profile";
 import AddItemModal from "../AddItemModal/AddItemModal";
@@ -18,7 +18,7 @@ import {
   addServerItem,
   toggleLike,
 } from "../../utils/api";
-import { signUserUp, signUserIn, fetchUserData } from "../../utils/auth"; // Correct import
+import { signUserUp, signUserIn, fetchUserData } from "../../utils/auth";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { CurrentTemperatureUnitProvider } from "../../contexts/CurrentTemperatureUnitContext";
 
