@@ -185,6 +185,7 @@ function App() {
             handleRegisterClick={handleRegisterClick}
             handleLoginClick={handleLoginClick}
             handleSignOut={handleSignOut}
+            handleAddClick={handleAddClick} // Passed to Header
           />
           <Routes>
             <Route
