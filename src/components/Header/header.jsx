@@ -12,6 +12,7 @@ function Header({
   handleRegisterClick,
   handleLoginClick,
   handleSignOut,
+  handleAddClick, // Added handleAddClick as a prop
 }) {
   const currentUser = useContext(CurrentUserContext);
 
@@ -56,7 +57,10 @@ function Header({
           />
         </div>
         {isLoggedIn && (
-          <button className="header__add-item" onClick={() => handleAddClick()}>
+          <button
+            className="header__add-item"
+            onClick={handleAddClick} // Corrected how handleAddClick is called
+          >
             + Add Clothes
           </button>
         )}
