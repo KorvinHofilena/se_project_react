@@ -1,8 +1,4 @@
-const baseUrl =
-  (typeof process !== "undefined" &&
-    process.env &&
-    process.env.REACT_APP_BASE_URL) ||
-  "http://localhost:3001";
+const baseUrl = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 
 export async function signUserIn(data) {
   const res = await fetch(`${baseUrl}/signin`, {
@@ -13,12 +9,9 @@ export async function signUserIn(data) {
     body: JSON.stringify(data),
   });
 
-  const result = await res.json();
-  if (!res.ok) {
-    throw new Error(result.message || "Error during sign in");
-  }
+  if (!res.ok) throw new Error("Invalid email or password");
 
-  return result;
+  return res.json();
 }
 
 export async function signUserUp(data) {
@@ -30,25 +23,19 @@ export async function signUserUp(data) {
     body: JSON.stringify(data),
   });
 
-  const result = await res.json();
-  if (!res.ok) {
-    throw new Error(result.message || "Error during sign up");
-  }
+  if (!res.ok) throw new Error("Registration failed");
 
-  return result;
+  return res.json();
 }
 
 export async function fetchUserData(token) {
-  try {
-    const response = await fetch(`${baseUrl}/users/me`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Error fetching user data:", error);
-    throw error;
-  }
+  const res = await fetch(`${baseUrl}/users/me`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!res.ok) throw new Error("Failed to fetch user data");
+
+  return res.json();
 }
