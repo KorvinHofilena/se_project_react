@@ -95,8 +95,6 @@ function App() {
   const handleAddItem = (newItem) => {
     const itemWithId = {
       ...newItem,
-      _id: generateUniqueId(), // Used to generate ID
-      likes: [],
     };
 
     addServerItem(itemWithId)
