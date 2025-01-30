@@ -1,47 +1,50 @@
-.card-container {
-  position: relative;
-  border-radius: 20px;
-  overflow: hidden;
+.card {
+  height: 328px;
   width: 323px;
-  height: 326px;
+  position: relative;
   display: flex;
   justify-content: center;
-  border-width: 1px;
-  border-style: solid;
-  border-color: rgba(0, 0, 0, 0.3);
 }
-
-.card__image {
-  object-fit: cover;
-  width: 100%;
-}
-
-.card__image:hover {
-  cursor: pointer;
-}
-
-.card__title {
+.card__name {
   position: absolute;
   top: 15px;
   margin: 0;
-  color: rgba(0, 0, 0, 0.6);
+  padding: 2px 12px 2px 12px;
   background-color: #fff;
-  width: 100%;
+  color: rgba(0, 0, 0, 0.6);
   border-radius: 4px;
-  font-family: "Inter";
-  font-size: 16px;
-  line-height: 20px;
   font-weight: 700;
-  text-align: center;
-  max-width: 80px;
+  font-size: 23px;
+  font-family: "CabinetGrotesk";
+  height: 24px;
+}
+.card__image {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
+.item__heart {
+  width: 21px;
+  height: 19px;
+  background-color: transparent;
+  border: none;
+  background-image: url(../../assets/❤.png);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 20px;
+  right: 60px;
+  cursor: pointer;
+}
+.item__heart_liked {
+  background-image: url(../../assets/ActiveLikeButton.png);
 }
 
-.card__like-btn {
-  position: absolute;
-  top: 19px;
-  right: 97px;
-  display: flex;
-  width: 18px;
-  height: 15px;
-  cursor: pointer;
+.item__heart_visible {
+  visibility: visible;
+}
+
+.item__heart_hidden {
+  visibility: hidden;
 }

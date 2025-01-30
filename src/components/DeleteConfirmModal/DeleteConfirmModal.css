@@ -1,47 +1,32 @@
-.delete-modal__content {
-  display: flex;
+.modal__content_delete {
   max-width: 670px;
-  max-height: 280px;
-  flex-direction: column;
-  text-align: center;
-  padding: 60px 152px 60px 151px;
-  margin: 0;
-  background-color: #fff;
-  box-sizing: border-box;
-  width: 100%;
-  border-radius: 20px;
+  height: 280px;
+  display: flex;
   position: relative;
-}
-.delete-modal__heading {
-  margin: 0 0 40px 0;
-  font-family: "Inter", Arial, sans-serif;
-  font-weight: 700;
+  top: -20px;
+  align-items: center;
+  font-family: "Cabinet Grotesk";
   font-size: 20px;
+}
+.modal__delete_text {
+  width: 367px;
+  height: 48px;
   text-align: center;
 }
-.delete-modal__confirm {
-  width: fit-content;
-  align-self: center;
+.confirm__delete_btn {
   background-color: transparent;
   border: none;
-  margin: 0 0 24px 0;
-  padding: 0;
   color: #ff4d00;
-  font-family: "Inter", Arial, sans-serif;
-  font-weight: 700;
-  font-size: 20px;
+  margin-top: 20px;
+  margin-bottom: 24px;
+  padding: 0;
   cursor: pointer;
 }
-.delete-modal__cancel {
-  width: fit-content;
-  align-self: center;
-  background-color: transparent;
+.cancel__delete_btn {
+  margin: auto;
   border: none;
-  margin: 0;
-  padding: 0;
-  color: #000;
-  font-family: "Inter", Arial, sans-serif;
-  font-weight: 700;
-  font-size: 20px;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
   cursor: pointer;
 }

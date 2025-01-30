@@ -1,143 +1,64 @@
 .header {
   display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: space-between;
-  padding: 32px 0 47px;
-  font-family: "CabinetGrotesk-Bold";
+  padding: 32px 0 28px;
   font-size: 20px;
-  line-height: 1.2;
+  line-height: 24.8px;
   font-weight: 700;
-  background-color: #f3f3f3;
-}
-
-.header__link {
-  text-decoration: none;
-  color: black;
-}
-
-.header__logo-and-date {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.header__temp-and-user {
-  display: flex;
-  flex-direction: row;
+  font-family: "CabinetGrotesk";
 }
 
 .header__logo {
-  margin-right: 24px;
+  width: 89px;
+  height: 40px;
+  padding-right: 24px;
+}
+.header__add_clothes {
+  opacity: 1;
+}
+.header__add_clothes:hover {
+  opacity: 0.2;
 }
 
-.header__add-btn {
-  margin: 0 20px 0 auto;
-  font-weight: 700;
-  border: none;
-  background: none;
-}
-
-.header__add-btn:hover {
-  cursor: pointer;
-}
-
-.header__date-and-location {
+.header__date_time {
   margin: 0;
 }
 
-.header__user-container {
+.header__add_clothes {
+  margin-left: 20px;
+  border: none;
+  padding-right: 20px;
+  background: none;
+  font-weight: 700;
+}
+
+.header__user_info {
   display: flex;
   align-items: center;
-  gap: 12px;
-}
-
-.header__user-name {
   margin: 0;
 }
 
-.header__register {
-  margin: 0 20px 0 auto;
-  font-weight: 700;
-  border: none;
-  background: none;
+.header__username {
+  padding-right: 12px;
 }
-
-.header__register:hover {
-  cursor: pointer;
+.Profile__header-link {
+  text-decoration: none;
+  color: black;
 }
-
 .header__login {
-  margin: 0 20px 0 auto;
-  font-weight: 700;
+  background-color: none;
   border: none;
-  background: none;
+  height: 25px;
+  margin: 0px 0px 0px 20px;
+  padding: none;
 }
-
-.header__login:hover {
-  cursor: pointer;
+.header__signup {
+  background-color: none;
+  border: none;
+  margin: 0px 0px 0px 36px;
+  padding: none;
 }
-
-.header__user-avatar {
+.header__user_avatar {
   height: 40px;
   width: 40px;
-  border-radius: 50px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #000;
-}
-
-.header__user-name {
-  font-family: "CabinetGrotesk-Medium";
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 24.8px;
-  text-align: left;
-}
-
-.header__link {
-  text-decoration: none;
-}
-
-.header__logout {
-  margin-right: 15px;
-  font-weight: 700;
-  border: none;
-  background: none;
-}
-
-.header__add-item {
-  font-weight: 700;
-  border: none;
-  background: none;
-}
-
-@media screen and (max-width: 600px) {
-  .header {
-    flex-direction: column;
-    padding: 0 0 28px;
-  }
-
-  .header__logo {
-    margin-right: 12px;
-  }
-
-  .header__logo-and-date {
-    padding: 20px 0;
-    border-bottom: 2px solid;
-    border-color: rgba(0, 0, 0, 0.3);
-  }
-
-  .header__date-and-location {
-    font-size: 16px;
-  }
-
-  .header__temp-and-user {
-    margin-top: 20px;
-    font-size: 16px;
-  }
-
-  .header__user-name {
-    font-size: 16px;
-  }
 }

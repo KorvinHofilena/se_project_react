@@ -1,50 +1,19 @@
-.clothes-section__text-container {
+.clothes__section-header {
   display: flex;
-  gap: 16px;
-  font-family: "CabinetGrotesk-Medium";
+  font-family: "cabinet Grotesk";
   font-size: 20px;
   font-weight: 700;
-  line-height: 24.8px;
-  text-align: left;
-  color: black;
-  margin-top: 20px;
+  line-height: 25px;
 }
-
-.clothes-section__your-items {
-  margin: 0;
+.clothes__section_p {
+  height: 25px;
+  width: 94px;
 }
-
-.clothes-section__add-btn {
-  border: none;
-  opacity: 0.6;
-}
-
-.clothes-section__add-btn:hover {
-  cursor: pointer;
-}
-
-.clothes-section__cards-list {
-  margin: 0;
-  margin-top: 16px;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  gap: 19px;
-  list-style-type: none;
-  margin-top: 35px;
+.clothes__section_button {
+  margin-left: 15px;
   padding: 0;
-}
-
-@media screen and (max-width: 600px) {
-  .clothes {
-    width: 100%;
-  }
-
-  .clothes-section__text-container {
-    padding-bottom: 16px;
-  }
-
-  .clothes-section__cards-list {
-    justify-content: center;
-  }
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.6);
 }

@@ -1,36 +1,37 @@
-import { useContext } from "react";
 import "./ClothesSection.css";
-import ItemCard from "../ItemCard/ItemCard";
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-
-function ClothesSection({ items, handler, onClick, onCardLike }) {
-  const currentUserId = useContext(CurrentUserContext)?._id;
-  const userItems = items.filter((item) => item.owner === currentUserId);
-
+import { defaultClothingItems } from "../../utils/Constants";
+import ItemCard from "../ItemCard/ItemCard.jsx";
+import { useContext } from "react";
+import CurrentUserContext from "../../context/CurrentUserContext";
+function ClothesSection({
+  onCardClick,
+  handleAddClick,
+  items,
+  clothingItems,
+  handleCardLike,
+}) {
+  const currentUser = useContext(CurrentUserContext);
+  const useritems = items.filter((item) => item.owner === currentUser?._id);
+  const reverseItems = [...useritems].reverse();
   return (
-    <section className="clothes-section">
-      <div className="clothes-section__text-container">
-        <p className="clothes-section__your-items">Your items</p>
-        <button
-          className="clothes-section__add-btn"
-          type="button"
-          onClick={onClick}
-        >
-          + Add new
+    <div className="clothes__section">
+      <div className="clothes__section-header">
+        <p className="clothes__section_p"> Your items</p>
+        <button className="clothes__section_button" onClick={handleAddClick}>
+          + Add items
         </button>
       </div>
-      <ul className="clothes-section__cards-list">
-        {userItems.map((item, index) => (
+      <ul className="cards__list">
+        {reverseItems.map((items) => (
           <ItemCard
-            key={`${item._id || item.id}-${index}`}
-            item={item}
-            onCardClick={handler}
-            onCardLike={onCardLike}
+            key={items._id}
+            item={items}
+            onCardClick={onCardClick}
+            handleCardLike={handleCardLike}
           />
         ))}
       </ul>
-    </section>
+    </div>
   );
 }
-
 export default ClothesSection;

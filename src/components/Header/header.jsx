@@ -1,70 +1,72 @@
-import { Link } from "react-router-dom";
-import { useContext } from "react";
 import "./Header.css";
+import logo from "../../assets/logo.svg";
+import avatar from "../../assets/avatar.png";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-import logo from "../../assets/logo.png";
-import avatarPlaceholder from "../../assets/avatar.png";
+import { Link } from "react-router-dom";
+import RegisterModal from "../RegisterModal/RegisterModal";
+import CurrentUserContext from "../../context/CurrentUserContext";
+import { useContext } from "react";
 
 function Header({
+  handleAddClick,
   weatherData,
+  activeModal,
   isLoggedIn,
-  handleRegisterClick,
-  handleLoginClick,
-  handleSignOut,
-  handleAddClick, // Added handleAddClick as a prop
+  handleRegisterModal,
+  handleLoginModal,
 }) {
-  const currentUser = useContext(CurrentUserContext);
-
+  const currentDate = new Date().toLocaleString("default", {
+    month: "long",
+    day: "numeric",
+  });
+  const CurrentUser = useContext(CurrentUserContext);
   return (
     <header className="header">
-      <div className="header__logo-and-date">
-        <Link to="/">
-          <img className="header__logo" src={logo} alt="Logo" />
-        </Link>
-        <p className="header__date-and-location">
-          {new Date().toLocaleString("default", {
-            month: "long",
-            day: "numeric",
-          })}
-          , {weatherData.city || "Unknown"}
-        </p>
-      </div>
-      <div className="header__temp-and-user">
-        <ToggleSwitch />
-        {!isLoggedIn ? (
-          <>
-            <button className="header__register" onClick={handleRegisterClick}>
-              Sign Up
-            </button>
-            <button className="header__login" onClick={handleLoginClick}>
-              Log In
-            </button>
-          </>
-        ) : (
-          <button className="header__logout" onClick={handleSignOut}>
-            Log Out
-          </button>
-        )}
-        <div className="header__user-container">
-          <Link to="/profile" className="header__link">
-            <p className="header__user-name">{currentUser?.name || "Guest"}</p>
-          </Link>
-          <img
-            className="header__user-avatar"
-            src={currentUser?.avatar || avatarPlaceholder}
-            alt="User Avatar"
-          />
-        </div>
-        {isLoggedIn && (
+      <Link to="/">
+        <img className="header__logo" src={logo} alt="header logo" />
+      </Link>
+      <p className="header__date_time">
+        {currentDate}, {weatherData.city}
+      </p>
+      <ToggleSwitch />
+      {isLoggedIn ? (
+        <>
           <button
-            className="header__add-item"
-            onClick={handleAddClick} // Corrected how handleAddClick is called
+            onClick={handleAddClick}
+            type="button"
+            className="header__add_clothes"
           >
             + Add Clothes
           </button>
-        )}
-      </div>
+          <Link to="/profile" className="Profile__header-link">
+            <div className="header__user_info">
+              <p className="header__username">{CurrentUser.name}</p>{" "}
+              <img
+                src={CurrentUser.avatar}
+                alt="Terrence Tegegne"
+                className="header__user_avatar"
+              />
+            </div>
+          </Link>
+        </>
+      ) : (
+        <div className={` ${activeModal === "login" && "modal_opened"}`}>
+          <button
+            onClick={handleRegisterModal}
+            className="header__signup"
+            type="button"
+          >
+            Sign Up
+          </button>
+          <button
+            onClick={handleLoginModal}
+            className="header__login"
+            type="button"
+          >
+            Log In
+          </button>
+        </div>
+      )}
     </header>
   );
 }

@@ -1,52 +1,39 @@
-// ItemCard.jsx
-
+import CurrentUserContext from "../../context/CurrentUserContext";
 import "./ItemCard.css";
 import { useContext } from "react";
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-import likeActive from "../../assets/like-active.png";
-import likeInactive from "../../assets/like-inactive.svg";
-
-function ItemCard({ item, onCardClick, onCardLike }) {
+function ItemCard({ item, onCardClick, handleCardLike }) {
   const currentUser = useContext(CurrentUserContext);
-
-  // Determine if the item is liked by the current user
-  const isLiked = item?.likes?.some(
-    (id) => id === currentUser?._id || id === currentUser?.id
-  );
+  const isLiked = item.likes?.some((id) => id === currentUser?._id);
 
   const handleCardClick = () => {
-    // Use whichever identifier is available
-    if (onCardClick && (item._id || item.id)) {
-      onCardClick(item);
-    }
+    onCardClick(item);
   };
 
-  const handleLike = (evt) => {
-    evt.preventDefault();
-    if (onCardLike && (item._id || item.id)) {
-      onCardLike({ id: item._id || item.id, isLiked });
-    }
+  const handleLike = () => {
+    handleCardLike({ id: item._id, isLiked });
   };
+
+  const itemCardLikeClassName = `item__heart ${
+    isLiked ? "item__heart_liked" : ""
+  }`;
 
   return (
-    <li className="card-container">
-      <h2 className="card__title">{item.name}</h2>
-      {currentUser && (
-        <img
-          src={isLiked ? likeActive : likeInactive}
-          alt={isLiked ? "Unlike" : "Like"}
-          className="card__like-btn"
+    <li className="card">
+      <h2 className="card__name">{item.name}</h2>
+      {currentUser?._id && (
+        <button
+          className={itemCardLikeClassName}
+          type="button"
           onClick={handleLike}
         />
       )}
       <img
         onClick={handleCardClick}
         className="card__image"
-        src={item.imageUrl}
+        src={item.imageUrl || item.link}
         alt={item.name}
       />
     </li>
   );
 }
-
 export default ItemCard;
