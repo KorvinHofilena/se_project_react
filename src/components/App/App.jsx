@@ -9,17 +9,17 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import Footer from "../Footer/Footer";
 import ItemModal from "../ItemModal/ItemModal";
 import { getWeather, filterWeatherData } from "../../utils/WeatherApi";
-import { CurrentTemperatureUnitContext } from "../../context/CurrentTemperatureUnitContext";
+import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext.jsx";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import Profile from "../profile/Profile";
 import { getItems, addItem, deleteItem } from "../../utils/Api";
-import DeleteConfirm from "../DeleteConfirm/DeleteConfirm";
+import DeleteConfirm from "../DeleteConfirmModal/DeleteConfirmModal";
 import { items } from "../../../db.json";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
-import CurrentUserContext from "../../context/CurrentUserContext";
-import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-import EditProfileModal from "../EditModal/EditModal";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
+import ProtectedRoute from "../App/ProtectedRoute";
+
 import {
   registerUser,
   logIn,

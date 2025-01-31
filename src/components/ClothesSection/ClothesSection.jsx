@@ -2,7 +2,7 @@ import "./ClothesSection.css";
 import { defaultClothingItems } from "../../utils/Constants";
 import ItemCard from "../ItemCard/ItemCard.jsx";
 import { useContext } from "react";
-import CurrentUserContext from "../../context/CurrentUserContext";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 function ClothesSection({
   onCardClick,
   handleAddClick,

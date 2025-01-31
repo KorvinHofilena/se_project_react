@@ -1,4 +1,4 @@
-import CurrentUserContext from "../../context/CurrentUserContext";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 import "./ItemCard.css";
 import { useContext } from "react";
 function ItemCard({ item, onCardClick, handleCardLike }) {
