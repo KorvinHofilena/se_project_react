@@ -1,6 +1,7 @@
-import CurrentUserContext from "../../contexts/CurrentUserContext";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext"; // ✅ Fix import
 import "./ItemCard.css";
 import { useContext } from "react";
+
 function ItemCard({ item, onCardClick, handleCardLike }) {
   const currentUser = useContext(CurrentUserContext);
   const isLiked = item.likes?.some((id) => id === currentUser?._id);
@@ -36,4 +37,5 @@ function ItemCard({ item, onCardClick, handleCardLike }) {
     </li>
   );
 }
+
 export default ItemCard;
