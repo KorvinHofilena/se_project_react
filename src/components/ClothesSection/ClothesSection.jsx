@@ -1,8 +1,9 @@
 import "./ClothesSection.css";
-import { defaultClothingItems } from "../../utils/Constants";
+import { defaultClothingItems } from "../../utils/constants";
 import ItemCard from "../ItemCard/ItemCard.jsx";
 import { useContext } from "react";
-import CurrentUserContext from "../../contexts/CurrentUserContext";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext"; // Corrected import
+
 function ClothesSection({
   onCardClick,
   handleAddClick,
@@ -13,6 +14,7 @@ function ClothesSection({
   const currentUser = useContext(CurrentUserContext);
   const useritems = items.filter((item) => item.owner === currentUser?._id);
   const reverseItems = [...useritems].reverse();
+
   return (
     <div className="clothes__section">
       <div className="clothes__section-header">
@@ -34,4 +36,5 @@ function ClothesSection({
     </div>
   );
 }
+
 export default ClothesSection;

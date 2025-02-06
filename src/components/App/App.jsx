@@ -3,7 +3,8 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import "./App.css";
 import Header from "../Header/header";
-import { coordinates, APIKey } from "../../utils/Constants";
+import { coordinates, APIkey } from "../../utils/constants"; // Named imports
+
 import Main from "../Main/Main";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import Footer from "../Footer/Footer";
@@ -17,7 +18,8 @@ import DeleteConfirm from "../DeleteConfirmModal/DeleteConfirmModal";
 import { items } from "../../../db.json";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
-import CurrentUserContext from "../../contexts/CurrentUserContext";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+
 import ProtectedRoute from "../App/ProtectedRoute";
 
 import {

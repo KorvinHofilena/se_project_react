@@ -1,10 +1,10 @@
 const baseUrl = "http://localhost:3001";
 
 const getAuthHeaders = () => {
-  const token = localStorage.getItem("jwt"); // Ensure token key matches the rest of the app
+  const token = localStorage.getItem("jwt");
   return {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${token}`, // Fixed template literal syntax
+    Authorization: `Bearer ${token}`,
   };
 };
 
@@ -13,7 +13,7 @@ export const getServerItems = () => {
     headers: getAuthHeaders(),
   }).then((res) => {
     if (!res.ok) {
-      return Promise.reject(`Error: ${res.status}`); // Corrected error template
+      return Promise.reject(`Error: ${res.status}`);
     }
     return res.json();
   });
@@ -40,40 +40,25 @@ export const deleteServerItem = (id) => {
     if (!res.ok) {
       return Promise.reject(`Error: ${res.status}`);
     }
-    return { message: "Item deleted", id };
+    return res.json();
   });
 };
 
-export const toggleLike = (id, isLiked, userId) => {
-  return getServerItems().then((items) => {
-    const item = items.find((item) => item.id === id || item._id === id);
-    if (!item) {
-      return Promise.reject("Item not found");
+export const toggleLike = (id, isLiked) => {
+  return fetch(`${baseUrl}/items/${id}/likes`, {
+    method: isLiked ? "DELETE" : "POST",
+    headers: getAuthHeaders(),
+  }).then((res) => {
+    if (!res.ok) {
+      return Promise.reject(`Error: ${res.status}`);
     }
-
-    const updatedLikes = isLiked
-      ? (item.likes || []).filter((likeId) => likeId !== userId)
-      : [...(item.likes || []), userId];
-
-    return fetch(`${baseUrl}/items/${item._id || item.id}`, {
-      method: "PUT",
-      headers: getAuthHeaders(),
-      body: JSON.stringify({ ...item, likes: updatedLikes }),
-    }).then((res) => {
-      if (!res.ok) {
-        return Promise.reject(`Error: ${res.status}`);
-      }
-      return res.json();
-    });
+    return res.json();
   });
 };
 
-export const fetchUserData = (token) => {
+export const fetchUserData = () => {
   return fetch(`${baseUrl}/users/me`, {
-    headers: {
-      Authorization: `Bearer ${token}`, // Fixed template literal syntax
-      "Content-Type": "application/json",
-    },
+    headers: getAuthHeaders(),
   }).then((res) => {
     if (!res.ok) {
       return Promise.reject(`Error: ${res.status}`);
