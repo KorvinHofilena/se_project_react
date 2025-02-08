@@ -16,7 +16,7 @@ import { getItems, addItem, deleteItem } from "../../utils/Api";
 import DeleteConfirm from "../DeleteConfirmModal/DeleteConfirmModal";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
-import EditProfileModal from "../EditProfileModal/EditProfileModal"; // Added import
+import EditProfileModal from "../EditModal/EditModal"; // Added import
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import ProtectedRoute from "../App/ProtectedRoute";
 
