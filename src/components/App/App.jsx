@@ -12,7 +12,12 @@ import { getWeather, filterWeatherData } from "../../utils/WeatherApi";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext.jsx";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import Profile from "../profile/Profile";
-import { getItems, addItem, deleteItem } from "../../utils/Api";
+import {
+  getServerItems,
+  addServerItem,
+  deleteServerItem,
+} from "../../utils/api";
+
 import DeleteConfirm from "../DeleteConfirmModal/DeleteConfirmModal";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
@@ -84,8 +89,7 @@ function App() {
 
   // Add item function
   const handleAddItemSubmit = (newItem, resetForm) => {
-    const token = localStorage.getItem("jwt");
-    addItem(newItem, token)
+    addServerItem(newItem) // Use addServerItem instead of addItem
       .then((addedItem) => {
         setClothingItems([...clothingItems, addedItem.data]);
         resetForm();
@@ -101,7 +105,7 @@ function App() {
   };
   const handleDeleteCard = (card) => {
     const token = localStorage.getItem("jwt");
-    deleteItem(card, token)
+    deleteServerItem(card.id) // Use deleteServerItem instead of deleteItem
       .then(() => {
         setClothingItems((cards) => cards.filter((c) => c.id !== card.id));
         closeActiveModal();
@@ -151,7 +155,7 @@ function App() {
     getWeather(coordinates, APIkey)
       .then((data) => setWeatherData(filterWeatherData(data)))
       .catch(console.error);
-    getItems().then(setClothingItems).catch(console.error);
+    getServerItems().then(setClothingItems).catch(console.error); // Use getServerItems instead of getItems
   }, []);
 
   // Fetch user session
@@ -163,7 +167,11 @@ function App() {
           setCurrentUser(user);
           setIsLoggedIn(true);
         })
-        .catch(console.error);
+        .catch(() => {
+          localStorage.removeItem("jwt");
+          setCurrentUser(null);
+          setIsLoggedIn(false);
+        });
     }
   }, []);
 
