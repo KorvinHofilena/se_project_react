@@ -48,7 +48,6 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
-  // Open & close functions
   const handleAddClick = () => setActiveModal("add-garment");
   const handleCardClick = (card) => {
     setActiveModal("preview");
@@ -62,7 +61,6 @@ function App() {
   const handleRegisterModal = () => setActiveModal("signup");
   const handleEditModal = () => setActiveModal("editprofile");
 
-  // Like function
   const handleCardLike = ({ id, isLiked }) => {
     const token = localStorage.getItem("jwt");
     const cardAction = isLiked ? removeCardLike : addCardLike;
@@ -76,7 +74,6 @@ function App() {
       .catch(console.error);
   };
 
-  // Edit function
   const handleEditProfile = ({ name, avatar }) => {
     const token = localStorage.getItem("jwt");
     editUserProfile({ name, avatar }, token)
@@ -87,7 +84,6 @@ function App() {
       .catch(console.error);
   };
 
-  // Add item function
   const handleAddItemSubmit = (newItem, resetForm) => {
     const token = localStorage.getItem("jwt");
     addServerItem(newItem, token)
@@ -99,7 +95,6 @@ function App() {
       .catch(console.error);
   };
 
-  // Delete functions
   const handleDeleteCardClick = (card) => {
     setSelectedCard(card);
     setActiveModal("delete-confirmation");
@@ -114,7 +109,6 @@ function App() {
       .catch(console.error);
   };
 
-  // Login function
   const handleLogin = ({ email, password }) => {
     logIn({ email, password })
       .then((res) => {
@@ -131,14 +125,12 @@ function App() {
       .catch(console.error);
   };
 
-  // Register new users
   const handleRegister = (user) => {
     registerUser(user)
       .then(() => handleLogin({ email: user.email, password: user.password }))
       .catch(console.error);
   };
 
-  // Handle signout
   const handleSignout = () => {
     localStorage.removeItem("jwt");
     setIsLoggedIn(false);
@@ -146,12 +138,10 @@ function App() {
     navigate("/");
   };
 
-  // Toggle function for temperature
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit((prevUnit) => (prevUnit === "C" ? "F" : "C"));
   };
 
-  // Fetch weather and items
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => setWeatherData(filterWeatherData(data)))
@@ -159,7 +149,6 @@ function App() {
     getServerItems().then(setClothingItems).catch(console.error);
   }, []);
 
-  // Fetch user session
   useEffect(() => {
     const token = localStorage.getItem("jwt");
     if (token) {
@@ -176,7 +165,6 @@ function App() {
     }
   }, []);
 
-  // Close modal on escape key press
   useEffect(() => {
     if (!activeModal) return;
     const handleEscClose = (e) => e.key === "Escape" && closeActiveModal();
