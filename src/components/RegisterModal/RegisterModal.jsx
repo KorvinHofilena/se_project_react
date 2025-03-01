@@ -52,30 +52,6 @@ function RegisterModal({
         onChange={handleChange}
         required
       />
-      <label className="modal__label" htmlFor="name-register">
-        Name *
-      </label>
-      <input
-        className="modal__input"
-        id="name-register"
-        name="name"
-        type="text"
-        value={values.name || ""}
-        onChange={handleChange}
-        required
-      />
-      <label className="modal__label" htmlFor="avatar-register">
-        Avatar URL *
-      </label>
-      <input
-        className="modal__input"
-        id="avatar-register"
-        name="avatar"
-        type="url"
-        value={values.avatar || ""}
-        onChange={handleChange}
-        required
-      />
     </ModalWithForm>
   );
 }
