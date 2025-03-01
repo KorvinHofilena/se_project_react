@@ -131,6 +131,7 @@ function App() {
       .catch(console.error);
   };
 
+  t;
   const handleSignout = () => {
     localStorage.removeItem("jwt");
     setIsLoggedIn(false);
@@ -165,97 +166,7 @@ function App() {
     }
   }, []);
 
-  useEffect(() => {
-    if (!activeModal) return;
-    const handleEscClose = (e) => e.key === "Escape" && closeActiveModal();
-    document.addEventListener("keydown", handleEscClose);
-    return () => document.removeEventListener("keydown", handleEscClose);
-  }, [activeModal]);
-
-  return (
-    <div className="page">
-      <CurrentUserContext.Provider value={currentUser}>
-        <CurrentTemperatureUnitContext.Provider
-          value={{ currentTemperatureUnit, handleToggleSwitchChange }}
-        >
-          <div className="page__content">
-            <Header
-              handleAddClick={handleAddClick}
-              weatherData={weatherData}
-              handleLoginModal={handleLoginModal}
-              handleRegisterModal={handleRegisterModal}
-              isLoggedIn={isLoggedIn}
-            />
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <Main
-                    weatherData={weatherData}
-                    handleCardClick={handleCardClick}
-                    items={clothingItems}
-                    isLoggedIn={isLoggedIn}
-                    handleCardLike={handleCardLike}
-                  />
-                }
-              />
-              <Route
-                path="/profile"
-                element={
-                  <ProtectedRoute isLoggedIn={isLoggedIn}>
-                    <Profile
-                      onCardClick={handleCardClick}
-                      handleAddClick={handleAddClick}
-                      items={clothingItems}
-                      handleEditModal={handleEditModal}
-                      handleSignout={handleSignout}
-                      handleCardLike={handleCardLike}
-                    />
-                  </ProtectedRoute>
-                }
-              />
-            </Routes>
-          </div>
-          <Footer />
-          <AddItemModal
-            isOpen={activeModal === "add-garment"}
-            handleAddItemSubmit={handleAddItemSubmit}
-            closeActiveModal={closeActiveModal}
-          />
-          <ItemModal
-            activeModal={activeModal}
-            card={selectedCard}
-            onClose={closeActiveModal}
-            handleDelete={() => handleDeleteCardClick(selectedCard)}
-          />
-          <DeleteConfirm
-            activeModal={activeModal}
-            closeActiveModal={closeActiveModal}
-            handleDeleteCard={handleDeleteCard}
-            selectedCard={selectedCard}
-          />
-          <LoginModal
-            activeModal={activeModal}
-            closeActiveModal={closeActiveModal}
-            isOpen={activeModal === "login"}
-            onLogin={handleLogin}
-          />
-          <RegisterModal
-            activeModal={activeModal}
-            closeActiveModal={closeActiveModal}
-            isOpen={activeModal === "signup"}
-            onRegister={handleRegister}
-          />
-          <EditProfileModal
-            activeModal={activeModal}
-            closeActiveModal={closeActiveModal}
-            isOpen={activeModal === "editprofile"}
-            onSubmit={handleEditProfile}
-          />
-        </CurrentTemperatureUnitContext.Provider>
-      </CurrentUserContext.Provider>
-    </div>
-  );
+  return <div className="page">{/* Context Providers */}</div>;
 }
 
 export default App;
