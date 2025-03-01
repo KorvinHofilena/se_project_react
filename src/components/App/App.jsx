@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import "./App.css";
 import Header from "../Header/header";
-import { coordinates, APIkey } from "../../utils/constants"; // Corrected variable name
+import { coordinates, APIkey } from "../../utils/constants";
 
 import Main from "../Main/Main";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
@@ -11,7 +11,7 @@ import ItemModal from "../ItemModal/ItemModal";
 import { getWeather, filterWeatherData } from "../../utils/WeatherApi";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext.jsx";
 import AddItemModal from "../AddItemModal/AddItemModal";
-import Profile from "../profile/Profile";
+import Profile from "../Profile/Profile";
 import {
   getServerItems,
   addServerItem,
@@ -21,7 +21,7 @@ import {
 import DeleteConfirm from "../DeleteConfirmModal/DeleteConfirmModal";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
-import EditProfileModal from "../EditModal/EditModal"; // Added import
+import EditProfileModal from "../EditModal/EditModal";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import ProtectedRoute from "../App/ProtectedRoute";
 
@@ -70,7 +70,7 @@ function App() {
     cardAction(id, token)
       .then((updatedCard) => {
         setClothingItems((cards) =>
-          cards.map((item) => (item.id === id ? updatedCard.data : item))
+          cards.map((item) => (item.id === id ? updatedCard : item))
         );
       })
       .catch(console.error);
@@ -89,9 +89,10 @@ function App() {
 
   // Add item function
   const handleAddItemSubmit = (newItem, resetForm) => {
-    addServerItem(newItem) // Use addServerItem instead of addItem
+    const token = localStorage.getItem("jwt");
+    addServerItem(newItem, token)
       .then((addedItem) => {
-        setClothingItems([...clothingItems, addedItem.data]);
+        setClothingItems([...clothingItems, addedItem]);
         resetForm();
         closeActiveModal();
       })
@@ -105,7 +106,7 @@ function App() {
   };
   const handleDeleteCard = (card) => {
     const token = localStorage.getItem("jwt");
-    deleteServerItem(card.id) // Use deleteServerItem instead of deleteItem
+    deleteServerItem(card.id, token)
       .then(() => {
         setClothingItems((cards) => cards.filter((c) => c.id !== card.id));
         closeActiveModal();
@@ -155,7 +156,7 @@ function App() {
     getWeather(coordinates, APIkey)
       .then((data) => setWeatherData(filterWeatherData(data)))
       .catch(console.error);
-    getServerItems().then(setClothingItems).catch(console.error); // Use getServerItems instead of getItems
+    getServerItems().then(setClothingItems).catch(console.error);
   }, []);
 
   // Fetch user session
@@ -249,7 +250,7 @@ function App() {
             activeModal={activeModal}
             closeActiveModal={closeActiveModal}
             isOpen={activeModal === "login"}
-            onLogIn={handleLogin}
+            onLogin={handleLogin}
           />
           <RegisterModal
             activeModal={activeModal}
@@ -261,7 +262,7 @@ function App() {
             activeModal={activeModal}
             closeActiveModal={closeActiveModal}
             isOpen={activeModal === "editprofile"}
-            handleEditProfile={handleEditProfile}
+            onSubmit={handleEditProfile}
           />
         </CurrentTemperatureUnitContext.Provider>
       </CurrentUserContext.Provider>

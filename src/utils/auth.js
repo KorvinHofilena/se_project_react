@@ -1,189 +1,86 @@
-const baseUrl =
-  (typeof process !== "undefined" &&
-    process.env &&
-    process.env.REACT_APP_BASE_URL) ||
-  "http://localhost:3001";
+const BASE_URL = "https://api.example.com";
 
-export async function signUserIn(data) {
-  try {
-    const res = await fetch(`${baseUrl}/signin`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+const registerUser = ({ name, email, password }) => {
+  return fetch(`${BASE_URL}/signup`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ name, email, password }),
+  }).then((res) => {
+    if (!res.ok) return Promise.reject("Failed to register user");
+    return res.json();
+  });
+};
 
-    const result = await res.json();
-    if (!res.ok) {
-      throw new Error(result.message || "Error during sign in");
-    }
+const logIn = ({ email, password }) => {
+  return fetch(`${BASE_URL}/signin`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email, password }),
+  }).then((res) => {
+    if (!res.ok) return Promise.reject("Failed to login");
+    return res.json();
+  });
+};
 
-    return result;
-  } catch (error) {
-    console.error("Sign-in error:", error);
-    throw error;
-  }
-}
+const getUserProfile = (token) => {
+  return fetch(`${BASE_URL}/users/me`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }).then((res) => {
+    if (!res.ok) return Promise.reject("Failed to get user profile");
+    return res.json();
+  });
+};
 
-export async function signUserUp(data) {
-  try {
-    const res = await fetch(`${baseUrl}/signup`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+const editUserProfile = ({ name, avatar }, token) => {
+  return fetch(`${BASE_URL}/users/me`, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ name, avatar }),
+  }).then((res) => {
+    if (!res.ok) return Promise.reject("Failed to edit user profile");
+    return res.json();
+  });
+};
 
-    const result = await res.json();
-    if (!res.ok) {
-      throw new Error(result.message || "Error during sign up");
-    }
+const addCardLike = (cardId, token) => {
+  return fetch(`${BASE_URL}/cards/${cardId}/likes`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }).then((res) => {
+    if (!res.ok) return Promise.reject("Failed to like card");
+    return res.json();
+  });
+};
 
-    return result;
-  } catch (error) {
-    console.error("Sign-up error:", error);
-    throw error;
-  }
-}
+const removeCardLike = (cardId, token) => {
+  return fetch(`${BASE_URL}/cards/${cardId}/likes`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }).then((res) => {
+    if (!res.ok) return Promise.reject("Failed to remove like from card");
+    return res.json();
+  });
+};
 
-export async function fetchUserData(token) {
-  if (!token) {
-    throw new Error("Token is missing");
-  }
-
-  try {
-    const response = await fetch(`${baseUrl}/users/me`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    });
-
-    const data = await response.json();
-    if (!response.ok) {
-      throw new Error(data.message || "Error fetching user data");
-    }
-    return data;
-  } catch (error) {
-    console.error("Error fetching user data:", error);
-    throw error;
-  }
-}
-
-export async function signUserOut() {
-  try {
-    const res = await fetch(`${baseUrl}/signout`, {
-      method: "POST",
-      credentials: "include",
-    });
-
-    if (!res.ok) {
-      throw new Error("Error during sign out");
-    }
-
-    return { message: "Successfully signed out" };
-  } catch (error) {
-    console.error("Sign-out error:", error);
-    throw error;
-  }
-}
-
-export async function refreshToken() {
-  try {
-    const res = await fetch(`${baseUrl}/refresh-token`, {
-      method: "POST",
-      credentials: "include",
-    });
-
-    const result = await res.json();
-    if (!res.ok) {
-      throw new Error(result.message || "Error refreshing token");
-    }
-
-    return result;
-  } catch (error) {
-    console.error("Token refresh error:", error);
-    throw error;
-  }
-}
-
-export async function updateUserDetails(token, userData) {
-  if (!token) {
-    throw new Error("Token is missing");
-  }
-
-  try {
-    const res = await fetch(`${baseUrl}/users/me`, {
-      method: "PATCH",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userData),
-    });
-
-    const result = await res.json();
-    if (!res.ok) {
-      throw new Error(result.message || "Error updating user details");
-    }
-
-    return result;
-  } catch (error) {
-    console.error("Error updating user details:", error);
-    throw error;
-  }
-}
-
-export async function addCardLike(token, cardId) {
-  if (!token) {
-    throw new Error("Token is missing");
-  }
-
-  try {
-    const res = await fetch(`${baseUrl}/cards/${cardId}/likes`, {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    });
-
-    const result = await res.json();
-    if (!res.ok) {
-      throw new Error(result.message || "Error adding like to card");
-    }
-
-    return result;
-  } catch (error) {
-    console.error("Error adding like to card:", error);
-    throw error;
-  }
-}
-
-export async function removeCardLike(token, cardId) {
-  if (!token) {
-    throw new Error("Token is missing");
-  }
-
-  try {
-    const res = await fetch(`${baseUrl}/cards/${cardId}/likes`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    });
-
-    const result = await res.json();
-    if (!res.ok) {
-      throw new Error(result.message || "Error removing like from card");
-    }
-
-    return result;
-  } catch (error) {
-    console.error("Error removing like from card:", error);
-    throw error;
-  }
-}
+export {
+  registerUser,
+  logIn,
+  getUserProfile,
+  editUserProfile,
+  addCardLike,
+  removeCardLike,
+};
