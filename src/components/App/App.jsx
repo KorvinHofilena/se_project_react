@@ -165,13 +165,6 @@ function App() {
     }
   }, []);
 
-  useEffect(() => {
-    if (!activeModal) return;
-    const handleEscClose = (e) => e.key === "Escape" && closeActiveModal();
-    document.addEventListener("keydown", handleEscClose);
-    return () => document.removeEventListener("keydown", handleEscClose);
-  }, [activeModal]);
-
   return (
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
@@ -235,21 +228,19 @@ function App() {
             selectedCard={selectedCard}
           />
           <LoginModal
-            activeModal={activeModal}
-            closeActiveModal={closeActiveModal}
             isOpen={activeModal === "login"}
-            onLogin={handleLogin}
+            onClose={closeActiveModal}
+            handleLogin={handleLogin}
+            setActiveModal={setActiveModal}
           />
           <RegisterModal
-            activeModal={activeModal}
-            closeActiveModal={closeActiveModal}
             isOpen={activeModal === "signup"}
+            onClose={closeActiveModal}
             onRegister={handleRegister}
           />
           <EditProfileModal
-            activeModal={activeModal}
-            closeActiveModal={closeActiveModal}
             isOpen={activeModal === "editprofile"}
+            onClose={closeActiveModal}
             onSubmit={handleEditProfile}
           />
         </CurrentTemperatureUnitContext.Provider>
