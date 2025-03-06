@@ -236,7 +236,7 @@ function App() {
           <RegisterModal
             isOpen={activeModal === "signup"}
             onClose={closeActiveModal}
-            onRegister={handleRegister}
+            handleRegistration={handleRegister} // Prop correctly passed here
           />
           <EditProfileModal
             isOpen={activeModal === "editprofile"}
