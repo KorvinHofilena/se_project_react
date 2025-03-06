@@ -1,4 +1,5 @@
-const BASE_URL = "https://api.example.com";
+const BASE_URL =
+  "mongodb+srv://hofilenakorvin:HnGbkzYSjs5kBoJh@cluster0.lo8fk.mongodb.net/myDatabaseName?retryWrites=true&w=majority";
 
 const registerUser = ({ name, email, password }) => {
   return fetch(`${BASE_URL}/signup`, {
