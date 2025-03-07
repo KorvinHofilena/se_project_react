@@ -130,6 +130,8 @@ function App() {
       .then(() => handleLogin({ email: user.email, password: user.password }))
       .catch((error) => {
         console.error("Error during registration:", error);
+
+        alert(error);
       });
   };
 

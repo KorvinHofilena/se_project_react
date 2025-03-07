@@ -10,7 +10,10 @@ const registerUser = ({ name, email, password, avatar = "" }) => {
   })
     .then((response) => {
       if (!response.ok) {
-        return Promise.reject("Failed to register user");
+        if (response.status === 409) {
+          return Promise.reject("Email already exists.");
+        }
+        return Promise.reject("Failed to register user.");
       }
       return response.json();
     })
@@ -19,6 +22,7 @@ const registerUser = ({ name, email, password, avatar = "" }) => {
       throw error;
     });
 };
+
 const logIn = ({ email, password }) => {
   return fetch(`${BASE_URL}/signin`, {
     method: "POST",
