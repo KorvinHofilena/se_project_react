@@ -1,18 +1,24 @@
 const BASE_URL = "http://localhost:3001";
 
-const registerUser = ({ name, email, password }) => {
+const registerUser = ({ name, email, password, avatar = "" }) => {
   return fetch(`${BASE_URL}/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ name, email, password }),
-  }).then((res) => {
-    if (!res.ok) return Promise.reject("Failed to register user");
-    return res.json();
-  });
+    body: JSON.stringify({ name, email, password, avatar }),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        return Promise.reject("Failed to register user");
+      }
+      return response.json();
+    })
+    .catch((error) => {
+      console.error("Registration Error:", error);
+      throw error;
+    });
 };
-
 const logIn = ({ email, password }) => {
   return fetch(`${BASE_URL}/signin`, {
     method: "POST",

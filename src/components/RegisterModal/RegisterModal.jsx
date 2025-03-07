@@ -13,7 +13,10 @@ function RegisterModal({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleRegistration(values); // This triggers handleRegistration correctly now
+
+    const values = { email, password, name, avatar };
+    handleRegistration(values);
+
     resetForm({ email: "", password: "", name: "", avatar: "" });
   };
 

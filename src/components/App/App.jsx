@@ -128,7 +128,9 @@ function App() {
   const handleRegister = (user) => {
     registerUser(user)
       .then(() => handleLogin({ email: user.email, password: user.password }))
-      .catch(console.error);
+      .catch((error) => {
+        console.error("Error during registration:", error);
+      });
   };
 
   const handleSignout = () => {
