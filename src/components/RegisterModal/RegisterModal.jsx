@@ -14,7 +14,6 @@ function RegisterModal({
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const values = { email, password, name, avatar };
     handleRegistration(values);
 
     resetForm({ email: "", password: "", name: "", avatar: "" });
@@ -54,6 +53,29 @@ function RegisterModal({
         value={values.password || ""}
         onChange={handleChange}
         required
+      />
+      <label className="modal__label" htmlFor="name-register">
+        Name *
+      </label>
+      <input
+        className="modal__input"
+        id="name-register"
+        name="name"
+        type="text"
+        value={values.name || ""}
+        onChange={handleChange}
+        required
+      />
+      <label className="modal__label" htmlFor="avatar-register">
+        Avatar URL
+      </label>
+      <input
+        className="modal__input"
+        id="avatar-register"
+        name="avatar"
+        type="text"
+        value={values.avatar || ""}
+        onChange={handleChange}
       />
     </ModalWithForm>
   );
