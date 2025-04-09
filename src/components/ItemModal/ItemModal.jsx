@@ -1,91 +1,85 @@
-import React, { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./ItemModal.css";
+import { useState } from "react";
 
 function AddItemModal({ isOpen, closeActiveModal, handleAddItemSubmit }) {
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [weather, setWeather] = useState("");
 
-  const resetForm = () => {
-    setName("");
-    setImageUrl("");
-    setWeather("");
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleAddItemSubmit({ name, imageUrl, weather }, resetForm);
+    handleAddItemSubmit({ name, imageUrl, weather }, () => {
+      setName("");
+      setImageUrl("");
+      setWeather("");
+    });
   };
 
   return (
     <ModalWithForm
       title="New Garment"
+      name="add-garment"
+      buttonText="Add Garment"
       isOpen={isOpen}
       onClose={closeActiveModal}
       onSubmit={handleSubmit}
-      buttonText="Add garment"
-      altButtonText="Cancel"
-      altButtonClick={closeActiveModal}
-      formValid={true} // 🔧 Temporary fix until validation is added
+      formValid={true} // <-- TEMP FIX until validation is implemented
     >
       <label className="modal__label">
         Name
         <input
           type="text"
-          name="name"
           className="modal__input"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="Enter garment name"
+          placeholder="Name"
           required
         />
       </label>
+
       <label className="modal__label">
-        Image URL
+        Image
         <input
           type="url"
-          name="imageUrl"
           className="modal__input"
           value={imageUrl}
           onChange={(e) => setImageUrl(e.target.value)}
-          placeholder="Enter image URL"
+          placeholder="Image URL"
           required
         />
       </label>
+
       <label className="modal__label">
-        Select Weather Type
+        Select the weather type:
         <div className="modal__radio-group">
-          <label className="modal__radio">
+          <label className="modal__radio-label">
             <input
               type="radio"
-              name="weather"
               value="hot"
               checked={weather === "hot"}
               onChange={(e) => setWeather(e.target.value)}
-              required
+              className="modal__radio"
             />
             Hot
           </label>
-          <label className="modal__radio">
+          <label className="modal__radio-label">
             <input
               type="radio"
-              name="weather"
               value="warm"
               checked={weather === "warm"}
               onChange={(e) => setWeather(e.target.value)}
-              required
+              className="modal__radio"
             />
             Warm
           </label>
-          <label className="modal__radio">
+          <label className="modal__radio-label">
             <input
               type="radio"
-              name="weather"
               value="cold"
               checked={weather === "cold"}
               onChange={(e) => setWeather(e.target.value)}
-              required
+              className="modal__radio"
             />
             Cold
           </label>
