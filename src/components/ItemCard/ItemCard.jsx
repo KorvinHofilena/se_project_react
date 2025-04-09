@@ -1,8 +1,6 @@
-import { useContext } from "react";
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext"; // ✅ Fix import
 import "./ItemCard.css";
-import likeIcon from "../../assets/❤.png";
-import activeLikeIcon from "../../assets/ActiveLikeButton.png";
+import { useContext } from "react";
 
 function ItemCard({ item, onCardClick, handleCardLike }) {
   const currentUser = useContext(CurrentUserContext);
@@ -12,22 +10,22 @@ function ItemCard({ item, onCardClick, handleCardLike }) {
     onCardClick(item);
   };
 
-  const handleLike = (e) => {
-    e.stopPropagation(); // prevent triggering card click
+  const handleLike = () => {
     handleCardLike({ id: item._id, isLiked });
   };
+
+  const itemCardLikeClassName = `item__heart ${
+    isLiked ? "item__heart_liked" : ""
+  }`;
 
   return (
     <li className="card">
       <h2 className="card__name">{item.name}</h2>
       {currentUser?._id && (
         <button
-          className="item__heart"
+          className={itemCardLikeClassName}
           type="button"
           onClick={handleLike}
-          style={{
-            backgroundImage: `url(${isLiked ? activeLikeIcon : likeIcon})`,
-          }}
         />
       )}
       <img
