@@ -28,7 +28,7 @@
   height: 19px;
   background-color: transparent;
   border: none;
-  background-image: url(../../assets/❤.png);
+  background-image: url(../../assets/❤inactive.svg);
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
@@ -38,7 +38,7 @@
   cursor: pointer;
 }
 .item__heart_liked {
-  background-image: url(../../assets/ActiveLikeButton.png);
+  background-image: url(../../assets/❤Active.svg);
 }
 
 .item__heart_visible {
