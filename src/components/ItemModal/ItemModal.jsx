@@ -19,10 +19,9 @@ function ItemModal({ isOpen, closeActiveModal, handleAddItemSubmit }) {
     handleAddItemSubmit({ name, imageUrl, weather }, resetForm);
   };
 
-  // ✅ Validate inputs whenever they change
   useEffect(() => {
     const isValid =
-      name.trim() !== "" && imageUrl.trim() !== "" && weather !== "";
+      name.trim().length > 1 && imageUrl.trim() !== "" && weather !== "";
     setFormValid(isValid);
   }, [name, imageUrl, weather]);
 
@@ -71,7 +70,6 @@ function ItemModal({ isOpen, closeActiveModal, handleAddItemSubmit }) {
               value="hot"
               checked={weather === "hot"}
               onChange={(e) => setWeather(e.target.value)}
-              required
             />
             Hot
           </label>
@@ -82,7 +80,6 @@ function ItemModal({ isOpen, closeActiveModal, handleAddItemSubmit }) {
               value="warm"
               checked={weather === "warm"}
               onChange={(e) => setWeather(e.target.value)}
-              required
             />
             Warm
           </label>
@@ -93,7 +90,6 @@ function ItemModal({ isOpen, closeActiveModal, handleAddItemSubmit }) {
               value="cold"
               checked={weather === "cold"}
               onChange={(e) => setWeather(e.target.value)}
-              required
             />
             Cold
           </label>
