@@ -25,7 +25,7 @@ function Main({ weatherData, handleCardClick, items, onCardLike }) {
               key={item._id}
               item={item}
               onCardClick={handleCardClick}
-              onCardLike={onCardLike}
+              handleCardLike={onCardLike}
             />
           ))}
         </ul>
