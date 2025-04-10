@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./ItemModal.css";
 
@@ -6,6 +6,7 @@ function ItemModal({ isOpen, closeActiveModal, handleAddItemSubmit }) {
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [weather, setWeather] = useState("");
+  const [formValid, setFormValid] = useState(false);
 
   const resetForm = () => {
     setName("");
@@ -18,6 +19,13 @@ function ItemModal({ isOpen, closeActiveModal, handleAddItemSubmit }) {
     handleAddItemSubmit({ name, imageUrl, weather }, resetForm);
   };
 
+  // ✅ Validate inputs whenever they change
+  useEffect(() => {
+    const isValid =
+      name.trim() !== "" && imageUrl.trim() !== "" && weather !== "";
+    setFormValid(isValid);
+  }, [name, imageUrl, weather]);
+
   return (
     <ModalWithForm
       title="New Garment"
@@ -27,7 +35,7 @@ function ItemModal({ isOpen, closeActiveModal, handleAddItemSubmit }) {
       buttonText="Add garment"
       altButtonText="Cancel"
       altButtonClick={closeActiveModal}
-      formValid={true} // 🔧 Temporary fix until validation is added
+      formValid={formValid}
     >
       <label className="modal__label">
         Name
