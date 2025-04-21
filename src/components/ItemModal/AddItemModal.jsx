@@ -70,6 +70,7 @@ function AddItemModal({ isOpen, closeActiveModal, handleAddItemSubmit }) {
         <input
           type="text"
           name="name"
+          id="add-item-name" // Changed from item-name
           className="modal__input"
           value={name}
           onChange={handleNameChange}
@@ -83,6 +84,7 @@ function AddItemModal({ isOpen, closeActiveModal, handleAddItemSubmit }) {
         <input
           type="url"
           name="imageUrl"
+          id="add-item-imageUrl" // Changed from imageURL
           className="modal__input"
           value={imageUrl}
           onChange={handleImageUrlChange}
@@ -97,6 +99,7 @@ function AddItemModal({ isOpen, closeActiveModal, handleAddItemSubmit }) {
             <input
               type="radio"
               name="weather"
+              id="add-item-hot" // Changed from hot
               value="hot"
               checked={weather === "hot"}
               onChange={handleWeatherChange}
@@ -107,6 +110,7 @@ function AddItemModal({ isOpen, closeActiveModal, handleAddItemSubmit }) {
             <input
               type="radio"
               name="weather"
+              id="add-item-warm" // Changed from warm
               value="warm"
               checked={weather === "warm"}
               onChange={handleWeatherChange}
@@ -117,6 +121,7 @@ function AddItemModal({ isOpen, closeActiveModal, handleAddItemSubmit }) {
             <input
               type="radio"
               name="weather"
+              id="add-item-cold" // Changed from cold
               value="cold"
               checked={weather === "cold"}
               onChange={handleWeatherChange}
