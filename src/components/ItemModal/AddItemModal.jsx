@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./AddItemModal.css";
 
-function ItemModal({ isOpen, closeActiveModal, handleAddItemSubmit }) {
+function AddItemModal({ isOpen, closeActiveModal, handleAddItemSubmit }) {
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [weather, setWeather] = useState("");
@@ -129,4 +129,4 @@ function ItemModal({ isOpen, closeActiveModal, handleAddItemSubmit }) {
   );
 }
 
-export default ItemModal;
+export default AddItemModal;
