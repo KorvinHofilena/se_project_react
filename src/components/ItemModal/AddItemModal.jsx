@@ -8,38 +8,26 @@ function AddItemModal({ isOpen, closeActiveModal, handleAddItemSubmit }) {
   const [weather, setWeather] = useState("");
   const [formValid, setFormValid] = useState(false);
 
-  const checkInputValidity = (input) => {
-    if (!input.validity.valid) {
-      setFormValid(false);
-    } else {
-      // Check if all fields are valid
-      const nameInput = document.querySelector('input[name="name"]');
-      const imageUrlInput = document.querySelector('input[name="imageUrl"]');
-      const isValid =
-        nameInput.validity.valid &&
-        imageUrlInput.validity.valid &&
-        weather !== "";
-      setFormValid(isValid);
-    }
+  // Updated checkInputValidity function
+  const checkInputValidity = () => {
+    // Check if all fields are valid
+    const isValid = name.length >= 2 && imageUrl && weather;
+    setFormValid(isValid);
   };
 
   const handleNameChange = (e) => {
     setName(e.target.value);
-    checkInputValidity(e.target);
+    checkInputValidity(); // Check validity after each input change
   };
 
   const handleImageUrlChange = (e) => {
     setImageUrl(e.target.value);
-    checkInputValidity(e.target);
+    checkInputValidity(); // Check validity after each input change
   };
 
   const handleWeatherChange = (e) => {
     setWeather(e.target.value);
-    // Create a dummy input element for weather validation
-    const weatherInput = document.createElement("input");
-    weatherInput.value = e.target.value;
-    weatherInput.required = true;
-    checkInputValidity(weatherInput);
+    checkInputValidity(); // Check validity after each input change
   };
 
   const resetForm = () => {
