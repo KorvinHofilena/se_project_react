@@ -62,26 +62,27 @@ const editUserProfile = ({ name, avatar }, token) => {
   });
 };
 
-const addCardLike = (cardId, token) => {
-  return fetch(`${BASE_URL}/cards/${cardId}/likes`, {
+// ✅ Updated endpoints to /items/:id/likes
+const addCardLike = (itemId, token) => {
+  return fetch(`${BASE_URL}/items/${itemId}/likes`, {
     method: "PUT",
     headers: {
       Authorization: `Bearer ${token}`,
     },
   }).then((res) => {
-    if (!res.ok) return Promise.reject("Failed to like card");
+    if (!res.ok) return Promise.reject("Failed to like item");
     return res.json();
   });
 };
 
-const removeCardLike = (cardId, token) => {
-  return fetch(`${BASE_URL}/cards/${cardId}/likes`, {
+const removeCardLike = (itemId, token) => {
+  return fetch(`${BASE_URL}/items/${itemId}/likes`, {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${token}`,
     },
   }).then((res) => {
-    if (!res.ok) return Promise.reject("Failed to remove like from card");
+    if (!res.ok) return Promise.reject("Failed to remove like from item");
     return res.json();
   });
 };
