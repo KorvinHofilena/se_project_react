@@ -68,7 +68,7 @@ function App() {
     cardAction(id, token)
       .then((updatedCard) => {
         setClothingItems((cards) =>
-          cards.map((item) => (item.id === id ? updatedCard : item))
+          cards.map((item) => (item._id === id ? updatedCard : item))
         );
       })
       .catch(console.error);
