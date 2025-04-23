@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./AddItemModal.css";
 
@@ -8,26 +8,22 @@ function AddItemModal({ isOpen, closeActiveModal, handleAddItemSubmit }) {
   const [weather, setWeather] = useState("");
   const [formValid, setFormValid] = useState(false);
 
-  // Updated checkInputValidity function
-  const checkInputValidity = () => {
-    // Check if all fields are valid
-    const isValid = name.length >= 2 && imageUrl && weather;
+  useEffect(() => {
+    const isValid =
+      name.trim().length >= 2 && imageUrl.trim() !== "" && weather !== "";
     setFormValid(isValid);
-  };
+  }, [name, imageUrl, weather]);
 
   const handleNameChange = (e) => {
     setName(e.target.value);
-    checkInputValidity(); // Check validity after each input change
   };
 
   const handleImageUrlChange = (e) => {
     setImageUrl(e.target.value);
-    checkInputValidity(); // Check validity after each input change
   };
 
   const handleWeatherChange = (e) => {
     setWeather(e.target.value);
-    checkInputValidity(); // Check validity after each input change
   };
 
   const resetForm = () => {
@@ -58,7 +54,7 @@ function AddItemModal({ isOpen, closeActiveModal, handleAddItemSubmit }) {
         <input
           type="text"
           name="name"
-          id="add-item-name" // Changed from item-name
+          id="add-item-name"
           className="modal__input"
           value={name}
           onChange={handleNameChange}
@@ -72,7 +68,7 @@ function AddItemModal({ isOpen, closeActiveModal, handleAddItemSubmit }) {
         <input
           type="url"
           name="imageUrl"
-          id="add-item-imageUrl" // Changed from imageURL
+          id="add-item-imageUrl"
           className="modal__input"
           value={imageUrl}
           onChange={handleImageUrlChange}
@@ -87,7 +83,7 @@ function AddItemModal({ isOpen, closeActiveModal, handleAddItemSubmit }) {
             <input
               type="radio"
               name="weather"
-              id="add-item-hot" // Changed from hot
+              id="add-item-hot"
               value="hot"
               checked={weather === "hot"}
               onChange={handleWeatherChange}
@@ -98,7 +94,7 @@ function AddItemModal({ isOpen, closeActiveModal, handleAddItemSubmit }) {
             <input
               type="radio"
               name="weather"
-              id="add-item-warm" // Changed from warm
+              id="add-item-warm"
               value="warm"
               checked={weather === "warm"}
               onChange={handleWeatherChange}
@@ -109,7 +105,7 @@ function AddItemModal({ isOpen, closeActiveModal, handleAddItemSubmit }) {
             <input
               type="radio"
               name="weather"
-              id="add-item-cold" // Changed from cold
+              id="add-item-cold"
               value="cold"
               checked={weather === "cold"}
               onChange={handleWeatherChange}

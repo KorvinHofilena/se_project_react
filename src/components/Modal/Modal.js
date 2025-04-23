@@ -1,6 +1,7 @@
 import { useEffect } from "react";
+import "./Modal.css"; // Ensure styling is included
 
-export const Modal = ({ name, onClose, children }) => {
+export const Modal = ({ name, onClose, children, isOpen }) => {
   useEffect(() => {
     const handleEscape = (e) => {
       if (e.key === "Escape") {
@@ -8,10 +9,12 @@ export const Modal = ({ name, onClose, children }) => {
       }
     };
 
-    document.addEventListener("keydown", handleEscape);
+    if (isOpen) {
+      document.addEventListener("keydown", handleEscape);
+    }
 
     return () => document.removeEventListener("keydown", handleEscape);
-  }, [onClose]);
+  }, [isOpen, onClose]);
 
   const handleOverlay = (e) => {
     if (e.target === e.currentTarget) {
@@ -19,12 +22,21 @@ export const Modal = ({ name, onClose, children }) => {
     }
   };
 
-  return (
-    <div className={`modal modal_type_${name}`} onClick={handleOverlay}>
-      <div className="modal__container">
-        {children}
+  if (!isOpen) return null;
 
-        <button className="modal__close" type="button" onClick={onClose} />
+  return (
+    <div
+      className={`modal modal_type_${name} ${isOpen ? "modal_opened" : ""}`}
+      onClick={handleOverlay}
+    >
+      <div className="modal__container">
+        <button
+          className="modal__close"
+          type="button"
+          aria-label="Close modal"
+          onClick={onClose}
+        />
+        {children}
       </div>
     </div>
   );
