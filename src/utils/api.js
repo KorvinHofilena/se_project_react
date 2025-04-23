@@ -1,4 +1,14 @@
+// api.js
+
 const baseUrl = "http://localhost:3001";
+
+// Function to check if the response is OK
+export const checkResponse = (res) => {
+  if (!res.ok) {
+    return Promise.reject(`Error: ${res.status}`);
+  }
+  return res.json();
+};
 
 const getAuthHeaders = () => {
   const token = localStorage.getItem("jwt");
@@ -11,12 +21,7 @@ const getAuthHeaders = () => {
 export const getServerItems = () => {
   return fetch(`${baseUrl}/items`, {
     headers: getAuthHeaders(),
-  }).then((res) => {
-    if (!res.ok) {
-      return Promise.reject(`Error: ${res.status}`);
-    }
-    return res.json();
-  });
+  }).then(checkResponse);
 };
 
 export const addServerItem = (item) => {
@@ -24,45 +29,25 @@ export const addServerItem = (item) => {
     method: "POST",
     headers: getAuthHeaders(),
     body: JSON.stringify(item),
-  }).then((res) => {
-    if (!res.ok) {
-      return Promise.reject(`Error: ${res.status}`);
-    }
-    return res.json();
-  });
+  }).then(checkResponse);
 };
 
 export const deleteServerItem = (id) => {
   return fetch(`${baseUrl}/items/${id}`, {
     method: "DELETE",
     headers: getAuthHeaders(),
-  }).then((res) => {
-    if (!res.ok) {
-      return Promise.reject(`Error: ${res.status}`);
-    }
-    return res.json();
-  });
+  }).then(checkResponse);
 };
 
 export const toggleLike = (id, isLiked) => {
   return fetch(`${baseUrl}/items/${id}/likes`, {
     method: isLiked ? "DELETE" : "POST",
     headers: getAuthHeaders(),
-  }).then((res) => {
-    if (!res.ok) {
-      return Promise.reject(`Error: ${res.status}`);
-    }
-    return res.json();
-  });
+  }).then(checkResponse);
 };
 
 export const fetchUserData = () => {
   return fetch(`${baseUrl}/users/me`, {
     headers: getAuthHeaders(),
-  }).then((res) => {
-    if (!res.ok) {
-      return Promise.reject(`Error: ${res.status}`);
-    }
-    return res.json();
-  });
+  }).then(checkResponse);
 };

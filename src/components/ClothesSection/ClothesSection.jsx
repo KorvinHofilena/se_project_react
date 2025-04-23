@@ -13,7 +13,7 @@ function ClothesSection({
 }) {
   const currentUser = useContext(CurrentUserContext);
   const useritems = items.filter((item) => item.owner === currentUser?._id);
-  const reverseItems = [...useritems].reverse();
+  const reverseItems = [...useritems];
 
   return (
     <div className="clothes__section">
