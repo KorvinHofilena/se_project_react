@@ -1,7 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext"; // Named import
-
 import "./EditModal.css";
 
 const EditProfileModal = ({ closeActiveModal, isOpen, handleEditProfile }) => {
@@ -11,12 +10,10 @@ const EditProfileModal = ({ closeActiveModal, isOpen, handleEditProfile }) => {
   const [isButtonActive, setIsButtonActive] = useState(false);
   const [errors, setErrors] = useState({ name: "", avatar: "" });
 
+  // Validate form inputs
   const validateForm = () => {
     let isValid = true;
-    let errors = {
-      name: "",
-      avatar: "",
-    };
+    let errors = { name: "", avatar: "" };
 
     if (!name.trim()) {
       errors.name = "Name is required.";
@@ -35,28 +32,33 @@ const EditProfileModal = ({ closeActiveModal, isOpen, handleEditProfile }) => {
     return isValid;
   };
 
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
       handleEditProfile({ name, avatar });
+      closeActiveModal(); // Close the modal after successful submission
     }
   };
 
-  const handleNameChange = (e) => setName(e.target.value || "");
-  const handleAvatarChange = (e) => setAvatar(e.target.value || "");
+  // Handle input changes
+  const handleNameChange = (e) => setName(e.target.value);
+  const handleAvatarChange = (e) => setAvatar(e.target.value);
 
+  // Handle button activation based on form validation
   useEffect(() => {
-    if (name.trim() && avatar.trim()) {
+    if (name.trim() && avatar.trim() && !errors.name && !errors.avatar) {
       setIsButtonActive(true);
     } else {
       setIsButtonActive(false);
     }
-  }, [name, avatar]);
+  }, [name, avatar, errors]);
 
+  // Reset the form when the modal is opened
   useEffect(() => {
     if (isOpen && currentUser) {
-      setName("" || currentUser.name);
-      setAvatar("" || currentUser.avatar);
+      setName(currentUser.name || "");
+      setAvatar(currentUser.avatar || "");
       setErrors({ name: "", avatar: "" });
     }
   }, [isOpen, currentUser]);
