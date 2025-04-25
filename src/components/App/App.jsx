@@ -99,7 +99,12 @@ function App() {
     setSelectedCard(card);
     setActiveModal("delete-confirmation");
   };
+
   const handleDeleteCard = (card) => {
+    if (!card.id) {
+      console.error("Card ID is missing");
+      return;
+    }
     const token = localStorage.getItem("jwt");
     deleteServerItem(card.id, token)
       .then(() => {
@@ -130,7 +135,6 @@ function App() {
       .then(() => handleLogin({ email: user.email, password: user.password }))
       .catch((error) => {
         console.error("Error during registration:", error);
-
         alert(error);
       });
   };
@@ -223,7 +227,7 @@ function App() {
             activeModal={activeModal}
             card={selectedCard}
             onClose={closeActiveModal}
-            handleDelete={() => handleDeleteCardClick(selectedCard)}
+            onDelete={() => handleDeleteCardClick(selectedCard)}
           />
           <DeleteConfirm
             activeModal={activeModal}
@@ -240,7 +244,7 @@ function App() {
           <RegisterModal
             isOpen={activeModal === "signup"}
             onClose={closeActiveModal}
-            handleRegistration={handleRegister} // Prop correctly passed here
+            handleRegistration={handleRegister}
           />
           <EditProfileModal
             isOpen={activeModal === "editprofile"}

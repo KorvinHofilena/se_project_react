@@ -33,6 +33,9 @@ export const addServerItem = (item) => {
 };
 
 export const deleteServerItem = (id) => {
+  if (!id) {
+    return Promise.reject("Item ID is required for deletion");
+  }
   return fetch(`${baseUrl}/items/${id}`, {
     method: "DELETE",
     headers: getAuthHeaders(),

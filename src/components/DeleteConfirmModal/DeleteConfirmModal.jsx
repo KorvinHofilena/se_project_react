@@ -1,4 +1,5 @@
 import "./DeleteConfirmModal.css";
+
 function DeleteConfirm({
   activeModal,
   closeActiveModal,
@@ -8,10 +9,11 @@ function DeleteConfirm({
   const onCardDelete = () => {
     handleDeleteCard(selectedCard);
   };
+
   return (
     <div
       className={`modal ${
-        activeModal === "delete-confirmation" && "modal_opened"
+        activeModal === "delete-confirmation" ? "modal_opened" : ""
       }`}
     >
       <div className="modal__form modal__content modal__content_delete">
@@ -22,7 +24,7 @@ function DeleteConfirm({
         </p>
         <div>
           <button className="confirm__delete_btn" onClick={onCardDelete}>
-            Yes,Delete
+            Yes, Delete
           </button>
           <button onClick={closeActiveModal} className="cancel__delete_btn">
             Cancel
@@ -32,4 +34,5 @@ function DeleteConfirm({
     </div>
   );
 }
+
 export default DeleteConfirm;
