@@ -2,17 +2,17 @@ import "./LoginModal.css";
 import { useFormAndValidation } from "../../utils/UseFormAndValidation";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-const LoginModal = ({
+function LoginModal({
   handleLogin,
   isOpen,
   onClose,
   isLoading,
   setActiveModal,
-}) => {
+}) {
   const { values, handleChange, isValid, resetForm } = useFormAndValidation();
 
-  const handleSubmit = (event) => {
-    event.preventDefault(); // Prevent default form behavior
+  const handleSubmit = (e) => {
+    e.preventDefault();
     handleLogin(values);
     resetForm({ email: "", password: "" });
   };
@@ -21,10 +21,10 @@ const LoginModal = ({
     <ModalWithForm
       title="Login"
       buttonText={isLoading ? "Logging in..." : "Login"}
-      altButtonText="or Register"
-      altButtonClick={() => setActiveModal("register")}
+      altButtonText="or Sign up"
+      altButtonClick={() => setActiveModal("signup")}
       isOpen={isOpen}
-      onSubmit={handleSubmit} // Pass handleSubmit correctly
+      onSubmit={handleSubmit}
       formValid={isValid}
       onClose={onClose}
     >
@@ -58,6 +58,6 @@ const LoginModal = ({
       />
     </ModalWithForm>
   );
-};
+}
 
 export default LoginModal;

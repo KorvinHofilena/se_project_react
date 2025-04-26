@@ -13,17 +13,16 @@ function RegisterModal({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     handleRegistration(values);
-
     resetForm({ email: "", password: "", name: "", avatar: "" });
   };
 
   return (
     <ModalWithForm
       title="Sign up"
-      buttonText={isLoading ? "Registering" : "Next"}
+      buttonText={isLoading ? "Registering..." : "Next"}
       altButtonText="or Log in"
+      // Correct switch to "login"
       altButtonClick={() => setActiveModal("login")}
       isOpen={isOpen}
       onSubmit={handleSubmit}
