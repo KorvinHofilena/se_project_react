@@ -101,14 +101,14 @@ function App() {
   };
 
   const handleDeleteCard = (card) => {
-    if (!card.id) {
+    if (!card._id) {
       console.error("Card ID is missing");
       return;
     }
     const token = localStorage.getItem("jwt");
-    deleteServerItem(card.id, token)
+    deleteServerItem(card._id, token)
       .then(() => {
-        setClothingItems((cards) => cards.filter((c) => c.id !== card.id));
+        setClothingItems((cards) => cards.filter((c) => c._id !== card._id));
         closeActiveModal();
       })
       .catch(console.error);
