@@ -1,6 +1,7 @@
 import "./RegisterModal.css";
 import { useFormAndValidation } from "../../utils/UseFormAndValidation";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import closeButton from "../../assets/CloseButton.png"; // Adjust the path to your close button image
 
 function RegisterModal({
   handleRegistration,
@@ -22,13 +23,18 @@ function RegisterModal({
       title="Sign up"
       buttonText={isLoading ? "Registering..." : "Next"}
       altButtonText="or Log in"
-      // Correct switch to "login"
       altButtonClick={() => setActiveModal("login")}
       isOpen={isOpen}
       onSubmit={handleSubmit}
       formValid={isValid}
       onClose={onClose}
     >
+      <img
+        src={closeButton}
+        alt="Close"
+        className="modal__close-button"
+        onClick={onClose}
+      />
       <label className="modal__label" htmlFor="email-register">
         Email *
       </label>

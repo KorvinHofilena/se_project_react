@@ -1,6 +1,7 @@
 import "./LoginModal.css";
 import { useFormAndValidation } from "../../utils/UseFormAndValidation";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import closeButton from "../../assets/CloseButton.png"; // Adjust the path to your close button image
 
 function LoginModal({
   handleLogin,
@@ -28,6 +29,12 @@ function LoginModal({
       formValid={isValid}
       onClose={onClose}
     >
+      <img
+        src={closeButton}
+        alt="Close"
+        className="modal__close-button"
+        onClick={onClose}
+      />
       <label className="modal__label" htmlFor="email-login">
         Email
       </label>

@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext"; // Named import
+import CloseButton from "../../assets/CloseButton.png"; // Import the close button image
 import "./EditProfileModal.css";
 
 const EditProfileModal = ({ closeActiveModal, isOpen, handleEditProfile }) => {
@@ -75,11 +76,9 @@ const EditProfileModal = ({ closeActiveModal, isOpen, handleEditProfile }) => {
       onSubmit={handleSubmit}
       name={"editprofile"}
     >
-      <button
-        className="modal__close"
-        type="button"
-        onClick={closeActiveModal}
-      />
+      <button className="modal__close" type="button" onClick={closeActiveModal}>
+        <img src={CloseButton} alt="Close" />
+      </button>
       <label className="modal__label">
         Name *
         <input
