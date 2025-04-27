@@ -262,7 +262,7 @@ function App() {
             <EditProfileModal
               isOpen={activeModal === "editprofile"}
               onClose={closeActiveModal}
-              onSubmit={handleEditProfile}
+              onSubmit={handleEditProfile} // This ensures that handleEditProfile is passed correctly
             />
           </div>
         </CurrentTemperatureUnitContext.Provider>

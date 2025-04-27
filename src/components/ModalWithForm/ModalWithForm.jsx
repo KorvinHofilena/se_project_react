@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import "./ModalWithForm.css";
 
 function ModalWithForm({
@@ -11,6 +12,22 @@ function ModalWithForm({
   onSubmit,
   formValid,
 }) {
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleEscape = (e) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [isOpen, onClose]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (onSubmit) {
@@ -22,12 +39,7 @@ function ModalWithForm({
     <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
       <div className="modal__content">
         <h2 className="modal__title">{title}</h2>
-        <button
-          className="modal__close"
-          type="button"
-          onClick={onClose}
-        ></button>
-        <form action="" onSubmit={handleSubmit} className="modal__form">
+        <form onSubmit={handleSubmit} className="modal__form">
           {children}
           <div className="modal__buttons-container">
             <button
@@ -39,13 +51,15 @@ function ModalWithForm({
             >
               {buttonText}
             </button>
-            <button
-              className="modal__text-button modal__el_hovered"
-              type="button"
-              onClick={altButtonClick}
-            >
-              {altButtonText}
-            </button>
+            {altButtonText && altButtonClick && (
+              <button
+                className="modal__text-button modal__el_hovered"
+                type="button"
+                onClick={altButtonClick}
+              >
+                {altButtonText}
+              </button>
+            )}
           </div>
         </form>
       </div>
