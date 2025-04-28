@@ -3,16 +3,16 @@ import close from "../../assets/CloseButton.png";
 import { useContext } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-function ItemModal({ activeModal, onClose, card, onDelete }) {
+function ItemModal({ activeModal, onClose, card, onDeleteClick }) {
   const currentUser = useContext(CurrentUserContext);
 
   if (!card) return null;
 
   const isOwn = currentUser?._id === card?.owner;
 
-  const handleDelete = () => {
-    if (typeof onDelete === "function") {
-      onDelete(card._id);
+  const handleDeleteClick = () => {
+    if (typeof onDeleteClick === "function") {
+      onDeleteClick(card);
     }
   };
 
@@ -27,7 +27,7 @@ function ItemModal({ activeModal, onClose, card, onDelete }) {
           <h2 className="modal__caption">{card.name}</h2>
           <p className="modal__weather">Weather: {card.weather}</p>
           {isOwn && (
-            <button className="modal__delete-card" onClick={handleDelete}>
+            <button className="modal__delete-card" onClick={handleDeleteClick}>
               Delete item
             </button>
           )}

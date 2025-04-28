@@ -1,6 +1,6 @@
 import "./DeleteConfirmModal.css";
 
-function DeleteConfirm({
+function DeleteConfirmModal({
   activeModal,
   closeActiveModal,
   selectedCard,
@@ -17,7 +17,7 @@ function DeleteConfirm({
       }`}
     >
       <div className="modal__form modal__content modal__content_delete">
-        <button onClick={closeActiveModal} className="modal__close"></button>
+        <button onClick={closeActiveModal} className="modal__close" />
         <p className="modal__delete_text">
           Are you sure you want to delete this item? This action is
           irreversible.
@@ -35,4 +35,4 @@ function DeleteConfirm({
   );
 }
 
-export default DeleteConfirm;
+export default DeleteConfirmModal;

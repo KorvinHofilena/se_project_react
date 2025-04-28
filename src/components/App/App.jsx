@@ -13,7 +13,7 @@ import DeleteConfirm from "../DeleteConfirmModal/DeleteConfirmModal";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
-import ProtectedRoute from "../App/ProtectedRoute";
+import ProtectedRoute from "./ProtectedRoute";
 
 import { coordinates, APIkey } from "../../utils/constants";
 import { getWeather, filterWeatherData } from "../../utils/WeatherApi";
@@ -50,16 +50,21 @@ function App() {
   const navigate = useNavigate();
 
   const handleAddClick = () => setActiveModal("add-garment");
+
   const handleCardClick = (card) => {
     setSelectedCard(card);
     setActiveModal("preview");
   };
+
   const closeActiveModal = () => {
     setActiveModal("");
     setSelectedCard({});
   };
+
   const handleLoginModal = () => setActiveModal("login");
+
   const handleRegisterModal = () => setActiveModal("signup");
+
   const handleEditModal = () => setActiveModal("editprofile");
 
   const handleCardLike = ({ id, isLiked }) => {
@@ -227,42 +232,42 @@ function App() {
 
             <Footer />
 
-            <AddItemModal
-              isOpen={activeModal === "add-garment"}
-              handleAddItemSubmit={handleAddItemSubmit}
-              closeActiveModal={closeActiveModal}
-            />
             <ItemModal
               activeModal={activeModal}
-              card={selectedCard}
               onClose={closeActiveModal}
-              onDelete={() => handleDeleteCardClick(selectedCard)}
+              card={selectedCard}
+              onDeleteClick={handleDeleteCardClick}
             />
+
+            <AddItemModal
+              isOpen={activeModal === "add-garment"}
+              closeActiveModal={closeActiveModal}
+              handleAddItemSubmit={handleAddItemSubmit}
+            />
+
             <DeleteConfirm
               activeModal={activeModal}
-              closeActiveModal={closeActiveModal}
-              handleDeleteCard={handleDeleteCard}
-              selectedCard={selectedCard}
-            />
-            <LoginModal
-              isOpen={activeModal === "login"}
               onClose={closeActiveModal}
-              handleLogin={handleLogin}
-              isLoading={false}
-              setActiveModal={setActiveModal}
+              onConfirmDelete={handleDeleteCard}
+              handleDeleteCard={handleDeleteCard}
+            />
+
+            <LoginModal
+              activeModal={activeModal}
+              onClose={closeActiveModal}
+              onLogin={handleLogin}
             />
 
             <RegisterModal
-              isOpen={activeModal === "signup"}
+              activeModal={activeModal}
               onClose={closeActiveModal}
-              handleRegistration={handleRegister}
-              isLoading={false}
-              setActiveModal={setActiveModal}
+              onRegister={handleRegister}
             />
+
             <EditProfileModal
-              isOpen={activeModal === "editprofile"}
+              activeModal={activeModal}
               onClose={closeActiveModal}
-              onSubmit={handleEditProfile} // This ensures that handleEditProfile is passed correctly
+              onEditProfile={handleEditProfile}
             />
           </div>
         </CurrentTemperatureUnitContext.Provider>
