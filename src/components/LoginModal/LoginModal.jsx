@@ -1,15 +1,9 @@
+// src/components/LoginModal/LoginModal.jsx
 import "./LoginModal.css";
 import { useFormAndValidation } from "../../utils/UseFormAndValidation";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import closeButton from "../../assets/CloseButton.png"; // Adjust the path to your close button image
 
-function LoginModal({
-  handleLogin,
-  isOpen,
-  onClose,
-  isLoading,
-  setActiveModal,
-}) {
+function LoginModal({ handleLogin, isOpen, onClose, setActiveModal }) {
   const { values, handleChange, isValid, resetForm } = useFormAndValidation();
 
   const handleSubmit = (e) => {
@@ -18,23 +12,21 @@ function LoginModal({
     resetForm({ email: "", password: "" });
   };
 
+  const handleAltButtonClick = () => {
+    setActiveModal("signup");
+  };
+
   return (
     <ModalWithForm
       title="Login"
-      buttonText={isLoading ? "Logging in..." : "Login"}
+      buttonText="Login"
       altButtonText="or Sign up"
-      altButtonClick={() => setActiveModal("signup")}
+      altButtonClick={handleAltButtonClick}
       isOpen={isOpen}
       onSubmit={handleSubmit}
       formValid={isValid}
       onClose={onClose}
     >
-      <img
-        src={closeButton}
-        alt="Close"
-        className="modal__close-button"
-        onClick={onClose}
-      />
       <label className="modal__label" htmlFor="email-login">
         Email
       </label>
@@ -50,6 +42,7 @@ function LoginModal({
         onChange={handleChange}
         required
       />
+
       <label className="modal__label" htmlFor="password-login">
         Password
       </label>

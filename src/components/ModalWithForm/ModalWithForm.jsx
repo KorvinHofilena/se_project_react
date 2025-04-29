@@ -1,3 +1,4 @@
+// src/components/ModalWithForm/ModalWithForm.jsx
 import { useEffect } from "react";
 import "./ModalWithForm.css";
 
@@ -38,6 +39,12 @@ function ModalWithForm({
   return (
     <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
       <div className="modal__content">
+        <button
+          type="button"
+          className="modal__close"
+          aria-label="Close"
+          onClick={onClose}
+        />
         <h2 className="modal__title">{title}</h2>
         <form onSubmit={handleSubmit} className="modal__form">
           {children}
@@ -53,8 +60,8 @@ function ModalWithForm({
             </button>
             {altButtonText && altButtonClick && (
               <button
-                className="modal__text-button modal__el_hovered"
                 type="button"
+                className="modal__text-button modal__el_hovered"
                 onClick={altButtonClick}
               >
                 {altButtonText}

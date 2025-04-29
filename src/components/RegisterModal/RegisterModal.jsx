@@ -1,13 +1,12 @@
+// src/components/RegisterModal/RegisterModal.jsx
 import "./RegisterModal.css";
 import { useFormAndValidation } from "../../utils/UseFormAndValidation";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import closeButton from "../../assets/CloseButton.png"; // Adjust the path to your close button image
 
 function RegisterModal({
   handleRegistration,
   isOpen,
   onClose,
-  isLoading,
   setActiveModal,
 }) {
   const { values, handleChange, isValid, resetForm } = useFormAndValidation();
@@ -18,23 +17,21 @@ function RegisterModal({
     resetForm({ email: "", password: "", name: "", avatar: "" });
   };
 
+  const handleAltButtonClick = () => {
+    setActiveModal("login");
+  };
+
   return (
     <ModalWithForm
-      title="Sign up"
-      buttonText={isLoading ? "Registering..." : "Next"}
+      title="Sign Up"
+      buttonText="Register"
       altButtonText="or Log in"
-      altButtonClick={() => setActiveModal("login")}
+      altButtonClick={handleAltButtonClick}
       isOpen={isOpen}
       onSubmit={handleSubmit}
       formValid={isValid}
       onClose={onClose}
     >
-      <img
-        src={closeButton}
-        alt="Close"
-        className="modal__close-button"
-        onClick={onClose}
-      />
       <label className="modal__label" htmlFor="email-register">
         Email *
       </label>
@@ -47,6 +44,7 @@ function RegisterModal({
         onChange={handleChange}
         required
       />
+
       <label className="modal__label" htmlFor="password-register">
         Password *
       </label>
@@ -59,6 +57,7 @@ function RegisterModal({
         onChange={handleChange}
         required
       />
+
       <label className="modal__label" htmlFor="name-register">
         Name *
       </label>
@@ -71,6 +70,7 @@ function RegisterModal({
         onChange={handleChange}
         required
       />
+
       <label className="modal__label" htmlFor="avatar-register">
         Avatar URL
       </label>
@@ -78,7 +78,7 @@ function RegisterModal({
         className="modal__input"
         id="avatar-register"
         name="avatar"
-        type="text"
+        type="url"
         value={values.avatar || ""}
         onChange={handleChange}
       />

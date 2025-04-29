@@ -1,10 +1,10 @@
+// src/components/App/App.jsx
 import { useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import "./App.css";
 
 import Header from "../Header/Header";
 import Main from "../Main/Main";
-import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import Footer from "../Footer/Footer";
 import ItemModal from "../ItemModal/ItemModal";
 import AddItemModal from "../AddItemModal/AddItemModal";
@@ -49,28 +49,20 @@ function App() {
 
   const navigate = useNavigate();
 
-  const handleAddClick = () => setActiveModal("add-garment");
-
-  const handleCardClick = (card) => {
-    setSelectedCard(card);
-    setActiveModal("preview");
-  };
-
+  const openModal = (modalName) => setActiveModal(modalName);
   const closeActiveModal = () => {
     setActiveModal("");
     setSelectedCard({});
   };
 
-  const handleLoginModal = () => setActiveModal("login");
-
-  const handleRegisterModal = () => setActiveModal("signup");
-
-  const handleEditModal = () => setActiveModal("editprofile");
+  const handleCardClick = (card) => {
+    setSelectedCard(card);
+    openModal("preview");
+  };
 
   const handleCardLike = ({ id, isLiked }) => {
-    const token = localStorage.getItem("jwt");
     const action = isLiked ? removeCardLike : addCardLike;
-
+    const token = localStorage.getItem("jwt");
     action(id, token)
       .then((updatedCard) => {
         setClothingItems((prevCards) =>
@@ -103,7 +95,7 @@ function App() {
 
   const handleDeleteCardClick = (card) => {
     setSelectedCard(card);
-    setActiveModal("delete-confirmation");
+    openModal("delete-confirmation");
   };
 
   const handleDeleteCard = () => {
@@ -112,7 +104,6 @@ function App() {
       console.error("Selected card ID is missing");
       return;
     }
-
     deleteServerItem(selectedCard._id, token)
       .then(() => {
         setClothingItems((prevCards) =>
@@ -193,10 +184,10 @@ function App() {
         >
           <div className="page__content">
             <Header
-              handleAddClick={handleAddClick}
+              handleAddClick={() => openModal("add-garment")}
               weatherData={weatherData}
-              handleLoginModal={handleLoginModal}
-              handleRegisterModal={handleRegisterModal}
+              handleLoginModal={() => openModal("login")}
+              handleRegisterModal={() => openModal("signup")}
               isLoggedIn={isLoggedIn}
             />
 
@@ -219,9 +210,9 @@ function App() {
                   <ProtectedRoute isLoggedIn={isLoggedIn}>
                     <Profile
                       onCardClick={handleCardClick}
-                      handleAddClick={handleAddClick}
+                      handleAddClick={() => openModal("add-garment")}
                       items={clothingItems}
-                      handleEditModal={handleEditModal}
+                      handleEditModal={() => openModal("editprofile")}
                       handleSignout={handleSignout}
                       handleCardLike={handleCardLike}
                     />
@@ -232,6 +223,7 @@ function App() {
 
             <Footer />
 
+            {/* Modals */}
             <ItemModal
               activeModal={activeModal}
               onClose={closeActiveModal}
@@ -253,21 +245,23 @@ function App() {
             />
 
             <LoginModal
-              activeModal={activeModal}
+              isOpen={activeModal === "login"}
               onClose={closeActiveModal}
-              onLogin={handleLogin}
+              handleLogin={handleLogin}
+              setActiveModal={setActiveModal}
             />
 
             <RegisterModal
-              activeModal={activeModal}
+              isOpen={activeModal === "signup"}
               onClose={closeActiveModal}
-              onRegister={handleRegister}
+              handleRegistration={handleRegister}
+              setActiveModal={setActiveModal}
             />
 
             <EditProfileModal
-              activeModal={activeModal}
+              isOpen={activeModal === "editprofile"}
               onClose={closeActiveModal}
-              onEditProfile={handleEditProfile}
+              onSubmit={handleEditProfile}
             />
           </div>
         </CurrentTemperatureUnitContext.Provider>
