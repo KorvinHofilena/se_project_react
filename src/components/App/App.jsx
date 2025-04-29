@@ -157,7 +157,13 @@ function App() {
       .then((data) => setWeatherData(filterWeatherData(data)))
       .catch(console.error);
 
-    getServerItems().then(setClothingItems).catch(console.error);
+    // ✅ ADDED CONSOLE LOG FOR DEBUGGING
+    getServerItems()
+      .then((items) => {
+        console.log("✅ Items fetched from server:", items);
+        setClothingItems(items);
+      })
+      .catch(console.error);
   }, []);
 
   useEffect(() => {
@@ -223,7 +229,6 @@ function App() {
 
             <Footer />
 
-            {/* Modals */}
             <ItemModal
               activeModal={activeModal}
               onClose={closeActiveModal}

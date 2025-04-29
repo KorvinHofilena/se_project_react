@@ -10,13 +10,26 @@ function AddItemModal({ isOpen, closeActiveModal, handleAddItemSubmit }) {
 
   useEffect(() => {
     const isValid =
-      name.trim().length >= 2 && imageUrl.trim() !== "" && weather !== "";
+      name.trim().length >= 2 &&
+      imageUrl.trim() !== "" &&
+      weather.trim() !== "";
     setFormValid(isValid);
   }, [name, imageUrl, weather]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleAddItemSubmit({ name, imageUrl, weather }, resetForm);
+
+    const trimmedImageUrl = imageUrl.trim();
+
+    // ✅ Ensure both `imageUrl` and `link` are included
+    const newItem = {
+      name: name.trim(),
+      imageUrl: trimmedImageUrl,
+      link: trimmedImageUrl,
+      weather: weather.trim().toLowerCase(),
+    };
+
+    handleAddItemSubmit(newItem, resetForm);
   };
 
   const resetForm = () => {
@@ -67,7 +80,6 @@ function AddItemModal({ isOpen, closeActiveModal, handleAddItemSubmit }) {
       <label className="modal__label">Select the weather type:</label>
       <div className="modal__radio-group">
         <label className="modal__radio">
-          Hot
           <input
             type="radio"
             name="weather"
@@ -76,9 +88,9 @@ function AddItemModal({ isOpen, closeActiveModal, handleAddItemSubmit }) {
             onChange={(e) => setWeather(e.target.value)}
             required
           />
+          <span>Hot</span>
         </label>
         <label className="modal__radio">
-          Warm
           <input
             type="radio"
             name="weather"
@@ -86,9 +98,9 @@ function AddItemModal({ isOpen, closeActiveModal, handleAddItemSubmit }) {
             checked={weather === "warm"}
             onChange={(e) => setWeather(e.target.value)}
           />
+          <span>Warm</span>
         </label>
         <label className="modal__radio">
-          Cold
           <input
             type="radio"
             name="weather"
@@ -96,6 +108,7 @@ function AddItemModal({ isOpen, closeActiveModal, handleAddItemSubmit }) {
             checked={weather === "cold"}
             onChange={(e) => setWeather(e.target.value)}
           />
+          <span>Cold</span>
         </label>
       </div>
     </ModalWithForm>
