@@ -1,6 +1,7 @@
 // src/components/ModalWithForm/ModalWithForm.jsx
 import { useEffect } from "react";
 import "./ModalWithForm.css";
+import closeButtonImage from "../../assets/CloseButton.png";
 
 function ModalWithForm({
   children,
@@ -44,7 +45,13 @@ function ModalWithForm({
           className="modal__close"
           aria-label="Close"
           onClick={onClose}
-        />
+        >
+          <img
+            src={closeButtonImage}
+            alt="Close"
+            className="modal__close-image"
+          />
+        </button>
         <h2 className="modal__title">{title}</h2>
         <form onSubmit={handleSubmit} className="modal__form">
           {children}
