@@ -1,24 +1,51 @@
-.side-bar__avatar {
-  height: 150px;
-  width: 150px;
-  border-radius: 50px;
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-left: 50px;
+}
+
+.sidebar__user-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.sidebar__avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .sidebar__username {
-  font-family: "CabinetGrotesk-Medium";
+  font-family: "CabinetGrotesk", sans-serif;
   font-size: 20px;
   font-weight: 700;
   line-height: 24.8px;
-  text-align: left;
+  margin: 0;
 }
 
-.sidebar__buttons-container {
+.sidebar__buttons {
   display: flex;
   flex-direction: column;
+  gap: 12px;
 }
 
-.side-bar__edit-button {
-  top: 10px;
+.sidebar__button {
+  background: none;
+  border: none;
+  font-family: "CabinetGrotesk", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: left;
+  color: black;
+  cursor: pointer;
+  padding: 0;
+}
+
+.sidebar__button:hover {
+  opacity: 0.6;
 }
 
 @media screen and (max-width: 600px) {

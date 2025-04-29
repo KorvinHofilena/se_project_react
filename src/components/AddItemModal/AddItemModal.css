@@ -1,52 +1,39 @@
-.item-modal__content_type_image {
-  padding: 0;
-}
-
-.item-modal__image {
-  height: 100%;
-  width: 100%;
-}
-
-.item-modal__caption {
-  margin: 0;
-  padding-top: 20px;
-  padding-left: 32px;
-  font-family: "Inter";
-  font-size: 20px;
-  line-height: 24px;
-}
-
-.item-modal__weather {
-  font-family: "Inter";
-  font-size: 20px;
-  line-height: 24px;
-  margin: 0;
-  padding: 20px 0px 32px 32px;
-}
-
-.item-modal__delete-btn {
-  font-family: "Inter";
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 24px;
-  text-align: left;
-  color: #ff4d00;
-  background-color: white;
-  border: none;
-  padding: 20px 32px;
-}
-
-.item-modal__delete-btn:hover {
-  cursor: pointer;
-}
-
-.model__delete_hidden {
-  display: none;
-}
-
-.item-modal__footer {
+.modal__label {
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #000;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-start;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.modal__input {
+  padding: 12px;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  background-color: transparent;
+  font-size: 14px;
+  font-family: "Inter", sans-serif;
+  outline: none;
+}
+
+.modal__input:focus {
+  border-color: #000;
+}
+
+.modal__radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.modal__radio {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
 }

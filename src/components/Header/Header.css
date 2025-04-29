@@ -1,64 +1,94 @@
+/* src/components/Header/Header.css */
 .header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-family: "CabinetGrotesk", sans-serif;
+  padding-left: 50px;
+}
+
+.header__left {
   display: flex;
   align-items: center;
-  padding: 32px 0 28px;
-  font-size: 20px;
-  line-height: 24.8px;
-  font-weight: 700;
-  font-family: "CabinetGrotesk";
+  gap: 20px;
 }
 
 .header__logo {
   width: 89px;
   height: 40px;
-  padding-right: 24px;
-}
-.header__add_clothes {
-  opacity: 1;
-}
-.header__add_clothes:hover {
-  opacity: 0.2;
 }
 
-.header__date_time {
+.header__date {
+  font-size: 18px;
+  font-weight: 700;
+  color: #000;
   margin: 0;
 }
 
-.header__add_clothes {
-  margin-left: 20px;
-  border: none;
-  padding-right: 20px;
-  background: none;
-  font-weight: 700;
-}
-
-.header__user_info {
+.header__right {
   display: flex;
   align-items: center;
-  margin: 0;
+  gap: 20px;
+  padding: 0 90px;
+}
+
+.header__add-button {
+  background: none;
+  border: none;
+  color: #000;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.header__add-button:hover {
+  opacity: 0.6;
+}
+
+.header__profile-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #000;
+  gap: 12px;
 }
 
 .header__username {
-  padding-right: 12px;
+  font-size: 16px;
+  font-weight: 700;
 }
-.Profile__header-link {
-  text-decoration: none;
-  color: black;
-}
-.header__login {
-  background-color: none;
-  border: none;
-  height: 25px;
-  margin: 0px 0px 0px 20px;
-  padding: none;
-}
-.header__signup {
-  background-color: none;
-  border: none;
-  margin: 0px 0px 0px 36px;
-  padding: none;
-}
-.header__user_avatar {
-  height: 40px;
+
+.header__avatar {
   width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.header__auth-buttons {
+  display: flex;
+  gap: 16px;
+}
+
+.header__auth-button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  color: #000;
+  padding: 8px 16px;
+}
+
+.header__auth-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+
+.header__logo-link {
+  text-decoration: none;
 }

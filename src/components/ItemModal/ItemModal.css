@@ -1,63 +1,70 @@
-.modal__image {
-  max-width: 498px;
-  width: 100%;
-  position: relative;
-  display: block;
-  overflow: auto;
-}
-
-.modal__close {
-  z-index: 2;
-  border: none;
-  background: transparent;
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  cursor: pointer;
-}
+/* src/components/ItemModal/ItemModal.css */
 
 .modal__content_type_image {
-  display: block;
+  background-color: white;
+  border-radius: 8px;
   overflow: hidden;
   padding: 0;
   position: relative;
-  background-color: white;
-  border-radius: 8px;
+  max-width: 498px;
+  width: 100%;
+}
+
+.modal__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 2;
+  padding: 0;
+}
+
+.modal__close-image {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  display: block;
+}
+
+.modal__image {
+  width: 100%;
+  display: block;
+  max-height: 498px;
+  object-fit: cover;
 }
 
 .modal__footer {
-  position: relative; /* needed to anchor delete button */
+  position: relative;
   padding: 20px 32px 32px;
+  background-color: white;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 12px;
+  gap: 8px;
 }
 
 .modal__caption {
-  margin: 0;
-  font-weight: 700;
-  padding: 0 0 12px;
   font-size: 20px;
+  font-weight: 700;
+  margin: 0;
 }
 
 .modal__weather {
-  margin: 0;
-  font-weight: 700;
   font-size: 16px;
+  font-weight: 700;
+  margin: 0;
 }
 
 .modal__delete-card {
   position: absolute;
   top: 20px;
   right: 32px;
-  background-color: transparent;
-  width: 101px;
-  height: 24px;
+  background: transparent;
   border: none;
   color: #ff4d00;
-  padding: 0;
   font-weight: 700;
   font-size: 16px;
   cursor: pointer;
+  padding: 0;
 }

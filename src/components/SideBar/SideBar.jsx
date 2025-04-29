@@ -1,3 +1,4 @@
+// src/components/SideBar/SideBar.jsx
 import "./SideBar.css";
 import { useContext } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
@@ -7,26 +8,25 @@ function SideBar({ handleEditProfileClick, onLogout }) {
   const currentUser = useContext(CurrentUserContext);
 
   return (
-    <div className="side-bar">
-      <div className="side-bar__avatar-container">
+    <div className="sidebar">
+      <div className="sidebar__user-info">
         <img
           src={currentUser?.avatar || avatarPlaceholder}
           alt={currentUser?.name || "User Avatar"}
-          className="side-bar__avatar"
+          className="sidebar__avatar"
         />
-        <p className="side-bar__username">
-          {currentUser?.name || "Guest User"}
-        </p>
+        <p className="sidebar__username">{currentUser?.name || "Guest User"}</p>
       </div>
-      <div className="side-bar__buttons">
+      <div className="sidebar__buttons">
         <button
-          className="side-bar__edit-button"
+          type="button"
+          className="sidebar__button"
           onClick={handleEditProfileClick}
         >
-          Change Profile Data
+          Change profile data
         </button>
-        <button className="side-bar__logout-button" onClick={onLogout}>
-          Log Out
+        <button type="button" className="sidebar__button" onClick={onLogout}>
+          Log out
         </button>
       </div>
     </div>

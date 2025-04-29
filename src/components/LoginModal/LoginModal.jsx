@@ -20,42 +20,38 @@ function LoginModal({ handleLogin, isOpen, onClose, setActiveModal }) {
     <ModalWithForm
       title="Login"
       buttonText="Login"
-      altButtonText="or Sign up"
+      altButtonText="or Sign Up"
       altButtonClick={handleAltButtonClick}
       isOpen={isOpen}
       onSubmit={handleSubmit}
       formValid={isValid}
       onClose={onClose}
     >
-      <label className="modal__label" htmlFor="email-login">
+      <label className="modal__label">
         Email
+        <input
+          className="modal__input"
+          name="email"
+          type="email"
+          placeholder="Email"
+          value={values.email || ""}
+          onChange={handleChange}
+          required
+        />
       </label>
-      <input
-        className="modal__input"
-        id="email-login"
-        name="email"
-        type="email"
-        minLength="4"
-        maxLength="64"
-        placeholder="Email"
-        value={values.email || ""}
-        onChange={handleChange}
-        required
-      />
 
-      <label className="modal__label" htmlFor="password-login">
+      <label className="modal__label">
         Password
+        <input
+          className="modal__input"
+          name="password"
+          type="password"
+          placeholder="Password"
+          value={values.password || ""}
+          onChange={handleChange}
+          required
+        />
       </label>
-      <input
-        className="modal__input"
-        id="password-login"
-        name="password"
-        type="password"
-        placeholder="Password"
-        value={values.password || ""}
-        onChange={handleChange}
-        required
-      />
     </ModalWithForm>
   );
 }

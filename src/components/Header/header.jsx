@@ -1,75 +1,75 @@
+// src/components/Header/Header.jsx
 import "./Header.css";
 import logo from "../../assets/logo.svg";
-import avatar from "../../assets/avatar.png";
+import avatarPlaceholder from "../../assets/avatar.png";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { Link } from "react-router-dom";
-
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-
 import { useContext } from "react";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function Header({
   handleAddClick,
   weatherData,
-  activeModal,
   isLoggedIn,
   handleRegisterModal,
   handleLoginModal,
 }) {
+  const currentUser = useContext(CurrentUserContext);
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
   });
 
-  const currentUser = useContext(CurrentUserContext);
-
   return (
     <header className="header">
-      <Link to="/">
-        <img className="header__logo" src={logo} alt="header logo" />
-      </Link>
-      <p className="header__date_time">
-        {currentDate}, {weatherData.city}
-      </p>
-      <ToggleSwitch />
-      {isLoggedIn ? (
-        <>
-          <button
-            onClick={handleAddClick}
-            type="button"
-            className="header__add_clothes"
-          >
-            + Add Clothes
-          </button>
-          <Link to="/profile" className="Profile__header-link">
-            <div className="header__user_info">
+      <div className="header__left">
+        <Link to="/" className="header__logo-link">
+          <img className="header__logo" src={logo} alt="WTWR Logo" />
+        </Link>
+        <p className="header__date">
+          {currentDate}, {weatherData.city}
+        </p>
+      </div>
+
+      <div className="header__right">
+        <ToggleSwitch />
+        {isLoggedIn ? (
+          <>
+            <button
+              onClick={handleAddClick}
+              className="header__add-button"
+              type="button"
+            >
+              + Add clothes
+            </button>
+            <Link to="/profile" className="header__profile-link">
               <p className="header__username">{currentUser?.name || "User"}</p>
               <img
-                src={currentUser?.avatar || avatar}
-                alt={currentUser?.name || "User"}
-                className="header__user_avatar"
+                src={currentUser?.avatar || avatarPlaceholder}
+                alt={currentUser?.name || "User Avatar"}
+                className="header__avatar"
               />
-            </div>
-          </Link>
-        </>
-      ) : (
-        <div className={` ${activeModal === "login" && "modal_opened"}`}>
-          <button
-            onClick={handleRegisterModal}
-            className="header__signup"
-            type="button"
-          >
-            Sign Up
-          </button>
-          <button
-            onClick={handleLoginModal}
-            className="header__login"
-            type="button"
-          >
-            Log In
-          </button>
-        </div>
-      )}
+            </Link>
+          </>
+        ) : (
+          <div className="header__auth-buttons">
+            <button
+              onClick={handleRegisterModal}
+              className="header__auth-button"
+              type="button"
+            >
+              Sign Up
+            </button>
+            <button
+              onClick={handleLoginModal}
+              className="header__auth-button"
+              type="button"
+            >
+              Log In
+            </button>
+          </div>
+        )}
+      </div>
     </header>
   );
 }
