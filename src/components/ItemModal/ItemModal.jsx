@@ -1,9 +1,8 @@
-// src/components/ItemModal/ItemModal.jsx
 import { useContext } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-import { Modal } from "../Modal/Modal"; // ✅ Correct import of Modal.js
+import { Modal } from "../Modal/Modal";
 import "./ItemModal.css";
-import closeButtonImage from "../../assets/CloseButton.png"; // ✅
+import closeButtonImage from "../../assets/CloseButton.png";
 
 function ItemModal({ activeModal, onClose, card, onDeleteClick }) {
   const currentUser = useContext(CurrentUserContext);

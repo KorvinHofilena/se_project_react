@@ -13,7 +13,7 @@ function ClothesSection({
   const currentUser = useContext(CurrentUserContext);
 
   const useritems = items.filter((item) => item.owner === currentUser?._id);
-  const reverseItems = [...useritems].reverse(); // show newest first
+  const reverseItems = [...useritems].reverse();
 
   return (
     <div className="clothes__section">

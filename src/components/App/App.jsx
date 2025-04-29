@@ -1,4 +1,3 @@
-// src/components/App/App.jsx
 import { useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import "./App.css";
@@ -157,7 +156,6 @@ function App() {
       .then((data) => setWeatherData(filterWeatherData(data)))
       .catch(console.error);
 
-    // ✅ ADDED CONSOLE LOG FOR DEBUGGING
     getServerItems()
       .then((items) => {
         console.log("✅ Items fetched from server:", items);

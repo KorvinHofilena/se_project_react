@@ -1,4 +1,4 @@
-import { CurrentUserContext } from "../../contexts/CurrentUserContext"; // ✅ Fix import
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import "./ItemCard.css";
 import { useContext } from "react";
 

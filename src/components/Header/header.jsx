@@ -1,4 +1,3 @@
-// src/components/Header/Header.jsx
 import "./Header.css";
 import logo from "../../assets/logo.svg";
 import avatarPlaceholder from "../../assets/avatar.png";

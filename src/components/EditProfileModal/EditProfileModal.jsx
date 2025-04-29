@@ -1,4 +1,3 @@
-// src/components/EditProfileModal/EditProfileModal.jsx
 import { useState, useEffect, useContext } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
@@ -24,7 +23,7 @@ function EditProfileModal({ isOpen, onClose, onSubmit }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({ name, avatar }); // 🔥 correctly call onSubmit now
+    onSubmit({ name, avatar });
   };
 
   return (

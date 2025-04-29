@@ -33,7 +33,7 @@
 .modal__radio {
   display: flex;
   align-items: center;
-  gap: 8px; /* Ensures button and label are close */
+  gap: 8px;
   font-family: "Inter", sans-serif;
   font-size: 14px;
   font-weight: 400;

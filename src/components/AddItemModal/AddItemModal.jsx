@@ -21,7 +21,6 @@ function AddItemModal({ isOpen, closeActiveModal, handleAddItemSubmit }) {
 
     const trimmedImageUrl = imageUrl.trim();
 
-    // ✅ Ensure both `imageUrl` and `link` are included
     const newItem = {
       name: name.trim(),
       imageUrl: trimmedImageUrl,

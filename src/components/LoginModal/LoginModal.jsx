@@ -1,4 +1,3 @@
-// src/components/LoginModal/LoginModal.jsx
 import "./LoginModal.css";
 import { useFormAndValidation } from "../../utils/UseFormAndValidation";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";

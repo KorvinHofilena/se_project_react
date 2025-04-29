@@ -74,14 +74,13 @@ const addCardLike = (itemId, token) => {
       Authorization: `Bearer ${token}`,
     },
   })
-    .then(checkResponse) // Use checkResponse to handle the response
+    .then(checkResponse)
     .catch((error) => {
       console.error("Add Like Error:", error);
       throw error;
     });
 };
 
-// Function to remove a like from a card
 const removeCardLike = (itemId, token) => {
   return fetch(`${BASE_URL}/items/${itemId}/likes`, {
     method: "DELETE",
@@ -89,7 +88,7 @@ const removeCardLike = (itemId, token) => {
       Authorization: `Bearer ${token}`,
     },
   })
-    .then(checkResponse) // Use checkResponse to handle the response
+    .then(checkResponse)
     .catch((error) => {
       console.error("Remove Like Error:", error);
       throw error;

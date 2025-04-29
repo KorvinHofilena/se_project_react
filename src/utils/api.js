@@ -1,8 +1,5 @@
-// api.js
-
 const baseUrl = "http://localhost:3001";
 
-// Function to check if the response is OK
 export const checkResponse = (res) => {
   if (!res.ok) {
     return Promise.reject(`Error: ${res.status}`);
