@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:3001";
+import { BASE_URL } from "../utils/constants";
 
 export const checkResponse = (res) => {
   if (!res.ok) {
@@ -16,13 +16,13 @@ const getAuthHeaders = () => {
 };
 
 export const getServerItems = () => {
-  return fetch(`${baseUrl}/items`, {
+  return fetch(`${BASE_URL}/items`, {
     headers: getAuthHeaders(),
   }).then(checkResponse);
 };
 
 export const addServerItem = (item) => {
-  return fetch(`${baseUrl}/items`, {
+  return fetch(`${BASE_URL}/items`, {
     method: "POST",
     headers: getAuthHeaders(),
     body: JSON.stringify(item),
@@ -33,21 +33,21 @@ export const deleteServerItem = (id) => {
   if (!id) {
     return Promise.reject("Item ID is required for deletion");
   }
-  return fetch(`${baseUrl}/items/${id}`, {
+  return fetch(`${BASE_URL}/items/${id}`, {
     method: "DELETE",
     headers: getAuthHeaders(),
   }).then(checkResponse);
 };
 
 export const toggleLike = (id, isLiked) => {
-  return fetch(`${baseUrl}/items/${id}/likes`, {
+  return fetch(`${BASE_URL}/items/${id}/likes`, {
     method: isLiked ? "DELETE" : "POST",
     headers: getAuthHeaders(),
   }).then(checkResponse);
 };
 
 export const fetchUserData = () => {
-  return fetch(`${baseUrl}/users/me`, {
+  return fetch(`${BASE_URL}/users/me`, {
     headers: getAuthHeaders(),
   }).then(checkResponse);
 };

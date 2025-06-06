@@ -1,3 +1,5 @@
+// src/utils/constants.js
+
 export const weatherOptions = [
   {
     day: true,
@@ -121,4 +123,13 @@ export const position = {
   longitude: 139.759455,
 };
 
-export const APIkey = "b360ae9323cb522c6cf6c3c4ff04dc77";
+const APIkey = "b360ae9323cb522c6cf6c3c4ff04dc77";
+
+const location = typeof window !== "undefined" ? window.location : null;
+
+const BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://api.express-demo.jumpingcrab.com"
+    : "http://localhost:3001";
+
+export { APIkey, location, BASE_URL };
