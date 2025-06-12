@@ -129,7 +129,7 @@ const location = typeof window !== "undefined" ? window.location : null;
 
 const BASE_URL =
   process.env.NODE_ENV === "production"
-    ? "https://api.express-demo.jumpingcrab.com"
+    ? "https://api.exp-demo.jumpingcrab.com"
     : "http://localhost:3001";
 
 export { APIkey, location, BASE_URL };
