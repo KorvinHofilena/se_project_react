@@ -15,7 +15,7 @@ import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import ProtectedRoute from "./ProtectedRoute";
 
 import { coordinates, APIkey } from "../../utils/constants";
-import { getWeather, filterWeatherData } from "../../utils/WeatherApi";
+import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import {
   getServerItems,
   addServerItem,

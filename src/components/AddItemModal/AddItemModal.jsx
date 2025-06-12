@@ -24,10 +24,10 @@ function AddItemModal({ isOpen, closeActiveModal, handleAddItemSubmit }) {
     const newItem = {
       name: name.trim(),
       imageUrl: trimmedImageUrl,
-      link: trimmedImageUrl,
       weather: weather.trim().toLowerCase(),
     };
 
+    console.log("Submitting new item:", newItem); // Optional debug log
     handleAddItemSubmit(newItem, resetForm);
   };
 
